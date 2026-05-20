@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coordinatez Service</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+    <script defer src="/assets/app.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">
+        <span class="brand-mark">CZ</span>
+        <span>Coordinatez IT Solution</span>
+      </a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">Menu</button>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <a href="/#services">Services</a>
+        <a href="/about.html">About</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main data-service-page>
+      <section class="page-hero service-hero">
+        <p class="eyebrow">Service</p>
+        <h1 data-service-title>Service Information</h1>
+        <p data-service-summary>Choose a service from the home page to view details and send an inquiry.</p>
+        <a class="button primary" href="#inquiry">Request this service</a>
+      </section>
+
+      <section class="section service-detail">
+        <div class="detail-copy">
+          <p class="eyebrow">What you get</p>
+          <h2 data-service-heading></h2>
+          <p data-service-description></p>
+        </div>
+        <div class="detail-panel">
+          <h3>Typical deliverables</h3>
+          <ul data-service-deliverables></ul>
+        </div>
+      </section>
+
+      <section class="section split-band">
+        <div>
+          <h2>Best fit</h2>
+          <p data-service-fit></p>
+        </div>
+        <div>
+          <h2>Engagement path</h2>
+          <ol>
+            <li>Discovery call and workflow review</li>
+            <li>Solution plan with timeline and responsibilities</li>
+            <li>Implementation, testing, handoff, and support</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="inquiry" class="section contact-section">
+        <div>
+          <p class="eyebrow">Inquiry</p>
+          <h2>Ask about this service.</h2>
+          <p>Your inquiry will include the selected service and will be addressed to support@coordinatez.com.</p>
+        </div>
+        <form class="inquiry-form" data-inquiry-form>
+          <label>
+            Name
+            <input name="name" autocomplete="name" required>
+          </label>
+          <label>
+            Contact detail
+            <input name="contact" autocomplete="email" placeholder="Email or phone" required>
+          </label>
+          <label>
+            Service
+            <select name="service" data-service-select required></select>
+          </label>
+          <label>
+            Message
+            <textarea name="message" rows="5" required placeholder="Tell us what you need, what systems you use, and your preferred timeline."></textarea>
+          </label>
+          <button class="button primary" type="submit">Send Inquiry</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <strong>Coordinatez IT Solution</strong>
+        <p>AI, data, software, POS, and support services for local businesses.</p>
+      </div>
+      <a href="/#services">View all services</a>
+    </footer>
+
+    <div class="chatbot" data-chatbot>
+      <button class="chat-launcher" aria-label="Open Coordinatez AI assistant">AI</button>
+      <section class="chat-panel" aria-label="Coordinatez AI assistant">
+        <header>
+          <div>
+            <strong>Coordinatez AI</strong>
+            <span>Company and service assistant</span>
+          </div>
+          <button class="chat-close" aria-label="Close chat">Close</button>
+        </header>
+        <div class="chat-messages" data-chat-messages></div>
+        <form class="chat-form" data-chat-form>
+          <input name="message" placeholder="Ask about this service..." autocomplete="off" required>
+          <button type="submit">Send</button>
+        </form>
+      </section>
+    </div>
+  </body>
+</html>

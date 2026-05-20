@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coordinatez IT Solution | AI, Data, Web, App and POS Consulting</title>
+    <meta name="description" content="Coordinatez IT Solution helps local businesses adopt AI, data systems, web apps, chatbots, POS consulting, and maintenance support.">
+    <link rel="stylesheet" href="/assets/styles.css">
+    <script defer src="/assets/app.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Coordinatez IT Solution home">
+        <span class="brand-mark">CZ</span>
+        <span>Coordinatez IT Solution</span>
+      </a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">Menu</button>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <a href="/#services">Services</a>
+        <a href="/about.html">About</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Illinois based AI and IT partner for local businesses</p>
+          <h1>Coordinatez IT Solution</h1>
+          <p class="hero-text">We design practical AI, data, web, app, chatbot, POS, and support systems that help growing businesses move faster without losing control.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#services">Explore Services</a>
+            <a class="button ghost" href="#contact">Start an Inquiry</a>
+          </div>
+          <div class="signal-row" aria-label="Company highlights">
+            <span>Founded 2026</span>
+            <span>Illinois, United States</span>
+            <span>support@coordinatez.com</span>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <img src="/assets/images/coordinatez-hero.png" alt="">
+          <div class="floating-card card-one">
+            <strong>AI Ops</strong>
+            <span>RAG, chatbots, automation</span>
+          </div>
+          <div class="floating-card card-two">
+            <strong>Local Business Stack</strong>
+            <span>POS, web, app, support</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="marquee" aria-label="Capabilities">
+        <div>
+          <span>AI strategy</span>
+          <span>Data pipelines</span>
+          <span>Annotation teams</span>
+          <span>Web apps</span>
+          <span>POS consulting</span>
+          <span>Maintenance</span>
+          <span>AI strategy</span>
+          <span>Data pipelines</span>
+        </div>
+      </section>
+
+      <section class="section intro-grid">
+        <div>
+          <p class="eyebrow">Built for action</p>
+          <h2>Technology work that connects to daily operations.</h2>
+        </div>
+        <p>Coordinatez combines modern AI delivery with dependable IT execution. We help local teams capture better data, automate repeated work, launch customer-facing products, and keep business systems healthy after go-live.</p>
+      </section>
+
+      <section id="services" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Services</p>
+          <h2>Pick the service you need next.</h2>
+        </div>
+        <div class="service-grid" data-service-list></div>
+      </section>
+
+      <section class="section process-band">
+        <div class="section-heading">
+          <p class="eyebrow">How we work</p>
+          <h2>Small enough to listen. Sharp enough to deliver.</h2>
+        </div>
+        <div class="process-grid">
+          <article>
+            <span>01</span>
+            <h3>Map the workflow</h3>
+            <p>We learn your current operations, customer touchpoints, data sources, and team constraints.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Build the useful version</h3>
+            <p>We ship the core system first, with the right integrations, controls, and support plan.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Improve with evidence</h3>
+            <p>We measure adoption, support your staff, and keep refining the solution as your business changes.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="section contact-section">
+        <div>
+          <p class="eyebrow">Inquiry</p>
+          <h2>Tell us what you want to improve.</h2>
+          <p>Choose a service, share your contact detail, and the request will be addressed to support@coordinatez.com.</p>
+        </div>
+        <form class="inquiry-form" data-inquiry-form>
+          <label>
+            Name
+            <input name="name" autocomplete="name" required>
+          </label>
+          <label>
+            Contact detail
+            <input name="contact" autocomplete="email" placeholder="Email or phone" required>
+          </label>
+          <label>
+            Service
+            <select name="service" data-service-select required></select>
+          </label>
+          <label>
+            Message
+            <textarea name="message" rows="5" required placeholder="Briefly describe your goal, timeline, or current issue."></textarea>
+          </label>
+          <button class="button primary" type="submit">Send Inquiry</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <strong>Coordinatez IT Solution</strong>
+        <p>AI, data, software, POS, and support services for local businesses.</p>
+      </div>
+      <a href="mailto:support@coordinatez.com">support@coordinatez.com</a>
+    </footer>
+
+    <div class="chatbot" data-chatbot>
+      <button class="chat-launcher" aria-label="Open Coordinatez AI assistant">AI</button>
+      <section class="chat-panel" aria-label="Coordinatez AI assistant">
+        <header>
+          <div>
+            <strong>Coordinatez AI</strong>
+            <span>Company and service assistant</span>
+          </div>
+          <button class="chat-close" aria-label="Close chat">Close</button>
+        </header>
+        <div class="chat-messages" data-chat-messages></div>
+        <form class="chat-form" data-chat-form>
+          <input name="message" placeholder="Ask about services, location, or support..." autocomplete="off" required>
+          <button type="submit">Send</button>
+        </form>
+      </section>
+    </div>
+  </body>
+</html>
