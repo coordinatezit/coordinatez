@@ -1,0 +1,8 @@
+data/*.json
+data/outbox/*.eml
+node_modules/
+.netlify/
+.vercel/
+dist/
+coordinatez-*.zip
+coordinatez-*/

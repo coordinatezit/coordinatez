@@ -1,0 +1,19 @@
+{
+  "name": "coordinatez-it-solution-site",
+  "version": "1.0.0",
+  "description": "Dynamic website for Coordinatez IT Solution.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "build": "echo Static site ready",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "coordinatez",
+    "ai",
+    "it-solutions",
+    "website"
+  ],
+  "author": "Coordinatez IT Solution",
+  "license": "UNLICENSED"
+}
