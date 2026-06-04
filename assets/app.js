@@ -164,13 +164,79 @@ function currentServiceSlug() {
     : params.get("service");
 }
 
+const serviceIcons = {
+  "ai-data-solution": `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 7c0-2 3.6-3.6 8-3.6S20 5 20 7s-3.6 3.6-8 3.6S4 9 4 7Z"/>
+      <path d="M4 7v5c0 2 3.6 3.6 8 3.6s8-1.6 8-3.6V7"/>
+      <path d="M4 12v5c0 2 3.6 3.6 8 3.6s8-1.6 8-3.6v-5"/>
+    </svg>
+  `,
+  "ai-integration-annotation": `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5 12a7 7 0 0 1 14 0v5a3 3 0 0 1-3 3h-2"/>
+      <path d="M9 20H7a3 3 0 0 1-3-3v-2"/>
+      <path d="M8 9h.01M16 9h.01"/>
+      <path d="M9 14c1.8 1.3 4.2 1.3 6 0"/>
+      <path d="m17 3 1.5 2.5L21 7"/>
+    </svg>
+  `,
+  "web-app-development": `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="14" rx="2"/>
+      <path d="M8 22h8"/>
+      <path d="M12 18v4"/>
+      <path d="m10 9-2 2 2 2"/>
+      <path d="m14 9 2 2-2 2"/>
+    </svg>
+  `,
+  "ai-integration": `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 3v4"/>
+      <path d="M12 17v4"/>
+      <path d="M3 12h4"/>
+      <path d="M17 12h4"/>
+      <circle cx="12" cy="12" r="5"/>
+      <path d="m15.5 8.5 2-2"/>
+      <path d="m6.5 17.5 2-2"/>
+      <path d="m8.5 8.5-2-2"/>
+      <path d="m17.5 17.5-2-2"/>
+    </svg>
+  `,
+  "ai-chatbots": `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M6 9V7a6 6 0 0 1 12 0v2"/>
+      <rect x="4" y="9" width="16" height="11" rx="3"/>
+      <path d="M9 14h.01M15 14h.01"/>
+      <path d="M10 17h4"/>
+      <path d="M12 3V1.5"/>
+    </svg>
+  `,
+  "pos-consulting": `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="5" y="3" width="14" height="18" rx="2"/>
+      <path d="M8 7h8"/>
+      <path d="M8 11h8"/>
+      <path d="M9 16h.01M12 16h.01M15 16h.01"/>
+      <path d="M9 19h6"/>
+    </svg>
+  `,
+  "maintenance-support": `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4"/>
+      <path d="m15 5 4 4"/>
+      <path d="m16 4 4 4"/>
+    </svg>
+  `
+};
+
 function renderServiceList() {
   const list = document.querySelector("[data-service-list]");
   if (!list) return;
 
   list.innerHTML = services.map(service => `
     <a class="service-card" href="${serviceUrl(service.slug)}" aria-label="View ${service.title} service information">
-      <span class="service-icon">${service.icon}</span>
+      <span class="service-icon">${serviceIcons[service.slug] || service.icon}</span>
       <span class="service-label">Capability</span>
       <h3>${service.title}</h3>
       <p>${service.summary}</p>
@@ -314,7 +380,7 @@ function setupChatbot() {
   launcher.addEventListener("click", () => chatbot.classList.add("open"));
   close.addEventListener("click", () => chatbot.classList.remove("open"));
 
-  addChatMessage(messages, "Hi. I can answer questions about Coordinatez IT Solution, services, location, and contact details. If I do not know, I will create a support ticket.", "bot");
+  addChatMessage(messages, "Hi, I am CoordiBot. I can answer questions about Coordinatez IT Solution, services, location, and contact details. If I do not know, I will create a support ticket.", "bot");
 
   form.addEventListener("submit", async event => {
     event.preventDefault();
@@ -376,9 +442,6 @@ function setupFooter() {
   document.querySelectorAll(".site-footer").forEach(footer => {
     footer.innerHTML = `
       <div class="footer-main">
-        <div class="footer-brand-panel">
-          <img src="/assets/images/coordinatez-footer-logo.png" alt="Coordinatez IT Solution">
-        </div>
         <nav class="footer-column" aria-label="Company links">
           <h2>Company</h2>
           <a href="/about.html">About Coordinatez</a>
@@ -408,6 +471,9 @@ function setupFooter() {
           <a href="mailto:support@coordinatez.com">support@coordinatez.com</a>
           <a href="tel:+18722582235">+1 (872) 258-2235</a>
           <p>Illinois, United States</p>
+        </div>
+        <div class="footer-brand-panel">
+          <img src="/assets/images/coordinatez-footer-logo.png" alt="Coordinatez IT Solution">
         </div>
       </div>
       <div class="footer-divider"></div>
