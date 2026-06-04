@@ -103,6 +103,9 @@ const formspreeEndpoint = "https://formspree.io/f/xaqkqeqn";
 
 function setupPreloader() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (sessionStorage.getItem("coordinatezPreloaderShown") === "true") return;
+
+  sessionStorage.setItem("coordinatezPreloaderShown", "true");
 
   document.body.classList.add("preloader-active");
   const preloader = document.createElement("div");
