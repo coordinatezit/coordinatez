@@ -1,9 +1,27 @@
 const services = [
   {
+    slug: "web-app-development",
+    icon: "WA",
+    title: "Web & App Development",
+    summary: "Launch responsive websites, customer portals, internal tools, and mobile-ready apps.",
+    heroImage: "/assets/images/service-web-app-development.png",
+    heroAlt: "Web and app development workspace with design, code, and responsive interface screens",
+    description: "Coordinatez builds websites, web apps, and app experiences for businesses that need modern customer touchpoints or better internal tools. We focus on fast interfaces, usable admin workflows, secure forms, and integrations with existing systems.",
+    fit: "Businesses that need a new website, booking flow, customer portal, inventory tool, staff dashboard, or mobile-friendly business app.",
+    deliverables: [
+      "Responsive UI and user flows",
+      "Frontend and backend implementation",
+      "Forms, dashboards, and integrations",
+      "Launch support and documentation"
+    ]
+  },
+  {
     slug: "ai-data-solution",
     icon: "AD",
     title: "AI & Data Solution",
     summary: "Turn scattered business data into dashboards, workflows, and AI-ready knowledge.",
+    heroImage: "/assets/images/service-ai-data-solution.png",
+    heroAlt: "AI and data analytics command center with dashboards and knowledge graph screens",
     description: "Coordinatez helps local businesses collect, clean, organize, and use their operational data. We can create dashboards, reporting pipelines, document knowledge bases, RAG-ready content libraries, and decision support tools that make business data easier to trust.",
     fit: "Businesses that have useful data in spreadsheets, POS exports, documents, CRMs, or web tools and want better reporting, automation, or AI search.",
     deliverables: [
@@ -18,6 +36,8 @@ const services = [
     icon: "IA",
     title: "AI Integration & Annotation",
     summary: "Connect AI into workflows and prepare labeled data for model improvement.",
+    heroImage: "/assets/images/service-ai-integration-annotation.png",
+    heroAlt: "AI annotation and human review workspace with labeled data and model evaluation dashboards",
     description: "We support AI integration projects that need both software delivery and high-quality human review. Coordinatez can help define labels, prepare annotation guidelines, manage datasets, and connect approved AI outputs into your daily operations.",
     fit: "Teams that need document classification, image or text labeling, quality review, model evaluation, or AI workflow pilots.",
     deliverables: [
@@ -28,38 +48,12 @@ const services = [
     ]
   },
   {
-    slug: "web-app-development",
-    icon: "WA",
-    title: "Web & App Development",
-    summary: "Launch responsive websites, customer portals, internal tools, and mobile-ready apps.",
-    description: "Coordinatez builds websites, web apps, and app experiences for businesses that need modern customer touchpoints or better internal tools. We focus on fast interfaces, usable admin workflows, secure forms, and integrations with existing systems.",
-    fit: "Businesses that need a new website, booking flow, customer portal, inventory tool, staff dashboard, or mobile-friendly business app.",
-    deliverables: [
-      "Responsive UI and user flows",
-      "Frontend and backend implementation",
-      "Forms, dashboards, and integrations",
-      "Launch support and documentation"
-    ]
-  },
-  {
-    slug: "ai-integration",
-    icon: "AI",
-    title: "AI Integration",
-    summary: "Add AI assistance, search, automation, and content intelligence to existing systems.",
-    description: "We design AI integrations around clear business cases: document search, workflow automation, lead triage, staff assistants, summarization, and structured data extraction. We build with guardrails so the system knows when to answer and when to escalate.",
-    fit: "Companies that already have systems in place and want to add AI without replacing everything.",
-    deliverables: [
-      "AI use-case discovery and risk review",
-      "RAG or automation architecture",
-      "Integration with business tools",
-      "Escalation, logging, and support workflow"
-    ]
-  },
-  {
     slug: "ai-chatbots",
     icon: "CB",
     title: "AI Chatbots",
     summary: "Create helpful assistants for customers, staff, sales, service, and support.",
+    heroImage: "/assets/images/service-ai-chatbots.png",
+    heroAlt: "AI chatbot support workspace with knowledge base, lead capture, and escalation dashboard",
     description: "Coordinatez builds chatbots that can answer common questions, collect lead details, recommend services, and escalate unknown issues. Retrieval-based knowledge keeps answers grounded in company information while ticket creation protects customers when the assistant is unsure.",
     fit: "Businesses that want 24/7 inquiry capture, faster customer support, lead qualification, or staff knowledge search.",
     deliverables: [
@@ -74,6 +68,8 @@ const services = [
     icon: "POS",
     title: "POS Consulting",
     summary: "Improve point-of-sale setup, reporting, integrations, and operational reliability.",
+    heroImage: "/assets/images/service-pos-consulting.png",
+    heroAlt: "POS consulting scene with checkout terminal, analytics tablet, and local business owner",
     description: "We help local businesses evaluate, configure, and improve POS workflows. Coordinatez can support menu or catalog setup, reporting exports, hardware planning, payment workflow review, inventory connections, and staff adoption.",
     fit: "Restaurants, retailers, service businesses, and local operators that depend on POS systems for daily revenue and reporting.",
     deliverables: [
@@ -88,6 +84,8 @@ const services = [
     icon: "MS",
     title: "Maintenance & Support",
     summary: "Keep websites, apps, AI tools, forms, and business systems healthy after launch.",
+    heroImage: "/assets/images/service-maintenance-support.png",
+    heroAlt: "IT maintenance and support operations desk with monitoring dashboards and ticket triage",
     description: "Technology needs care after it goes live. Coordinatez provides maintenance, issue triage, updates, monitoring, content changes, small improvements, and support planning for business-critical digital systems.",
     fit: "Businesses that need dependable technical support without hiring a full in-house engineering team.",
     deliverables: [
@@ -159,9 +157,13 @@ function getServiceBySlug(slug) {
 
 function currentServiceSlug() {
   const params = new URLSearchParams(window.location.search);
-  return window.location.pathname.startsWith("/services/")
-    ? window.location.pathname.split("/").filter(Boolean).pop()
-    : params.get("service");
+  if (!window.location.pathname.startsWith("/services/")) {
+    return params.get("service");
+  }
+
+  const parts = window.location.pathname.split("/").filter(Boolean);
+  const last = parts[parts.length - 1];
+  return last === "index.html" ? parts[parts.length - 2] : last;
 }
 
 const serviceIcons = {
@@ -262,6 +264,11 @@ function renderServicePage() {
   document.title = `${service.title} | Coordinatez IT Solution`;
   document.querySelector("[data-service-title]").textContent = service.title;
   document.querySelector("[data-service-summary]").textContent = service.summary;
+  const heroImage = document.querySelector("[data-service-hero-image]");
+  if (heroImage) {
+    heroImage.src = service.heroImage;
+    heroImage.alt = service.heroAlt;
+  }
   document.querySelector("[data-service-heading]").textContent = `Coordinatez ${service.title}`;
   document.querySelector("[data-service-description]").textContent = service.description;
   document.querySelector("[data-service-fit]").textContent = service.fit;
@@ -360,6 +367,59 @@ function answerFromKnowledge(question) {
   return ranked.map(item => item.text).join(" ");
 }
 
+function answerGeneralQuestion(question) {
+  const lower = question.toLowerCase();
+  const now = new Date();
+
+  if (/\b(date|today|day)\b/.test(lower)) {
+    return `Today is ${now.toLocaleDateString(undefined, {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    })}.`;
+  }
+
+  if (/\b(time|clock)\b/.test(lower)) {
+    return `The current time is ${now.toLocaleTimeString(undefined, {
+      hour: "numeric",
+      minute: "2-digit"
+    })}.`;
+  }
+
+  if (/\b(hi|hello|hey)\b/.test(lower)) {
+    return "Hello. I am CoordiBot. I can help with Coordinatez services, contact details, and general questions.";
+  }
+
+  if (/\b(thanks|thank you)\b/.test(lower)) {
+    return "You are welcome. I am here if you need help choosing a service or contacting Coordinatez.";
+  }
+
+  return null;
+}
+
+async function askAssistantApi(question) {
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: question,
+        page: window.location.href
+      })
+    });
+
+    if (!response.ok) return null;
+    const result = await response.json();
+    return result.answer || null;
+  } catch (error) {
+    return null;
+  }
+}
+
 function addChatMessage(container, text, sender) {
   const message = document.createElement("div");
   message.className = `message ${sender}`;
@@ -380,7 +440,7 @@ function setupChatbot() {
   launcher.addEventListener("click", () => chatbot.classList.add("open"));
   close.addEventListener("click", () => chatbot.classList.remove("open"));
 
-  addChatMessage(messages, "Hi, I am CoordiBot. I can answer questions about Coordinatez IT Solution, services, location, and contact details. If I do not know, I will create a support ticket.", "bot");
+  addChatMessage(messages, "Hi, I am CoordiBot. I can answer questions about Coordinatez, services, contact details, and normal questions like today's date or time. If I do not know, I will create a support ticket.", "bot");
 
   form.addEventListener("submit", async event => {
     event.preventDefault();
@@ -391,9 +451,16 @@ function setupChatbot() {
     addChatMessage(messages, question, "user");
     input.value = "";
 
-    const answer = answerFromKnowledge(question);
+    const answer = answerFromKnowledge(question) || answerGeneralQuestion(question);
     if (answer) {
       addChatMessage(messages, answer, "bot");
+      return;
+    }
+
+    addChatMessage(messages, "Let me think about that...", "bot");
+    const aiAnswer = await askAssistantApi(question);
+    if (aiAnswer) {
+      addChatMessage(messages, aiAnswer, "bot");
       return;
     }
 
@@ -453,7 +520,6 @@ function setupFooter() {
         <nav class="footer-column" aria-label="Service links">
           <h2>What we do</h2>
           <a href="/services/ai-data-solution/">AI & Data Solution</a>
-          <a href="/services/ai-integration/">AI Integration</a>
           <a href="/services/ai-chatbots/">AI Chatbots</a>
           <a href="/services/web-app-development/">Web & App Development</a>
           <a href="/services/pos-consulting/">POS Consulting</a>
