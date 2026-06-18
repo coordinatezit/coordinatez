@@ -216,12 +216,24 @@ img {
 
 .nav-toggle {
   display: none;
+  align-items: center;
+  justify-content: center;
   border: 0;
-  padding: 10px 12px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   border-radius: 8px;
   background: var(--navy);
   color: #ffffff;
-  font-weight: 800;
+}
+
+.nav-toggle svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
 }
 
 .hero {
@@ -822,6 +834,10 @@ h3 {
   gap: 16px;
 }
 
+.service-grid-wide {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .transformation-section {
   display: grid;
   grid-template-columns: minmax(0, 0.82fr) minmax(320px, 1.18fr);
@@ -1311,6 +1327,16 @@ textarea:focus {
   padding: 8px;
 }
 
+.contact-facts {
+  margin-top: 24px;
+}
+
+.inquiry-form > p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
 .facts div {
   display: grid;
   grid-template-columns: 110px 1fr;
@@ -1548,6 +1574,161 @@ textarea:focus {
 .chat-form button {
   color: #ffffff;
   background: var(--navy);
+}
+
+body.theme-dark {
+  color: #e5edf7;
+  background: #0b1220;
+}
+
+body.theme-dark .site-header {
+  background: rgba(11, 18, 32, 0.88);
+  border-bottom-color: rgba(148, 163, 184, 0.18);
+}
+
+body.theme-dark .brand,
+body.theme-dark h1,
+body.theme-dark h2,
+body.theme-dark h3,
+body.theme-dark .card-link,
+body.theme-dark .signal-row span {
+  color: #f8fafc;
+}
+
+body.theme-dark .site-nav a,
+body.theme-dark .hero-text,
+body.theme-dark .page-hero p,
+body.theme-dark .intro-grid > p,
+body.theme-dark .contact-section > div p,
+body.theme-dark .detail-copy p,
+body.theme-dark .photo-story-copy p,
+body.theme-dark .service-card p,
+body.theme-dark .process-grid p,
+body.theme-dark .industry-grid p,
+body.theme-dark .values p,
+body.theme-dark .detail-panel li,
+body.theme-dark .split-band p,
+body.theme-dark .split-band li,
+body.theme-dark .blog-card p,
+body.theme-dark .industry-page-grid p,
+body.theme-dark .article p,
+body.theme-dark .inquiry-form > p {
+  color: #aab6c7;
+}
+
+body.theme-dark .site-nav a:hover {
+  color: #ffffff;
+  background: rgba(37, 99, 235, 0.18);
+}
+
+body.theme-dark .hero,
+body.theme-dark .page-hero,
+body.theme-dark .photo-page-hero {
+  background:
+    radial-gradient(circle at 78% 18%, rgba(37, 99, 235, 0.18), transparent 26rem),
+    linear-gradient(180deg, #0b1220 0%, #101827 100%);
+}
+
+body.theme-dark .hero::before {
+  background: linear-gradient(180deg, transparent, rgba(96, 165, 250, 0.42), transparent);
+}
+
+body.theme-dark .hero-metrics article,
+body.theme-dark .floating-card,
+body.theme-dark .service-card,
+body.theme-dark .process-grid article,
+body.theme-dark .industry-grid article,
+body.theme-dark .values article,
+body.theme-dark .detail-panel,
+body.theme-dark .facts,
+body.theme-dark .inquiry-form,
+body.theme-dark .blog-card,
+body.theme-dark .industry-page-grid article {
+  border-color: rgba(148, 163, 184, 0.18);
+  background: rgba(15, 23, 42, 0.78);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.26);
+}
+
+body.theme-dark .hero-metrics span,
+body.theme-dark .floating-card span,
+body.theme-dark .photo-caption span,
+body.theme-dark .services-photo-panel span {
+  color: #aab6c7;
+}
+
+body.theme-dark .button.primary {
+  background: #1d4ed8;
+  box-shadow: 0 18px 44px rgba(29, 78, 216, 0.24);
+}
+
+body.theme-dark .button.ghost {
+  color: #f8fafc;
+  border-color: rgba(226, 232, 240, 0.34);
+  background: rgba(15, 23, 42, 0.38);
+}
+
+body.theme-dark .marquee,
+body.theme-dark .process-band,
+body.theme-dark .proof-strip {
+  background: #070d18;
+}
+
+body.theme-dark .photo-story-section,
+body.theme-dark .services-showcase,
+body.theme-dark .blog-preview-section,
+body.theme-dark .industries-section,
+body.theme-dark .split-band,
+body.theme-dark .contact-section {
+  background:
+    linear-gradient(180deg, #101827 0%, #0b1220 100%);
+}
+
+body.theme-dark .photo-points span {
+  color: #e5edf7;
+  border-color: rgba(96, 165, 250, 0.24);
+  border-left-color: #60a5fa;
+  background: rgba(15, 23, 42, 0.78);
+}
+
+body.theme-dark .proof-strip {
+  color: #f8fafc;
+  background:
+    linear-gradient(135deg, rgba(37, 99, 235, 0.22), transparent 42%),
+    #070d18;
+}
+
+body.theme-dark .proof-strip article {
+  background: rgba(15, 23, 42, 0.82);
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+body.theme-dark input,
+body.theme-dark select,
+body.theme-dark textarea {
+  color: #f8fafc;
+  background: #0b1220;
+  border-color: rgba(148, 163, 184, 0.24);
+}
+
+body.theme-dark input::placeholder,
+body.theme-dark textarea::placeholder {
+  color: #778397;
+}
+
+body.theme-dark .site-footer {
+  background: #070d18;
+  border-top: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+body.theme-dark .chat-panel,
+body.theme-dark .message.bot {
+  color: #e5edf7;
+  background: #111827;
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+body.theme-dark .chat-messages {
+  background: #0b1220;
 }
 
 @keyframes liftIn {

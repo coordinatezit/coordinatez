@@ -1,10 +1,10 @@
 const companyContext = `
-Coordinatez IT Solution is an AI and IT services company founded in 2026 in Illinois, United States.
+Coordinatez is the public brand of Coordinatez Tech Inc., a technology and business systems company founded in 2026 in Illinois, United States.
 Company email: support@coordinatez.com.
 Phone: +1 (872) 258-2235.
-Services: Web & App Development, AI & Data Solution, AI Integration & Annotation, AI Chatbots, POS Consulting, Maintenance & Support.
+Services: Website & Digital Presence, Business Automation, AI & Chatbot Systems, Customer Portals & Internal Dashboards, POS & Retail Technology Consulting, Data & Reporting.
 Industries: retail stores, restaurants and cafes, service businesses, healthcare and wellness, professional services, startups, and growing teams.
-The company helps local businesses modernize operations with practical AI, data, software, chatbot, POS, and support systems.
+The company helps businesses modernize operations with practical websites, automation, AI systems, portals, POS workflows, data reporting, and digital operations.
 `;
 
 function send(res, status, payload) {
@@ -55,7 +55,7 @@ export default async function handler(req, res) {
         model: process.env.OPENAI_MODEL || "gpt-5-mini",
         reasoning: { effort: "low" },
         instructions: [
-          "You are CoordiBot, the website assistant for Coordinatez IT Solution.",
+          "You are CoordiBot, the website assistant for Coordinatez.",
           "Answer normal visitor questions helpfully and briefly.",
           "For Coordinatez-specific questions, use the company context.",
           "If a user asks for legal, medical, financial, or emergency advice, give a cautious general answer and recommend a qualified professional.",

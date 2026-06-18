@@ -2,97 +2,97 @@ const services = [
   {
     slug: "web-app-development",
     icon: "WA",
-    title: "Web & App Development",
-    summary: "Launch responsive websites, customer portals, internal tools, and mobile-ready apps.",
+    title: "Website & Digital Presence",
+    summary: "Business websites, landing pages, redesigns, speed improvements, SEO structure, contact forms, and client-facing pages.",
     heroImage: "/assets/images/service-web-app-development.png",
     heroAlt: "Web and app development workspace with design, code, and responsive interface screens",
-    description: "Coordinatez builds websites, web apps, and app experiences for businesses that need modern customer touchpoints or better internal tools. We focus on fast interfaces, usable admin workflows, secure forms, and integrations with existing systems.",
-    fit: "Businesses that need a new website, booking flow, customer portal, inventory tool, staff dashboard, or mobile-friendly business app.",
+    description: "Coordinatez builds practical websites and digital experiences for businesses that need a stronger online presence, clearer customer paths, and reliable inquiry capture. We focus on clean structure, performance, responsive layouts, SEO basics, and forms that support real business conversations.",
+    fit: "Businesses that need a new website, a redesign, better contact forms, service pages, landing pages, speed improvements, or a more professional digital presence.",
     deliverables: [
-      "Responsive UI and user flows",
-      "Frontend and backend implementation",
-      "Forms, dashboards, and integrations",
-      "Launch support and documentation"
+      "Responsive website or page structure",
+      "Clear service pages and contact paths",
+      "Basic SEO structure and metadata",
+      "Launch support and improvement checklist"
     ]
   },
   {
     slug: "ai-data-solution",
     icon: "AD",
-    title: "AI & Data Solution",
-    summary: "Turn scattered business data into dashboards, workflows, and AI-ready knowledge.",
+    title: "Business Automation",
+    summary: "Automated workflows, lead routing, reminders, internal task systems, customer follow-ups, and operational tools.",
     heroImage: "/assets/images/service-ai-data-solution.png",
     heroAlt: "AI and data analytics command center with dashboards and knowledge graph screens",
-    description: "Coordinatez helps local businesses collect, clean, organize, and use their operational data. We can create dashboards, reporting pipelines, document knowledge bases, RAG-ready content libraries, and decision support tools that make business data easier to trust.",
-    fit: "Businesses that have useful data in spreadsheets, POS exports, documents, CRMs, or web tools and want better reporting, automation, or AI search.",
+    description: "Coordinatez helps businesses reduce manual work by connecting forms, requests, reminders, tasks, and follow-ups into simple digital workflows. The goal is to save time, reduce missed opportunities, and make daily operations easier to manage.",
+    fit: "Businesses that handle repeated inquiries, manual follow-ups, spreadsheets, task handoffs, scheduling steps, or customer requests that need better routing and tracking.",
     deliverables: [
-      "Data discovery and source mapping",
-      "Clean reporting datasets and dashboards",
-      "AI-ready knowledge base structure",
-      "Data quality checks and maintenance plan"
+      "Workflow review and automation plan",
+      "Lead routing or request tracking",
+      "Reminder and follow-up flows",
+      "Internal task or operations tools"
     ]
   },
   {
     slug: "ai-integration-annotation",
     icon: "IA",
-    title: "AI Integration & Annotation",
-    summary: "Connect AI into workflows and prepare labeled data for model improvement.",
+    title: "AI & Chatbot Systems",
+    summary: "Website chatbots, internal AI assistants, customer support bots, FAQ systems, and workflow-connected AI tools.",
     heroImage: "/assets/images/service-ai-integration-annotation.png",
     heroAlt: "AI annotation and human review workspace with labeled data and model evaluation dashboards",
-    description: "We support AI integration projects that need both software delivery and high-quality human review. Coordinatez can help define labels, prepare annotation guidelines, manage datasets, and connect approved AI outputs into your daily operations.",
-    fit: "Teams that need document classification, image or text labeling, quality review, model evaluation, or AI workflow pilots.",
+    description: "Coordinatez designs AI and chatbot systems around business use cases such as customer questions, internal knowledge lookup, lead capture, support routing, and workflow assistance. We keep the experience practical, guided, and connected to human follow-up when needed.",
+    fit: "Businesses that want a website chatbot, internal assistant, FAQ automation, customer support bot, or AI workflow that helps staff and customers without creating unnecessary complexity.",
     deliverables: [
-      "Annotation taxonomy and review guidelines",
-      "Dataset preparation and quality checks",
-      "AI workflow integration plan",
-      "Human-in-the-loop review process"
+      "Chatbot or assistant conversation design",
+      "Knowledge base and FAQ setup",
+      "Inquiry capture and escalation flow",
+      "Testing, handoff, and support notes"
     ]
   },
   {
     slug: "ai-chatbots",
     icon: "CB",
-    title: "AI Chatbots",
-    summary: "Create helpful assistants for customers, staff, sales, service, and support.",
+    title: "Customer Portals & Internal Dashboards",
+    summary: "Client dashboards, employee dashboards, vendor portals, request tracking, RFQ systems, document access, and reporting dashboards.",
     heroImage: "/assets/images/service-ai-chatbots.png",
     heroAlt: "AI chatbot support workspace with knowledge base, lead capture, and escalation dashboard",
-    description: "Coordinatez builds chatbots that can answer common questions, collect lead details, recommend services, and escalate unknown issues. Retrieval-based knowledge keeps answers grounded in company information while ticket creation protects customers when the assistant is unsure.",
-    fit: "Businesses that want 24/7 inquiry capture, faster customer support, lead qualification, or staff knowledge search.",
+    description: "Coordinatez builds portals and dashboards that help customers, employees, vendors, and managers access the right information in one place. These tools can support requests, documents, reporting, RFQs, project visibility, and business operations.",
+    fit: "Businesses that need a customer portal, vendor portal, staff dashboard, request tracker, document access system, reporting view, or internal tool.",
     deliverables: [
-      "Chatbot conversation design",
-      "Company knowledge base setup",
-      "Inquiry and ticket escalation",
-      "Testing, training, and analytics"
+      "Portal or dashboard user flow",
+      "Data fields and access structure",
+      "Request tracking or reporting views",
+      "Launch, handoff, and support plan"
     ]
   },
   {
     slug: "pos-consulting",
     icon: "POS",
-    title: "POS Consulting",
-    summary: "Improve point-of-sale setup, reporting, integrations, and operational reliability.",
+    title: "POS & Retail Technology Consulting",
+    summary: "POS setup, menu/product structure, digital ordering support, retail workflows, reporting, and store technology improvements.",
     heroImage: "/assets/images/service-pos-consulting.png",
     heroAlt: "POS consulting scene with checkout terminal, analytics tablet, and local business owner",
-    description: "We help local businesses evaluate, configure, and improve POS workflows. Coordinatez can support menu or catalog setup, reporting exports, hardware planning, payment workflow review, inventory connections, and staff adoption.",
+    description: "Coordinatez helps retailers, restaurants, and local operators improve how POS and store technology support day-to-day work. We can help organize menus or products, improve reporting, review workflows, and connect operational tools where appropriate.",
     fit: "Restaurants, retailers, service businesses, and local operators that depend on POS systems for daily revenue and reporting.",
     deliverables: [
       "POS workflow assessment",
-      "System configuration recommendations",
+      "Menu, product, or catalog structure review",
       "Reporting and export improvements",
-      "Staff handoff and support checklist"
+      "Store technology improvement checklist"
     ]
   },
   {
     slug: "maintenance-support",
     icon: "MS",
-    title: "Maintenance & Support",
-    summary: "Keep websites, apps, AI tools, forms, and business systems healthy after launch.",
+    title: "Data & Reporting",
+    summary: "Business reports, dashboards, KPI tracking, sales reporting, customer insights, and operational data organization.",
     heroImage: "/assets/images/service-maintenance-support.png",
     heroAlt: "IT maintenance and support operations desk with monitoring dashboards and ticket triage",
-    description: "Technology needs care after it goes live. Coordinatez provides maintenance, issue triage, updates, monitoring, content changes, small improvements, and support planning for business-critical digital systems.",
-    fit: "Businesses that need dependable technical support without hiring a full in-house engineering team.",
+    description: "Coordinatez organizes business data into clearer reports, dashboards, and tracking systems. We help business owners understand sales, customer activity, operations, and performance without relying on scattered files and manual reporting.",
+    fit: "Businesses that need sales reports, KPI tracking, POS exports, customer insights, operational dashboards, or cleaner data organization.",
     deliverables: [
-      "Website and app maintenance",
-      "Bug fixes and small enhancements",
-      "Monitoring and issue triage",
-      "Monthly support plan and reporting"
+      "Data source review and reporting plan",
+      "Dashboard or report structure",
+      "KPI and metric organization",
+      "Documentation and support notes"
     ]
   }
 ];
@@ -116,7 +116,7 @@ function setupPreloader() {
       </div>
       <div class="preloader-title">
         <strong>Coordinatez</strong>
-        <span>IT Solution</span>
+        <span>Business Systems</span>
       </div>
       <div class="preloader-progress"></div>
     </div>
@@ -134,16 +134,20 @@ function setupPreloader() {
   }, 2850);
 }
 
+function setupThemePreview() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("theme") === "dark") {
+    document.body.classList.add("theme-dark");
+  }
+}
+
 const companyKnowledge = [
-  "Coordinatez IT Solution is an AI and IT services company founded in 2026 in Illinois, United States.",
-  "Coordinatez IT Solution's email address is support@coordinatez.com.",
-  "Coordinatez serves local businesses with AI and data solutions, AI integration, annotation, web and app development, AI chatbots, POS consulting, maintenance, and support.",
-  "The company helps local businesses use AI with practical guardrails, retrieval-based knowledge, inquiry capture, and escalation when the chatbot cannot answer.",
-  "Coordinatez can build web apps, customer portals, internal dashboards, forms, integrations, and mobile-ready business tools.",
-  "Coordinatez provides POS consulting for restaurants, retailers, service businesses, reporting workflows, catalog setup, integrations, and staff handoff.",
-  "Coordinatez maintenance and support includes issue triage, updates, monitoring, content changes, small enhancements, and support planning.",
-  "Coordinatez works with industries including retail stores, restaurants and cafes, service businesses, healthcare and wellness, professional services, startups, and growing teams.",
-  "Coordinatez publishes blog articles about RAG, AI for local business, AI chatbots, business digital transformation, POS data and reporting, and website maintenance.",
+  "Coordinatez is the public brand of Coordinatez Tech Inc., a technology and business systems company founded in 2026 in Illinois, United States.",
+  "Coordinatez email is support@coordinatez.com and the business phone number is +1 (872) 258-2235.",
+  "Coordinatez helps businesses with websites, automation, AI and chatbot systems, customer portals, internal dashboards, POS and retail technology consulting, data, reporting, and digital operations.",
+  "Coordinatez works with local businesses, retailers, restaurants, contractors, distributors, professional service companies, medical and dental offices, real estate and property businesses, startups, and small businesses.",
+  "Coordinatez serves Illinois and remote U.S. clients.",
+  "Typical response time for business inquiries is usually within one business day.",
   ...services.map(service => `${service.title}: ${service.summary} ${service.description}`)
 ];
 
@@ -261,7 +265,7 @@ function renderServicePage() {
 
   const service = getServiceBySlug(currentServiceSlug());
 
-  document.title = `${service.title} | Coordinatez IT Solution`;
+  document.title = `${service.title} | Coordinatez`;
   document.querySelector("[data-service-title]").textContent = service.title;
   document.querySelector("[data-service-summary]").textContent = service.summary;
   const heroImage = document.querySelector("[data-service-hero-image]");
@@ -300,6 +304,7 @@ function setupInquiryForms() {
           body: JSON.stringify({
             type: "Website inquiry",
             name: data.name,
+            company: data.company || "",
             email: data.email,
             phone: data.phone,
             service: data.service,
@@ -314,7 +319,7 @@ function setupInquiryForms() {
           throw new Error(result.message || "Unable to send inquiry.");
         }
 
-        status.textContent = "Thanks. Your inquiry was sent to Coordinatez IT Solution.";
+        status.textContent = "Thanks. Your inquiry was sent to Coordinatez.";
         form.reset();
         hydrateServiceSelects(new URLSearchParams(window.location.search).get("service"));
       } catch (error) {
@@ -389,6 +394,10 @@ function answerGeneralQuestion(question) {
 
   if (/\b(hi|hello|hey)\b/.test(lower)) {
     return "Hello. I am CoordiBot. I can help with Coordinatez services, contact details, and general questions.";
+  }
+
+  if (/\b(how are you|how do you do|how's it going|how is it going)\b/.test(lower)) {
+    return "I am doing well and ready to help. You can ask me about Coordinatez services, contact details, or general questions.";
   }
 
   if (/\b(thanks|thank you)\b/.test(lower)) {
@@ -505,53 +514,87 @@ function setupNav() {
   });
 }
 
+function setupHeader() {
+  document.querySelectorAll(".site-header").forEach(header => {
+    header.innerHTML = `
+      <a class="brand" href="/" aria-label="Coordinatez home">
+        <span class="brand-mark"><img src="/assets/images/coordinatez-logo.png" alt=""></span>
+        <span>Coordinatez</span>
+      </a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 7h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 17h16"></path>
+        </svg>
+      </button>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/services/">Services</a>
+        <a href="/industries/">Industries</a>
+        <a href="/work/">Work</a>
+        <a href="/careers/">Careers</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    `;
+  });
+}
+
 function setupFooter() {
   document.querySelectorAll(".site-footer").forEach(footer => {
     footer.innerHTML = `
       <div class="footer-main">
+        <div class="footer-column footer-brand-text">
+          <h2>Coordinatez</h2>
+          <p>A brand of Coordinatez Tech Inc.</p>
+          <p>Business technology, websites, automation, AI systems, POS consulting, customer portals, and digital operations.</p>
+        </div>
         <nav class="footer-column" aria-label="Company links">
-          <h2>Company</h2>
-          <a href="/about.html">About Coordinatez</a>
-          <a href="/#contact">Contact us</a>
+          <h2>Links</h2>
+          <a href="/">Home</a>
+          <a href="/about.html">About</a>
+          <a href="/services/">Services</a>
           <a href="/industries/">Industries</a>
-          <a href="/blog/">Blog</a>
-          <a href="/#services">Services</a>
+          <a href="/work/">Work</a>
+          <a href="/careers/">Careers</a>
+          <a href="/contact/">Contact</a>
         </nav>
         <nav class="footer-column" aria-label="Service links">
           <h2>What we do</h2>
-          <a href="/services/ai-data-solution/">AI & Data Solution</a>
-          <a href="/services/ai-chatbots/">AI Chatbots</a>
-          <a href="/services/web-app-development/">Web & App Development</a>
+          <a href="/services/web-app-development/">Website & Digital Presence</a>
+          <a href="/services/ai-data-solution/">Business Automation</a>
+          <a href="/services/ai-integration-annotation/">AI & Chatbot Systems</a>
+          <a href="/services/ai-chatbots/">Customer Portals & Dashboards</a>
           <a href="/services/pos-consulting/">POS Consulting</a>
+          <a href="/services/maintenance-support/">Data & Reporting</a>
         </nav>
-        <nav class="footer-column" aria-label="Insights links">
-          <h2>Insights</h2>
-          <a href="/blog/rag-for-business-knowledge/">RAG for Business</a>
-          <a href="/blog/ai-for-local-business/">AI for Local Business</a>
-          <a href="/blog/ai-chatbots-for-customer-support/">AI Chatbots</a>
-          <a href="/blog/business-digital-transformation/">Digital Transformation</a>
-          <a href="/blog/website-maintenance-and-support/">Maintenance & Support</a>
+        <nav class="footer-column" aria-label="Policy links">
+          <h2>Policies</h2>
+          <a href="/privacy-policy/">Privacy Policy</a>
+          <a href="/terms-of-service/">Terms of Service</a>
+          <a href="/service-policy/">Service Policy</a>
+          <a href="/blog/">Blog</a>
         </nav>
         <div class="footer-column footer-contact">
           <h2>Contact us</h2>
+          <p>Illinois, United States</p>
           <a href="mailto:support@coordinatez.com">support@coordinatez.com</a>
           <a href="tel:+18722582235">+1 (872) 258-2235</a>
-          <p>Illinois, United States</p>
-        </div>
-        <div class="footer-brand-panel">
-          <img src="/assets/images/coordinatez-footer-logo.png" alt="Coordinatez IT Solution">
         </div>
       </div>
       <div class="footer-divider"></div>
       <div class="footer-bottom">
-        <p>© 2026 Coordinatez IT Solution. All rights reserved.</p>
+        <p>&copy; 2026 Coordinatez Tech Inc. All rights reserved.</p>
       </div>
     `;
   });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  setupThemePreview();
   setupPreloader();
+  setupHeader();
   setupNav();
   setupFooter();
   renderServiceList();
