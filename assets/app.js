@@ -875,34 +875,6 @@ function setupSectionMotion() {
   sections.forEach(section => observer.observe(section));
 }
 
-function setupHomepageSystemRail() {
-  const hero = document.querySelector(".hero");
-  if (!hero || document.querySelector(".system-rail")) return;
-
-  const rail = document.createElement("div");
-  rail.className = "system-rail";
-  rail.setAttribute("aria-hidden", "true");
-  rail.innerHTML = `
-    <div class="system-rail-track">
-      <span>Inquiry</span>
-      <span>Website</span>
-      <span>Workflow</span>
-      <span>Portal</span>
-      <span>POS</span>
-      <span>Reporting</span>
-      <span>Support</span>
-      <span>Inquiry</span>
-      <span>Website</span>
-      <span>Workflow</span>
-      <span>Portal</span>
-      <span>POS</span>
-      <span>Reporting</span>
-      <span>Support</span>
-    </div>
-  `;
-  hero.appendChild(rail);
-}
-
 function setupFooter() {
   document.querySelectorAll(".site-footer").forEach(footer => {
     footer.innerHTML = `
@@ -966,7 +938,6 @@ document.addEventListener("DOMContentLoaded", () => {
   setupActiveNavigation();
   setupFooter();
   setupSectionMotion();
-  setupHomepageSystemRail();
   renderServiceList();
   renderServicePage();
   renderImportExportList();
