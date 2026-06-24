@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Import Export Services | Coordinatez</title>
+    <meta name="description" content="Coordinatez import export inquiry support for food and supplements, home textile and decor items, metal scrap, and automobile scrap.">
+    <link rel="canonical" href="https://coordinatez.com/import-export/">
+    <link rel="icon" href="/assets/images/coordinatez-logo.png" type="image/png">
+    <link rel="stylesheet" href="/assets/styles.css">
+    <script defer src="/assets/app.js"></script>
+  </head>
+  <body>
+    <header class="site-header"></header>
+
+    <main>
+      <section class="page-hero photo-page-hero import-export-hero">
+        <div class="page-hero-copy">
+          <p class="eyebrow">Import Export</p>
+          <h1>Global trade support for practical business sourcing.</h1>
+          <p>Coordinatez supports import/export business conversations for food and supplements, home textile and decor items, metal scrap, and automobile scrap categories.</p>
+          <a class="button primary" href="#inquiry">Send Product Inquiry</a>
+        </div>
+        <div class="page-hero-media">
+          <img src="/assets/images/coordinatez-import-export-hero.png" alt="Organized import export warehouse with trade products and logistics">
+        </div>
+      </section>
+
+      <section class="section intro-grid">
+        <div>
+          <p class="eyebrow">Trade focus</p>
+          <h2>Clear product inquiries before business discussions move forward.</h2>
+        </div>
+        <p>Our import/export section is built for buyers, suppliers, vendors, and trade partners who want to start with clear product category, quantity, destination, documentation, and communication details.</p>
+      </section>
+
+      <section class="section import-export-showcase">
+        <div class="section-heading">
+          <p class="eyebrow">Product categories</p>
+          <h2>Choose a product category to view details.</h2>
+          <p>Each product page includes information and an inquiry form that routes the request to Coordinatez.</p>
+        </div>
+        <div class="product-grid" data-import-export-list></div>
+      </section>
+
+      <section id="inquiry" class="section contact-section">
+        <div>
+          <p class="eyebrow">Product inquiry</p>
+          <h2>Send an import/export inquiry.</h2>
+          <p>Share the product category, quantity, destination, and business contact details. Coordinatez will review the request and respond with the next step.</p>
+        </div>
+        <form class="inquiry-form" data-inquiry-form>
+          <label>Name<input name="name" autocomplete="name" required></label>
+          <label>Company Name<input name="company" autocomplete="organization"></label>
+          <label>Email<input name="email" type="email" autocomplete="email" required></label>
+          <label>Phone<input name="phone" type="tel" autocomplete="tel" required></label>
+          <label>Product / Service Needed<select name="service" data-product-select required></select></label>
+          <label>Message<textarea name="message" rows="6" required placeholder="Mention product type, quantity, destination, timeline, and any documentation requirements."></textarea></label>
+          <button class="button primary" type="submit">Send Inquiry</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer"></footer>
+  </body>
+</html>

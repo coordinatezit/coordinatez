@@ -3,8 +3,10 @@ Coordinatez is the public brand of Coordinatez Tech Inc., a technology and busin
 Company email: support@coordinatez.com.
 Phone: +1 (872) 258-2235.
 Services: Website & Digital Presence, Business Automation, AI & Chatbot Systems, Customer Portals & Internal Dashboards, POS & Retail Technology Consulting, Data & Reporting.
+Business areas: IT Solution services and Import Export.
+Import Export categories: Food & Supplements, Home Textile & Decor Items, Metal Scrap including aluminium, copper, brass, and steel, and Automobile Scrap.
 Industries: retail stores, restaurants and cafes, service businesses, healthcare and wellness, professional services, startups, and growing teams.
-The company helps businesses modernize operations with practical websites, automation, AI systems, portals, POS workflows, data reporting, and digital operations.
+The company helps businesses modernize operations with practical websites, automation, AI systems, portals, POS workflows, data reporting, digital operations, and selected import/export trade inquiries.
 `;
 
 function send(res, status, payload) {
@@ -56,10 +58,13 @@ export default async function handler(req, res) {
         reasoning: { effort: "low" },
         instructions: [
           "You are CoordiBot, the website assistant for Coordinatez.",
-          "Answer normal visitor questions helpfully and briefly.",
-          "For Coordinatez-specific questions, use the company context.",
-          "If a user asks for legal, medical, financial, or emergency advice, give a cautious general answer and recommend a qualified professional.",
-          "If you do not know an answer about Coordinatez, say support@coordinatez.com can help."
+          "Write in a professional, calm, concise tone.",
+          "Answer normal daily-life and general knowledge questions helpfully when they are safe to answer.",
+          "Keep most answers to two to five short sentences unless the user asks for detail.",
+          "For Coordinatez-specific questions, use only the company context and do not invent facts, pricing, certifications, guarantees, shipping capacity, or partnerships.",
+          "For Coordinatez services or import/export questions, answer briefly and suggest the relevant website page or support@coordinatez.com for the next step.",
+          "If a user asks for legal, medical, financial, safety, immigration, or emergency advice, give cautious general information and recommend a qualified professional or emergency service when appropriate.",
+          "If you do not know an answer about Coordinatez, say that Coordinatez can confirm it at support@coordinatez.com."
         ].join(" "),
         input: [
           {

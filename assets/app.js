@@ -97,6 +97,69 @@ const services = [
   }
 ];
 
+const importExportProducts = [
+  {
+    slug: "food-supplements",
+    title: "Food & Supplements",
+    summary: "Sourcing and export support for packaged food products, wellness products, and supplement categories with documentation-focused inquiry handling.",
+    image: "/assets/images/import-food-supplements.png",
+    imageAlt: "Organized export cartons and supplement bottles in a clean warehouse inspection area",
+    description: "Coordinatez supports import and export inquiries for food and supplement products by helping buyers and vendors clarify product categories, packaging requirements, documentation needs, destination details, and expected commercial terms before the next step.",
+    fit: "Importers, wholesalers, distributors, retailers, and business buyers looking for packaged food or supplement-related product sourcing conversations.",
+    details: [
+      "Packaged food product inquiry review",
+      "Supplement category and packaging discussion",
+      "Quantity, destination, and documentation coordination",
+      "Vendor or buyer inquiry routing through Coordinatez"
+    ]
+  },
+  {
+    slug: "home-textile-decor",
+    title: "Home Textile & Decor Items",
+    summary: "Trade inquiries for towels, bedding, cushions, throws, fabric goods, decor pieces, and related home product categories.",
+    image: "/assets/images/import-home-textile-decor.png",
+    imageAlt: "Folded home textiles and decor products prepared for export in a showroom warehouse",
+    description: "Coordinatez handles import/export inquiries for home textile and decor categories where product quality, material, finish, packing, and consistent supply matter. We help organize early-stage buyer and vendor communication so the right product information can be reviewed.",
+    fit: "Retailers, wholesalers, home goods sellers, sourcing partners, distributors, and buyers looking for home textile or decor product discussions.",
+    details: [
+      "Home textile and decor product inquiry review",
+      "Material, finish, style, and packing requirement collection",
+      "Buyer/vendor communication support",
+      "Quantity and destination information capture"
+    ]
+  },
+  {
+    slug: "metal-scrap",
+    title: "Metal Scrap",
+    summary: "Import/export inquiries for aluminium, copper, brass, steel, and mixed metal scrap categories.",
+    image: "/assets/images/import-metal-scrap.png",
+    imageAlt: "Sorted aluminium, copper, brass, and steel scrap prepared for trade inspection",
+    description: "Coordinatez supports commercial inquiries for metal scrap categories including aluminium, copper, brass, steel, and mixed metals. The focus is on clear commodity details, quantity expectations, origin/destination, inspection requirements, and responsible trade communication.",
+    fit: "Scrap buyers, suppliers, recyclers, traders, processors, and businesses looking to discuss metal scrap sourcing or supply opportunities.",
+    details: [
+      "Aluminium, copper, brass, steel, and mixed metal inquiry intake",
+      "Quantity, grade, packing, and destination information capture",
+      "Buyer and supplier communication support",
+      "Inspection and documentation discussion before next steps"
+    ]
+  },
+  {
+    slug: "automobile-scrap",
+    title: "Automobile Scrap",
+    summary: "Trade inquiries for automobile scrap, used auto parts, engines, transmissions, wheels, and export-ready auto components.",
+    image: "/assets/images/import-automobile-scrap.png",
+    imageAlt: "Organized automobile scrap and used auto parts prepared for export",
+    description: "Coordinatez supports business inquiries around automobile scrap and used auto components, including organized discussions for product type, condition, quantity, packing, loading, documentation, and destination requirements.",
+    fit: "Auto recyclers, parts traders, importers, exporters, workshops, wholesalers, and commodity buyers looking for automobile scrap or used parts inquiries.",
+    details: [
+      "Automobile scrap and used component inquiry intake",
+      "Engine, transmission, wheel, and parts category discussion",
+      "Packing, loading, quantity, and destination information capture",
+      "Responsible buyer/vendor communication support"
+    ]
+  }
+];
+
 const formspreeEndpoint = "https://formspree.io/f/xaqkqeqn";
 
 function setupPreloader() {
@@ -145,10 +208,12 @@ const companyKnowledge = [
   "Coordinatez is the public brand of Coordinatez Tech Inc., a technology and business systems company founded in 2026 in Illinois, United States.",
   "Coordinatez email is support@coordinatez.com and the business phone number is +1 (872) 258-2235.",
   "Coordinatez helps businesses with websites, automation, AI and chatbot systems, customer portals, internal dashboards, POS and retail technology consulting, data, reporting, and digital operations.",
+  "Coordinatez also supports import export business inquiries for food and supplements, home textile and decor items, metal scrap including aluminium copper brass and steel, and automobile scrap.",
   "Coordinatez works with local businesses, retailers, restaurants, contractors, distributors, professional service companies, medical and dental offices, real estate and property businesses, startups, and small businesses.",
   "Coordinatez serves Illinois and remote U.S. clients.",
   "Typical response time for business inquiries is usually within one business day.",
-  ...services.map(service => `${service.title}: ${service.summary} ${service.description}`)
+  ...services.map(service => `${service.title}: ${service.summary} ${service.description}`),
+  ...importExportProducts.map(product => `${product.title}: ${product.summary} ${product.description}`)
 ];
 
 function serviceUrl(slug) {
@@ -166,6 +231,23 @@ function currentServiceSlug() {
   }
 
   const parts = window.location.pathname.split("/").filter(Boolean);
+  const last = parts[parts.length - 1];
+  return last === "index.html" ? parts[parts.length - 2] : last;
+}
+
+function importExportUrl(slug) {
+  return `/import-export/${encodeURIComponent(slug)}/`;
+}
+
+function getImportExportProductBySlug(slug) {
+  return importExportProducts.find(product => product.slug === slug) || importExportProducts[0];
+}
+
+function currentImportExportSlug() {
+  if (!window.location.pathname.startsWith("/import-export/")) return null;
+
+  const parts = window.location.pathname.split("/").filter(Boolean);
+  if (parts.length < 2) return null;
   const last = parts[parts.length - 1];
   return last === "index.html" ? parts[parts.length - 2] : last;
 }
@@ -259,6 +341,53 @@ function hydrateServiceSelects(selectedSlug) {
   });
 }
 
+function hydrateProductSelects(selectedSlug) {
+  document.querySelectorAll("[data-product-select]").forEach(select => {
+    select.innerHTML = importExportProducts.map(product => `
+      <option value="${product.title}" ${product.slug === selectedSlug ? "selected" : ""}>${product.title}</option>
+    `).join("");
+  });
+}
+
+function renderImportExportList() {
+  const list = document.querySelector("[data-import-export-list]");
+  if (!list) return;
+
+  list.innerHTML = importExportProducts.map(product => `
+    <a class="product-card" href="${importExportUrl(product.slug)}" aria-label="View ${product.title} import export information">
+      <span class="product-card-image"><img src="${product.image}" alt="${product.imageAlt}"></span>
+      <span class="service-label">Product category</span>
+      <h3>${product.title}</h3>
+      <p>${product.summary}</p>
+      <span class="card-link">View information</span>
+    </a>
+  `).join("");
+}
+
+function renderImportExportPage() {
+  const page = document.querySelector("[data-product-page]");
+  if (!page) return;
+
+  const product = getImportExportProductBySlug(currentImportExportSlug());
+
+  document.title = `${product.title} Import Export | Coordinatez`;
+  document.querySelector("[data-product-title]").textContent = product.title;
+  document.querySelector("[data-product-summary]").textContent = product.summary;
+  const productImage = document.querySelector("[data-product-image]");
+  if (productImage) {
+    productImage.src = product.image;
+    productImage.alt = product.imageAlt;
+  }
+  document.querySelector("[data-product-heading]").textContent = `${product.title} trade inquiries`;
+  document.querySelector("[data-product-description]").textContent = product.description;
+  document.querySelector("[data-product-fit]").textContent = product.fit;
+  document.querySelector("[data-product-details]").innerHTML = product.details
+    .map(item => `<li>${item}</li>`)
+    .join("");
+
+  hydrateProductSelects(product.slug);
+}
+
 function renderServicePage() {
   const page = document.querySelector("[data-service-page]");
   if (!page) return;
@@ -322,6 +451,7 @@ function setupInquiryForms() {
         status.textContent = "Thanks. Your inquiry was sent to Coordinatez.";
         form.reset();
         hydrateServiceSelects(new URLSearchParams(window.location.search).get("service"));
+        hydrateProductSelects(currentImportExportSlug());
       } catch (error) {
         status.textContent = `${error.message} You can also email support@coordinatez.com directly.`;
       } finally {
@@ -372,9 +502,85 @@ function answerFromKnowledge(question) {
   return ranked.map(item => item.text).join(" ");
 }
 
+function answerCompanyQuestion(question) {
+  const lower = question.toLowerCase();
+
+  if (/\b(who are you|about coordinatez|what is coordinatez|company info|company information)\b/.test(lower)) {
+    return "Coordinatez is a business brand of Coordinatez Tech Inc. based in Illinois, United States. We support IT solution services and import/export business inquiries.";
+  }
+
+  if (/\b(contact|email|phone|call|reach)\b/.test(lower)) {
+    return "You can contact Coordinatez at support@coordinatez.com or +1 (872) 258-2235.";
+  }
+
+  if (/\b(location|located|where are you|based|address)\b/.test(lower)) {
+    return "Coordinatez is based in Illinois, United States, and can work with remote U.S. clients.";
+  }
+
+  if (/\b(found|founded|started|start)\b/.test(lower)) {
+    return "Coordinatez Tech Inc. was founded in 2026.";
+  }
+
+  if (/\b(services|it service|it solution|technology|website|automation|chatbot|portal|dashboard|pos|reporting)\b/.test(lower)) {
+    return {
+      text: "Coordinatez provides IT solution services including websites, automation, AI/chatbot systems, portals, dashboards, POS consulting, and data reporting.",
+      linkHref: "/services/",
+      linkText: "View services"
+    };
+  }
+
+  return null;
+}
+
+function answerImportExportQuestion(question) {
+  const lower = question.toLowerCase();
+  const tradeTerms = /\b(import|export|trade|trading|supplier|buyer|shipment|shipping|sourcing|product|products|commodity|commodities)\b/;
+  const productTerms = /\b(food|supplement|supplements|textile|textiles|decor|decore|scrap|aluminium|aluminum|copper|brass|steel|metal|automobile|auto|vehicle|parts|engine|transmission)\b/;
+
+  if (!tradeTerms.test(lower) && !productTerms.test(lower)) {
+    return null;
+  }
+
+  const matchedProduct = importExportProducts.find(product => {
+    const productText = `${product.title} ${product.summary} ${product.description}`.toLowerCase();
+    return scoreText(question, productText) >= 1;
+  });
+
+  if (matchedProduct) {
+    return {
+      text: `Yes. We handle ${matchedProduct.title} import/export inquiries.`,
+      linkHref: importExportUrl(matchedProduct.slug),
+      linkText: "View details"
+    };
+  }
+
+  if (/\b(which|what|products|categories|deal|dealing)\b/.test(lower)) {
+    const productList = importExportProducts.map(product => product.title).join(", ");
+    return {
+      text: `Yes. We work with import/export inquiries for ${productList}.`,
+      linkHref: "/import-export/",
+      linkText: "View details"
+    };
+  }
+
+  return {
+    text: "Yes. Coordinatez also works with import/export business inquiries.",
+    linkHref: "/import-export/",
+    linkText: "View details"
+  };
+}
+
 function answerGeneralQuestion(question) {
   const lower = question.toLowerCase();
   const now = new Date();
+
+  if (/\b(who are you|your name|what is your name)\b/.test(lower)) {
+    return "I am CoordiBot, the Coordinatez website assistant. How may I help you?";
+  }
+
+  if (/\b(what can you do|how can you help|help me)\b/.test(lower)) {
+    return "I can help with Coordinatez company information, IT solution services, import/export inquiries, contact details, and general daily questions.";
+  }
 
   if (/\b(date|today|day)\b/.test(lower)) {
     return `Today is ${now.toLocaleDateString(undefined, {
@@ -393,18 +599,23 @@ function answerGeneralQuestion(question) {
   }
 
   if (/\b(hi|hello|hey)\b/.test(lower)) {
-    return "Hello. I am CoordiBot. I can help with Coordinatez services, contact details, and general questions.";
+    return "How may I help you?";
   }
 
   if (/\b(how are you|how do you do|how's it going|how is it going)\b/.test(lower)) {
-    return "I am doing well and ready to help. You can ask me about Coordinatez services, contact details, or general questions.";
+    return "I am doing well, thank you. How may I help you?";
   }
 
   if (/\b(thanks|thank you)\b/.test(lower)) {
-    return "You are welcome. I am here if you need help choosing a service or contacting Coordinatez.";
+    return "You are welcome.";
   }
 
   return null;
+}
+
+function isCoordinatezRelatedQuestion(question) {
+  const lower = question.toLowerCase();
+  return /\b(coordinatez|company|business|service|services|website|automation|chatbot|portal|dashboard|pos|report|reporting|contact|email|phone|import|export|trade|product|products|food|supplement|textile|decor|decore|scrap|aluminium|aluminum|copper|brass|steel|automobile|auto)\b/.test(lower);
 }
 
 async function askAssistantApi(question) {
@@ -432,7 +643,19 @@ async function askAssistantApi(question) {
 function addChatMessage(container, text, sender) {
   const message = document.createElement("div");
   message.className = `message ${sender}`;
-  message.textContent = text;
+
+  if (typeof text === "object" && text !== null) {
+    message.append(document.createTextNode(text.text));
+    if (text.linkHref && text.linkText) {
+      const link = document.createElement("a");
+      link.href = text.linkHref;
+      link.textContent = text.linkText;
+      message.append(document.createElement("br"), link);
+    }
+  } else {
+    message.textContent = text;
+  }
+
   container.appendChild(message);
   container.scrollTop = container.scrollHeight;
 }
@@ -449,7 +672,7 @@ function setupChatbot() {
   launcher.addEventListener("click", () => chatbot.classList.add("open"));
   close.addEventListener("click", () => chatbot.classList.remove("open"));
 
-  addChatMessage(messages, "Hi, I am CoordiBot. I can answer questions about Coordinatez, services, contact details, and normal questions like today's date or time. If I do not know, I will create a support ticket.", "bot");
+  addChatMessage(messages, "Hi, I am CoordiBot.", "bot");
 
   form.addEventListener("submit", async event => {
     event.preventDefault();
@@ -460,7 +683,7 @@ function setupChatbot() {
     addChatMessage(messages, question, "user");
     input.value = "";
 
-    const answer = answerFromKnowledge(question) || answerGeneralQuestion(question);
+    const answer = answerGeneralQuestion(question) || answerImportExportQuestion(question) || answerCompanyQuestion(question);
     if (answer) {
       addChatMessage(messages, answer, "bot");
       return;
@@ -473,7 +696,18 @@ function setupChatbot() {
       return;
     }
 
-    addChatMessage(messages, "I do not have a confident answer for that. I am creating a support ticket for support@coordinatez.com.", "bot");
+    const knowledgeAnswer = answerFromKnowledge(question);
+    if (knowledgeAnswer) {
+      addChatMessage(messages, knowledgeAnswer, "bot");
+      return;
+    }
+
+    if (!isCoordinatezRelatedQuestion(question)) {
+      addChatMessage(messages, "I can help with general questions when the live AI assistant is connected. For now, please ask me about Coordinatez, its services, import/export business, or contact details.", "bot");
+      return;
+    }
+
+    addChatMessage(messages, "I do not have a confirmed answer for that. I will create a support ticket so the Coordinatez team can follow up.", "bot");
 
     try {
       const response = await fetch(formspreeEndpoint, {
@@ -529,16 +763,144 @@ function setupHeader() {
         </svg>
       </button>
       <nav class="site-nav" aria-label="Primary navigation">
-        <a href="/">Home</a>
-        <a href="/about.html">About</a>
-        <a href="/services/">Services</a>
-        <a href="/industries/">Industries</a>
-        <a href="/work/">Work</a>
-        <a href="/careers/">Careers</a>
-        <a href="/contact/">Contact</a>
+        <a href="/" data-nav-key="home">Home</a>
+        <a href="/about.html" data-nav-key="about">About</a>
+        <a href="/services/" data-nav-key="services">Services</a>
+        <a href="/industries/" data-nav-key="industries">Industries</a>
+        <a href="/work/" data-nav-key="work">Work</a>
+        <a href="/careers/" data-nav-key="careers">Careers</a>
+        <a href="/contact/" data-nav-key="contact">Contact</a>
       </nav>
     `;
   });
+}
+
+function setupActiveNavigation() {
+  const header = document.querySelector(".site-header");
+  const links = Array.from(document.querySelectorAll(".site-nav a[data-nav-key]"));
+  if (!header || !links.length) return;
+
+  const routeMap = [
+    ["/about", "about"],
+    ["/about.html", "about"],
+    ["/services", "services"],
+    ["/industries", "industries"],
+    ["/work", "work"],
+    ["/careers", "careers"],
+    ["/contact", "contact"]
+  ];
+
+  const getActiveKey = () => {
+    const path = window.location.pathname;
+    const matchedRoute = routeMap.find(([route]) => path.startsWith(route));
+    if (matchedRoute) return matchedRoute[1];
+
+    if (path === "/" || path.endsWith("/index.html")) {
+      const scrollAnchor = window.location.hash.replace("#", "");
+      if (scrollAnchor === "services" || scrollAnchor === "contact") return scrollAnchor;
+      const homepageAnchors = ["contact", "services"];
+      const activeSection = homepageAnchors.find(sectionId => {
+        const section = document.getElementById(sectionId);
+        if (!section) return false;
+        const box = section.getBoundingClientRect();
+        return box.top <= 140 && box.bottom > 160;
+      });
+      if (activeSection) return activeSection;
+      return "home";
+    }
+
+    return "home";
+  };
+
+  const updateActiveLink = () => {
+    const activeKey = getActiveKey();
+    links.forEach(link => {
+      link.classList.toggle("is-active", link.dataset.navKey === activeKey);
+    });
+  };
+
+  const updateScrollProgress = () => {
+    const scrollMax = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollMax > 0 ? window.scrollY / scrollMax : 0;
+    header.style.setProperty("--scroll-progress", progress.toFixed(4));
+  };
+
+  updateActiveLink();
+  updateScrollProgress();
+  window.addEventListener("hashchange", updateActiveLink);
+  window.addEventListener("scroll", () => {
+    updateScrollProgress();
+    updateActiveLink();
+  }, { passive: true });
+}
+
+function setupSectionMotion() {
+  const sections = document.querySelectorAll([
+    ".hero",
+    ".intro-grid",
+    ".photo-story-section",
+    ".services-showcase",
+    ".proof-strip",
+    ".process-band",
+    ".contact-section",
+    ".page-hero",
+    ".photo-page-hero",
+    ".service-detail",
+    ".industry-page-grid",
+    ".business-grid",
+    ".import-export-showcase",
+    ".split-band",
+    ".values",
+    ".blog-grid",
+    ".article"
+  ].join(","));
+  if (!sections.length) return;
+
+  sections.forEach(section => section.classList.add("motion-section"));
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    sections.forEach(section => section.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.16, rootMargin: "0px 0px -8% 0px" });
+
+  sections.forEach(section => observer.observe(section));
+}
+
+function setupHomepageSystemRail() {
+  const hero = document.querySelector(".hero");
+  if (!hero || document.querySelector(".system-rail")) return;
+
+  const rail = document.createElement("div");
+  rail.className = "system-rail";
+  rail.setAttribute("aria-hidden", "true");
+  rail.innerHTML = `
+    <div class="system-rail-track">
+      <span>Inquiry</span>
+      <span>Website</span>
+      <span>Workflow</span>
+      <span>Portal</span>
+      <span>POS</span>
+      <span>Reporting</span>
+      <span>Support</span>
+      <span>Inquiry</span>
+      <span>Website</span>
+      <span>Workflow</span>
+      <span>Portal</span>
+      <span>POS</span>
+      <span>Reporting</span>
+      <span>Support</span>
+    </div>
+  `;
+  hero.appendChild(rail);
 }
 
 function setupFooter() {
@@ -548,13 +910,18 @@ function setupFooter() {
         <div class="footer-column footer-brand-text">
           <h2>Coordinatez</h2>
           <p>A brand of Coordinatez Tech Inc.</p>
-          <p>Business technology, websites, automation, AI systems, POS consulting, customer portals, and digital operations.</p>
+          <h3>Our businesses</h3>
+          <div class="footer-business-list">
+            <li><a href="/services/">IT Solution service</a></li>
+            <li><a href="/import-export/">Import Export</a></li>
+          </div>
         </div>
         <nav class="footer-column" aria-label="Company links">
           <h2>Links</h2>
           <a href="/">Home</a>
           <a href="/about.html">About</a>
           <a href="/services/">Services</a>
+          <a href="/import-export/">Import Export</a>
           <a href="/industries/">Industries</a>
           <a href="/work/">Work</a>
           <a href="/careers/">Careers</a>
@@ -596,10 +963,16 @@ document.addEventListener("DOMContentLoaded", () => {
   setupPreloader();
   setupHeader();
   setupNav();
+  setupActiveNavigation();
   setupFooter();
+  setupSectionMotion();
+  setupHomepageSystemRail();
   renderServiceList();
   renderServicePage();
+  renderImportExportList();
+  renderImportExportPage();
   hydrateServiceSelects(currentServiceSlug());
+  hydrateProductSelects(currentImportExportSlug());
   setupInquiryForms();
   setupChatbot();
 });

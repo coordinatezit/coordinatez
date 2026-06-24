@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Food & Supplements Import Export | Coordinatez</title>
+    <meta name="description" content="Coordinatez import export inquiry page for food and supplements, product details, quantity, destination, and documentation discussions.">
+    <link rel="canonical" href="https://coordinatez.com/import-export/food-supplements/">
+    <link rel="icon" href="/assets/images/coordinatez-logo.png" type="image/png">
+    <link rel="stylesheet" href="/assets/styles.css">
+    <script defer src="/assets/app.js"></script>
+  </head>
+  <body>
+    <header class="site-header"></header>
+
+    <main data-product-page>
+      <section class="page-hero photo-page-hero import-export-hero">
+        <div class="page-hero-copy">
+          <p class="eyebrow">Import Export Product</p>
+          <h1 data-product-title>Product Category</h1>
+          <p data-product-summary>Product information and inquiry details.</p>
+          <a class="button primary" href="#inquiry">Request Information</a>
+        </div>
+        <div class="page-hero-media">
+          <img data-product-image src="/assets/images/coordinatez-import-export-hero.png" alt="Import export product category">
+        </div>
+      </section>
+
+      <section class="section service-detail">
+        <div class="detail-copy">
+          <p class="eyebrow">Product information</p>
+          <h2 data-product-heading></h2>
+          <p data-product-description></p>
+        </div>
+        <div class="detail-panel">
+          <h3>Inquiry details we review</h3>
+          <ul data-product-details></ul>
+        </div>
+      </section>
+
+      <section class="section split-band">
+        <div>
+          <h2>Best fit</h2>
+          <p data-product-fit></p>
+        </div>
+        <div>
+          <h2>Inquiry path</h2>
+          <ol>
+            <li>Share product category, quantity, and destination.</li>
+            <li>Coordinatez reviews the request and required details.</li>
+            <li>We respond with the appropriate next step for the business inquiry.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="inquiry" class="section contact-section">
+        <div>
+          <p class="eyebrow">Product inquiry</p>
+          <h2>Send an import/export inquiry.</h2>
+        </div>
+        <form class="inquiry-form" data-inquiry-form>
+          <label>Name<input name="name" autocomplete="name" required></label>
+          <label>Company Name<input name="company" autocomplete="organization"></label>
+          <label>Email<input name="email" type="email" autocomplete="email" required></label>
+          <label>Phone<input name="phone" type="tel" autocomplete="tel" required></label>
+          <label>Product / Service Needed<select name="service" data-product-select required></select></label>
+          <label>Message<textarea name="message" rows="6" required placeholder="Tell us what product you need, quantity, destination, and any trade requirements."></textarea></label>
+          <button class="button primary" type="submit">Send Inquiry</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer"></footer>
+  </body>
+</html>
