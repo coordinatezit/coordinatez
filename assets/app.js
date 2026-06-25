@@ -4,6 +4,8 @@ const services = [
     icon: "WA",
     title: "Website & Digital Presence",
     summary: "Business websites, landing pages, redesigns, speed improvements, SEO structure, contact forms, and client-facing pages.",
+    seoTitle: "Website Development & Digital Presence | Coordinatez",
+    seoDescription: "Coordinatez builds business websites, landing pages, redesigns, SEO-ready page structures, and inquiry flows for Illinois and U.S. companies.",
     heroImage: "/assets/images/service-web-app-development.png",
     heroAlt: "Web and app development workspace with design, code, and responsive interface screens",
     description: "Coordinatez builds practical websites and digital experiences for businesses that need a stronger online presence, clearer customer paths, and reliable inquiry capture. We focus on clean structure, performance, responsive layouts, SEO basics, and forms that support real business conversations.",
@@ -20,6 +22,8 @@ const services = [
     icon: "AD",
     title: "Business Automation",
     summary: "Automated workflows, lead routing, reminders, internal task systems, customer follow-ups, and operational tools.",
+    seoTitle: "Business Automation Services | Coordinatez",
+    seoDescription: "Coordinatez helps businesses automate lead routing, reminders, follow-ups, request tracking, and internal workflows.",
     heroImage: "/assets/images/service-ai-data-solution.png",
     heroAlt: "AI and data analytics command center with dashboards and knowledge graph screens",
     description: "Coordinatez helps businesses reduce manual work by connecting forms, requests, reminders, tasks, and follow-ups into simple digital workflows. The goal is to save time, reduce missed opportunities, and make daily operations easier to manage.",
@@ -36,6 +40,8 @@ const services = [
     icon: "IA",
     title: "AI & Chatbot Systems",
     summary: "Website chatbots, internal AI assistants, customer support bots, FAQ systems, and workflow-connected AI tools.",
+    seoTitle: "AI Chatbot & Assistant Systems | Coordinatez",
+    seoDescription: "Coordinatez designs website chatbots, FAQ assistants, customer support bots, internal AI tools, and workflow-connected AI systems.",
     heroImage: "/assets/images/service-ai-integration-annotation.png",
     heroAlt: "AI annotation and human review workspace with labeled data and model evaluation dashboards",
     description: "Coordinatez designs AI and chatbot systems around business use cases such as customer questions, internal knowledge lookup, lead capture, support routing, and workflow assistance. We keep the experience practical, guided, and connected to human follow-up when needed.",
@@ -52,6 +58,8 @@ const services = [
     icon: "CB",
     title: "Customer Portals & Internal Dashboards",
     summary: "Client dashboards, employee dashboards, vendor portals, request tracking, RFQ systems, document access, and reporting dashboards.",
+    seoTitle: "Customer Portals & Internal Dashboards | Coordinatez",
+    seoDescription: "Coordinatez builds customer portals, staff dashboards, vendor portals, request tracking systems, RFQ tools, and reporting dashboards.",
     heroImage: "/assets/images/service-ai-chatbots.png",
     heroAlt: "AI chatbot support workspace with knowledge base, lead capture, and escalation dashboard",
     description: "Coordinatez builds portals and dashboards that help customers, employees, vendors, and managers access the right information in one place. These tools can support requests, documents, reporting, RFQs, project visibility, and business operations.",
@@ -68,6 +76,8 @@ const services = [
     icon: "POS",
     title: "POS & Retail Technology Consulting",
     summary: "POS setup, menu/product structure, digital ordering support, retail workflows, reporting, and store technology improvements.",
+    seoTitle: "POS & Retail Technology Consulting | Coordinatez",
+    seoDescription: "Coordinatez helps retailers, restaurants, and local businesses improve POS workflows, product structures, reporting, and store technology.",
     heroImage: "/assets/images/service-pos-consulting.png",
     heroAlt: "POS consulting scene with checkout terminal, analytics tablet, and local business owner",
     description: "Coordinatez helps retailers, restaurants, and local operators improve how POS and store technology support day-to-day work. We can help organize menus or products, improve reporting, review workflows, and connect operational tools where appropriate.",
@@ -84,6 +94,8 @@ const services = [
     icon: "MS",
     title: "Data & Reporting",
     summary: "Business reports, dashboards, KPI tracking, sales reporting, customer insights, and operational data organization.",
+    seoTitle: "Data Reporting & Business Dashboards | Coordinatez",
+    seoDescription: "Coordinatez organizes sales, customer, POS, and operational data into reports, KPI tracking, and business dashboards.",
     heroImage: "/assets/images/service-maintenance-support.png",
     heroAlt: "IT maintenance and support operations desk with monitoring dashboards and ticket triage",
     description: "Coordinatez organizes business data into clearer reports, dashboards, and tracking systems. We help business owners understand sales, customer activity, operations, and performance without relying on scattered files and manual reporting.",
@@ -102,6 +114,8 @@ const importExportProducts = [
     slug: "food-supplements",
     title: "Food & Supplements",
     summary: "Sourcing and export support for packaged food products, wellness products, and supplement categories with documentation-focused inquiry handling.",
+    seoTitle: "Food & Supplements Import Export | Coordinatez",
+    seoDescription: "Coordinatez supports import export inquiries for packaged food, wellness, and supplement product categories with business inquiry routing.",
     image: "/assets/images/import-food-supplements.png",
     imageAlt: "Organized export cartons and supplement bottles in a clean warehouse inspection area",
     description: "Coordinatez supports import and export inquiries for food and supplement products by helping buyers and vendors clarify product categories, packaging requirements, documentation needs, destination details, and expected commercial terms before the next step.",
@@ -117,6 +131,8 @@ const importExportProducts = [
     slug: "home-textile-decor",
     title: "Home Textile & Decor Items",
     summary: "Trade inquiries for towels, bedding, cushions, throws, fabric goods, decor pieces, and related home product categories.",
+    seoTitle: "Home Textile & Decor Import Export | Coordinatez",
+    seoDescription: "Coordinatez supports import export inquiries for home textile, bedding, towels, cushions, decor items, and related product categories.",
     image: "/assets/images/import-home-textile-decor.png",
     imageAlt: "Folded home textiles and decor products prepared for export in a showroom warehouse",
     description: "Coordinatez handles import/export inquiries for home textile and decor categories where product quality, material, finish, packing, and consistent supply matter. We help organize early-stage buyer and vendor communication so the right product information can be reviewed.",
@@ -132,6 +148,8 @@ const importExportProducts = [
     slug: "metal-scrap",
     title: "Metal Scrap",
     summary: "Import/export inquiries for aluminium, copper, brass, steel, and mixed metal scrap categories.",
+    seoTitle: "Metal Scrap Import Export | Coordinatez",
+    seoDescription: "Coordinatez supports metal scrap import export inquiries for aluminium, copper, brass, steel, and mixed metal categories.",
     image: "/assets/images/import-metal-scrap.png",
     imageAlt: "Sorted aluminium, copper, brass, and steel scrap prepared for trade inspection",
     description: "Coordinatez supports commercial inquiries for metal scrap categories including aluminium, copper, brass, steel, and mixed metals. The focus is on clear commodity details, quantity expectations, origin/destination, inspection requirements, and responsible trade communication.",
@@ -147,6 +165,8 @@ const importExportProducts = [
     slug: "automobile-scrap",
     title: "Automobile Scrap",
     summary: "Trade inquiries for automobile scrap, used auto parts, engines, transmissions, wheels, and export-ready auto components.",
+    seoTitle: "Automobile Scrap Import Export | Coordinatez",
+    seoDescription: "Coordinatez supports import export inquiries for automobile scrap, used auto parts, engines, transmissions, wheels, and components.",
     image: "/assets/images/import-automobile-scrap.png",
     imageAlt: "Organized automobile scrap and used auto parts prepared for export",
     description: "Coordinatez supports business inquiries around automobile scrap and used auto components, including organized discussions for product type, condition, quantity, packing, loading, documentation, and destination requirements.",
@@ -250,6 +270,64 @@ function currentImportExportSlug() {
   if (parts.length < 2) return null;
   const last = parts[parts.length - 1];
   return last === "index.html" ? parts[parts.length - 2] : last;
+}
+
+function setMetaAttribute(selector, attribute, value) {
+  if (!value) return;
+  const element = document.querySelector(selector);
+  if (element) {
+    element.setAttribute(attribute, value);
+  }
+}
+
+function upsertMeta(name, content, attr = "name") {
+  if (!content) return;
+  let meta = document.querySelector(`meta[${attr}="${name}"]`);
+  if (!meta) {
+    meta = document.createElement("meta");
+    meta.setAttribute(attr, name);
+    document.head.appendChild(meta);
+  }
+  meta.setAttribute("content", content);
+}
+
+function upsertCanonical(href) {
+  if (!href) return;
+  let link = document.querySelector('link[rel="canonical"]');
+  if (!link) {
+    link = document.createElement("link");
+    link.rel = "canonical";
+    document.head.appendChild(link);
+  }
+  link.href = href;
+}
+
+function applyPageSeo({ title, description, canonical, image, type = "website" }) {
+  if (title) {
+    document.title = title;
+    upsertMeta("og:title", title, "property");
+  }
+  upsertMeta("description", description);
+  upsertMeta("og:description", description, "property");
+  upsertMeta("og:type", type, "property");
+  upsertMeta("og:url", canonical, "property");
+  upsertMeta("og:image", image, "property");
+  upsertMeta("twitter:card", "summary_large_image");
+  upsertMeta("twitter:title", title);
+  upsertMeta("twitter:description", description);
+  upsertMeta("twitter:image", image);
+  upsertCanonical(canonical);
+}
+
+function upsertJsonLd(id, data) {
+  let script = document.getElementById(id);
+  if (!script) {
+    script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.id = id;
+    document.head.appendChild(script);
+  }
+  script.textContent = JSON.stringify(data);
 }
 
 const serviceIcons = {
@@ -370,7 +448,26 @@ function renderImportExportPage() {
 
   const product = getImportExportProductBySlug(currentImportExportSlug());
 
-  document.title = `${product.title} Import Export | Coordinatez`;
+  applyPageSeo({
+    title: product.seoTitle || `${product.title} Import Export | Coordinatez`,
+    description: product.seoDescription || product.summary,
+    canonical: `https://coordinatez.com${importExportUrl(product.slug)}`,
+    image: `https://coordinatez.com${product.image}`
+  });
+  upsertJsonLd("coordinatez-product-service-schema", {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": `${product.title} Import Export`,
+    "description": product.seoDescription || product.summary,
+    "provider": {
+      "@type": "Organization",
+      "name": "Coordinatez Tech Inc.",
+      "url": "https://coordinatez.com/"
+    },
+    "areaServed": ["Illinois", "United States"],
+    "serviceType": "Import Export Inquiry Support",
+    "url": `https://coordinatez.com${importExportUrl(product.slug)}`
+  });
   document.querySelector("[data-product-title]").textContent = product.title;
   document.querySelector("[data-product-summary]").textContent = product.summary;
   const productImage = document.querySelector("[data-product-image]");
@@ -394,7 +491,26 @@ function renderServicePage() {
 
   const service = getServiceBySlug(currentServiceSlug());
 
-  document.title = `${service.title} | Coordinatez`;
+  applyPageSeo({
+    title: service.seoTitle || `${service.title} | Coordinatez`,
+    description: service.seoDescription || service.summary,
+    canonical: `https://coordinatez.com${serviceUrl(service.slug)}/`,
+    image: `https://coordinatez.com${service.heroImage}`
+  });
+  upsertJsonLd("coordinatez-service-schema", {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": service.title,
+    "description": service.seoDescription || service.summary,
+    "provider": {
+      "@type": "Organization",
+      "name": "Coordinatez Tech Inc.",
+      "url": "https://coordinatez.com/"
+    },
+    "areaServed": ["Illinois", "United States"],
+    "serviceType": service.title,
+    "url": `https://coordinatez.com${serviceUrl(service.slug)}/`
+  });
   document.querySelector("[data-service-title]").textContent = service.title;
   document.querySelector("[data-service-summary]").textContent = service.summary;
   const heroImage = document.querySelector("[data-service-hero-image]");
