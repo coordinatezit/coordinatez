@@ -222,40 +222,44 @@ const importExportProducts = [
 
 const formspreeEndpoint = "https://formspree.io/f/xaqkqeqn";
 
-function setupPreloader() {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  if (sessionStorage.getItem("coordinatezPreloaderShown") === "true") return;
+// --- Analytics / measurement layer -------------------------------------
+// TODO: replace with the real GA4 Measurement ID from your Google Analytics
+// property (Admin > Data Streams > your web stream > Measurement ID).
+// Until a real "G-XXXXXXXXXX" id is set, no analytics script is loaded and
+// trackEvent() below becomes a harmless no-op (safe to leave deployed).
+const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
 
-  sessionStorage.setItem("coordinatezPreloaderShown", "true");
+function initAnalytics() {
+  if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === "G-XXXXXXXXXX") return;
 
-  document.body.classList.add("preloader-active");
-  const preloader = document.createElement("div");
-  preloader.className = "site-preloader";
-  preloader.setAttribute("aria-hidden", "true");
-  preloader.innerHTML = `
-    <div class="preloader-inner">
-      <div class="preloader-logo-frame">
-        <img class="preloader-logo" src="/assets/images/coordinatez-logo.png" alt="">
-      </div>
-      <div class="preloader-title">
-        <strong>Coordinatez</strong>
-        <span>Business Systems</span>
-      </div>
-      <div class="preloader-progress"></div>
-    </div>
-  `;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function gtag() { window.dataLayer.push(arguments); };
+  gtag("js", new Date());
+  gtag("config", GA_MEASUREMENT_ID, { anonymize_ip: true });
 
-  document.body.prepend(preloader);
-
-  window.setTimeout(() => {
-    preloader.classList.add("is-hidden");
-    document.body.classList.remove("preloader-active");
-  }, 2200);
-
-  window.setTimeout(() => {
-    preloader.remove();
-  }, 2850);
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+  document.head.appendChild(script);
 }
+
+function trackEvent(name, params = {}) {
+  if (typeof window.gtag === "function") {
+    window.gtag("event", name, params);
+  }
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: name, ...params });
+}
+
+function setupContactClickTracking() {
+  document.addEventListener("click", event => {
+    const link = event.target.closest('a[href^="tel:"], a[href^="mailto:"]');
+    if (!link) return;
+    const type = link.getAttribute("href").startsWith("tel:") ? "phone" : "email";
+    trackEvent("contact_click", { contact_method: type, page_path: window.location.pathname });
+  });
+}
+
 
 function setupThemePreview() {
   const params = new URLSearchParams(window.location.search);
@@ -622,6 +626,11 @@ function setupInquiryForms() {
         }
 
         status.textContent = "Thanks. Your inquiry was sent to Coordinatez.";
+        trackEvent("generate_lead", {
+          form_type: window.location.pathname.startsWith("/import-export/") ? "import_export_inquiry" : "service_inquiry",
+          service_requested: data.service || "",
+          page_path: window.location.pathname
+        });
         form.reset();
         hydrateServiceSelects(new URLSearchParams(window.location.search).get("service"));
         hydrateProductSelects(currentImportExportSlug());
@@ -881,6 +890,7 @@ function setupChatbot() {
     }
 
     addChatMessage(messages, "I do not have a confirmed answer for that. I will create a support ticket so the Coordinatez team can follow up.", "bot");
+    trackEvent("chatbot_escalation", { page_path: window.location.pathname });
 
     try {
       const response = await fetch(formspreeEndpoint, {
@@ -1106,8 +1116,9 @@ function setupFooter() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  initAnalytics();
+  setupContactClickTracking();
   setupThemePreview();
-  setupPreloader();
   setupHeader();
   setupNav();
   setupActiveNavigation();

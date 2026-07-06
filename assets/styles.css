@@ -383,6 +383,17 @@ h3 {
   font-weight: 800;
 }
 
+.trust-bar {
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.trust-bar .signal-row {
+  justify-content: center;
+  gap: 28px;
+  row-gap: 12px;
+}
+
 .hero-metrics {
   flex-wrap: wrap;
   gap: 10px;
