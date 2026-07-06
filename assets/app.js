@@ -121,10 +121,20 @@ const importExportProducts = [
     description: "Coordinatez supports import and export inquiries for food and supplement products by helping buyers and vendors clarify product categories, packaging requirements, documentation needs, destination details, and expected commercial terms before the next step.",
     fit: "Importers, wholesalers, distributors, retailers, and business buyers looking for packaged food or supplement-related product sourcing conversations.",
     details: [
-      "Packaged food product inquiry review",
-      "Supplement category and packaging discussion",
-      "Quantity, destination, and documentation coordination",
+      "Packaged food, beverage, nutraceutical, and dietary supplement inquiry review",
+      "Labeling, ingredient list, and certificate-of-analysis discussion (commonly HS Chapters 19-21 for food preparations and beverages)",
+      "Quantity, destination, storage, and documentation coordination",
       "Vendor or buyer inquiry routing through Coordinatez"
+    ],
+    faq: [
+      {
+        q: "What food and supplement categories does Coordinatez support inquiries for?",
+        a: "Packaged foods, beverages, nutraceuticals, vitamins, and herbal or dietary supplement products. Share your specific product category, target destination, and required certifications in the inquiry form so we can confirm fit before the next step."
+      },
+      {
+        q: "Do you handle FDA or import documentation for food and supplement shipments?",
+        a: "We help buyers and vendors organize the documentation conversation, including labeling, certificates of analysis, and destination requirements, early in the process. Formal customs, FDA, and compliance filings are confirmed and handled through the appropriate licensed parties as the inquiry moves forward."
+      }
     ]
   },
   {
@@ -138,44 +148,74 @@ const importExportProducts = [
     description: "Coordinatez handles import/export inquiries for home textile and decor categories where product quality, material, finish, packing, and consistent supply matter. We help organize early-stage buyer and vendor communication so the right product information can be reviewed.",
     fit: "Retailers, wholesalers, home goods sellers, sourcing partners, distributors, and buyers looking for home textile or decor product discussions.",
     details: [
-      "Home textile and decor product inquiry review",
-      "Material, finish, style, and packing requirement collection",
+      "Home textile and decor product inquiry review, including towels, bedding, cushions, throws, rugs, curtains, and fabric decor pieces",
+      "Material, finish, style, and packing requirement collection (commonly HS Chapter 63 textile articles and Chapter 57 for rugs and carpets)",
       "Buyer/vendor communication support",
       "Quantity and destination information capture"
+    ],
+    faq: [
+      {
+        q: "What kinds of home textile and decor products can I inquire about?",
+        a: "Towels, bedding sets, cushions, throws, curtains, rugs, and related fabric or decor items. Include material, finish, and target quantity in your inquiry so it can be routed correctly."
+      },
+      {
+        q: "Can Coordinatez support both import and export directions for textiles?",
+        a: "Yes. The inquiry form supports both buyers sourcing textile products and vendors looking to place products with U.S. or international partners."
+      }
     ]
   },
   {
     slug: "metal-scrap",
     title: "Metal Scrap",
-    summary: "Import/export inquiries for aluminium, copper, brass, steel, and mixed metal scrap categories.",
-    seoTitle: "Metal Scrap Import Export | Coordinatez",
-    seoDescription: "Coordinatez supports metal scrap import export inquiries for aluminium, copper, brass, steel, and mixed metal categories.",
+    summary: "Import/export inquiries for aluminium, copper, brass, steel, and mixed metal scrap categories in Chicago, Illinois, and across the U.S.",
+    seoTitle: "Metal Scrap Import Export | Chicago & Illinois | Coordinatez",
+    seoDescription: "Coordinatez supports metal scrap import export inquiries for aluminium, copper, brass, and steel for buyers and suppliers in Chicago, Illinois, and across the U.S.",
     image: "/assets/images/import-metal-scrap.png",
     imageAlt: "Sorted aluminium, copper, brass, and steel scrap prepared for trade inspection",
-    description: "Coordinatez supports commercial inquiries for metal scrap categories including aluminium, copper, brass, steel, and mixed metals. The focus is on clear commodity details, quantity expectations, origin/destination, inspection requirements, and responsible trade communication.",
-    fit: "Scrap buyers, suppliers, recyclers, traders, processors, and businesses looking to discuss metal scrap sourcing or supply opportunities.",
+    description: "Coordinatez supports commercial inquiries for metal scrap categories including aluminium, copper, brass, steel, and mixed metals. The focus is on clear commodity details, quantity expectations, origin/destination, inspection requirements, and responsible trade communication for buyers and suppliers in Chicago, across Illinois, and nationally.",
+    fit: "Scrap buyers, suppliers, recyclers, traders, and processors in Chicago, Illinois, and across the U.S. looking to discuss metal scrap sourcing or supply opportunities.",
     details: [
-      "Aluminium, copper, brass, steel, and mixed metal inquiry intake",
-      "Quantity, grade, packing, and destination information capture",
-      "Buyer and supplier communication support",
-      "Inspection and documentation discussion before next steps"
+      "Aluminium (extrusion, UBC, mixed aluminium), copper (bare bright, #1/#2, candy), brass, and steel (HMS 1&2, shredded, structural) inquiry intake",
+      "Quantity, grade, packing (loose, baled, briquetted), and destination information capture",
+      "Buyer and supplier communication support for Chicago, Illinois, and other U.S. and international trade contacts",
+      "Inspection, HS classification (commonly HS Chapter 74 copper, 76 aluminium, 72 iron and steel), and documentation discussion before next steps"
+    ],
+    faq: [
+      {
+        q: "What metal scrap grades does Coordinatez take inquiries for?",
+        a: "Common categories include aluminium (extrusion, UBC, mixed), copper (bare bright, #1/#2, candy), brass, and steel (HMS 1&2, shredded, structural). Share the grade, quantity, and packing format in your inquiry."
+      },
+      {
+        q: "Do you support scrap metal buyers and suppliers in the Chicago area?",
+        a: "Yes. Coordinatez is based in Illinois and supports metal scrap trade inquiries connected to Chicago, the broader Illinois market, and other U.S. and international buyers and suppliers."
+      }
     ]
   },
   {
     slug: "automobile-scrap",
     title: "Automobile Scrap",
-    summary: "Trade inquiries for automobile scrap, used auto parts, engines, transmissions, wheels, and export-ready auto components.",
-    seoTitle: "Automobile Scrap Import Export | Coordinatez",
-    seoDescription: "Coordinatez supports import export inquiries for automobile scrap, used auto parts, engines, transmissions, wheels, and components.",
+    summary: "Trade inquiries for automobile scrap, used auto parts, engines, transmissions, wheels, and export-ready auto components in Chicago, Illinois, and across the U.S.",
+    seoTitle: "Automobile Scrap Import Export | Chicago & Illinois | Coordinatez",
+    seoDescription: "Coordinatez supports automobile scrap and used auto parts import export inquiries for buyers and suppliers in Chicago, Illinois, and across the U.S.",
     image: "/assets/images/import-automobile-scrap.png",
     imageAlt: "Organized automobile scrap and used auto parts prepared for export",
-    description: "Coordinatez supports business inquiries around automobile scrap and used auto components, including organized discussions for product type, condition, quantity, packing, loading, documentation, and destination requirements.",
-    fit: "Auto recyclers, parts traders, importers, exporters, workshops, wholesalers, and commodity buyers looking for automobile scrap or used parts inquiries.",
+    description: "Coordinatez supports business inquiries around automobile scrap and used auto components, including organized discussions for product type, condition, quantity, packing, loading, documentation, and destination requirements for buyers and suppliers in Chicago, across Illinois, and nationally.",
+    fit: "Auto recyclers, parts traders, importers, exporters, and workshops in Chicago, Illinois, and other U.S. markets looking for automobile scrap or used parts inquiries.",
     details: [
-      "Automobile scrap and used component inquiry intake",
-      "Engine, transmission, wheel, and parts category discussion",
-      "Packing, loading, quantity, and destination information capture",
-      "Responsible buyer/vendor communication support"
+      "Automobile scrap and used component inquiry intake, including engines, transmissions, wheels, and body panels",
+      "Condition, quantity, packing, and loading (container or bulk) discussion",
+      "Documentation and destination requirement capture (commonly HS Chapter 87 for vehicle parts and Chapter 72/76 for scrap metal content)",
+      "Responsible buyer/vendor communication support for Chicago, Illinois, and other U.S. trade contacts"
+    ],
+    faq: [
+      {
+        q: "What automobile scrap and used parts categories can I inquire about?",
+        a: "Engines, transmissions, wheels, body panels, and other used or end-of-life vehicle components. Include condition, quantity, and destination details in your inquiry."
+      },
+      {
+        q: "Is Coordinatez able to support automobile scrap trade inquiries in Chicago and Illinois?",
+        a: "Yes. Coordinatez is based in Illinois and supports automobile scrap inquiry routing for buyers and suppliers in the Chicago area as well as other U.S. and international markets."
+      }
     ]
   }
 ];
@@ -464,10 +504,21 @@ function renderImportExportPage() {
       "name": "Coordinatez Tech Inc.",
       "url": "https://coordinatez.com/"
     },
-    "areaServed": ["Illinois", "United States"],
+    "areaServed": ["Illinois", "Chicago", "United States"],
     "serviceType": "Import Export Inquiry Support",
     "url": `https://coordinatez.com${importExportUrl(product.slug)}`
   });
+  if (Array.isArray(product.faq) && product.faq.length) {
+    upsertJsonLd("coordinatez-product-faq-schema", {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": product.faq.map(item => ({
+        "@type": "Question",
+        "name": item.q,
+        "acceptedAnswer": { "@type": "Answer", "text": item.a }
+      }))
+    });
+  }
   document.querySelector("[data-product-title]").textContent = product.title;
   document.querySelector("[data-product-summary]").textContent = product.summary;
   const productImage = document.querySelector("[data-product-image]");
@@ -481,6 +532,12 @@ function renderImportExportPage() {
   document.querySelector("[data-product-details]").innerHTML = product.details
     .map(item => `<li>${item}</li>`)
     .join("");
+  const faqList = document.querySelector("[data-product-faq]");
+  if (faqList && Array.isArray(product.faq)) {
+    faqList.innerHTML = product.faq
+      .map(item => `<div class="faq-item"><h3>${item.q}</h3><p>${item.a}</p></div>`)
+      .join("");
+  }
 
   hydrateProductSelects(product.slug);
 }
@@ -882,6 +939,7 @@ function setupHeader() {
         <a href="/" data-nav-key="home">Home</a>
         <a href="/about.html" data-nav-key="about">About</a>
         <a href="/services/" data-nav-key="services">Services</a>
+        <a href="/import-export/" data-nav-key="import-export">Import Export</a>
         <a href="/industries/" data-nav-key="industries">Industries</a>
         <a href="/work/" data-nav-key="work">Work</a>
         <a href="/careers/" data-nav-key="careers">Careers</a>
@@ -900,6 +958,7 @@ function setupActiveNavigation() {
     ["/about", "about"],
     ["/about.html", "about"],
     ["/services", "services"],
+    ["/import-export", "import-export"],
     ["/industries", "industries"],
     ["/work", "work"],
     ["/careers", "careers"],
