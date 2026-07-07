@@ -227,7 +227,7 @@ const formspreeEndpoint = "https://formspree.io/f/xaqkqeqn";
 // property (Admin > Data Streams > your web stream > Measurement ID).
 // Until a real "G-XXXXXXXXXX" id is set, no analytics script is loaded and
 // trackEvent() below becomes a harmless no-op (safe to leave deployed).
-const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
+const GA_MEASUREMENT_ID = "G-EL9172J97W";
 
 function initAnalytics() {
   if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === "G-XXXXXXXXXX") return;
