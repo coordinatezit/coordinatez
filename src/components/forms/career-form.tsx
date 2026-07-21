@@ -28,6 +28,7 @@ import { FormSuccessCard } from "@/components/forms/form-success-card";
 import { useAntiSpamGuard, turnstileEnabled } from "@/hooks/use-anti-spam-guard";
 import { careerSchema, type CareerFormValues, validateResumeFile } from "@/lib/validations";
 import { openPositions, applicationPositionOptions } from "@/data/jobs";
+import { trackEvent } from "@/lib/analytics";
 
 const positionOptions = [...openPositions.map((job) => job.title), ...applicationPositionOptions];
 
@@ -80,6 +81,7 @@ export function CareerForm({ defaultPosition }: { defaultPosition?: string }) {
         throw new Error(json.message || "Something went wrong. Please try again.");
       }
 
+      trackEvent("career_application_submit", { position: data.position });
       setStatus("success");
       reset({ position: "", website: "", name: "", email: "", phone: "", message: "" });
       setResumeFile(null);

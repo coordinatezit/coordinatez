@@ -24,6 +24,7 @@ import { FormSuccessCard } from "@/components/forms/form-success-card";
 import { useAntiSpamGuard, turnstileEnabled } from "@/hooks/use-anti-spam-guard";
 import { contactSchema, failsTimeTrap, type ContactFormValues } from "@/lib/validations";
 import { countryOptions, inquiryInterestOptions } from "@/lib/form-options";
+import { trackEvent } from "@/lib/analytics";
 
 export function ContactForm() {
   const searchParams = useSearchParams();
@@ -106,6 +107,7 @@ export function ContactForm() {
         throw new Error(json?.message || "Something went wrong. Please try again.");
       }
 
+      trackEvent("contact_form_submit", { interest: data.interest });
       setStatus("success");
       resetForm();
     } catch (error) {
