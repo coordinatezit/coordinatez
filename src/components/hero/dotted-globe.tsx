@@ -1,6 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { geoContains } from "d3-geo";
+import { feature } from "topojson-client";
+import land110m from "world-atlas/land-110m.json";
 import { networkNodes, networkArcs } from "@/data/network";
 
 // Palette tuned for the deep-navy (ink) hero — light dots and glowing arcs.
@@ -37,18 +40,43 @@ function rotate(v: Vec3, spin: number): Vec3 {
   return { x: x1, y: y2, z: z2 };
 }
 
-// Evenly distributed surface dots (density scaled by latitude so the sphere
-// doesn't crowd at the poles).
+// Real world landmass, decoded once at module load, used to keep only the
+// grid points that fall on land — so the globe reads as an actual world map.
+const LAND = feature(
+  land110m as unknown as Parameters<typeof feature>[0],
+  (land110m as unknown as { objects: { land: unknown } }).objects
+    .land as unknown as Parameters<typeof feature>[1]
+) as unknown as Parameters<typeof geoContains>[0];
+
+// Continent dots — a lat/lon grid filtered to land, giving recognizable
+// continents while density stays even (longitude step scaled by latitude).
 const DOTS: Vec3[] = (() => {
   const pts: Vec3[] = [];
-  for (let lat = -78; lat <= 78; lat += 6) {
-    const circumference = Math.cos((lat * Math.PI) / 180);
-    const count = Math.max(1, Math.round(58 * circumference));
-    for (let i = 0; i < count; i++) {
-      pts.push(latLonToVec(lat, (i / count) * 360, 1));
+  for (let lat = -78; lat <= 84; lat += 2.6) {
+    const cos = Math.cos((lat * Math.PI) / 180);
+    const step = 2.6 / Math.max(0.12, cos);
+    for (let lon = -180; lon < 180; lon += step) {
+      if (geoContains(LAND, [lon, lat])) pts.push(latLonToVec(lat, lon, 1));
     }
   }
   return pts;
+})();
+
+// Faint graticule (lat rings + meridians) so the sphere shape reads even over
+// the oceans, echoing the brand's coordinate-grid motif.
+const GRATICULE: Vec3[][] = (() => {
+  const lines: Vec3[][] = [];
+  for (let lat = -60; lat <= 60; lat += 30) {
+    const ring: Vec3[] = [];
+    for (let lon = -180; lon <= 180; lon += 4) ring.push(latLonToVec(lat, lon, 1));
+    lines.push(ring);
+  }
+  for (let lon = -180; lon < 180; lon += 30) {
+    const meridian: Vec3[] = [];
+    for (let lat = -80; lat <= 80; lat += 4) meridian.push(latLonToVec(lat, lon, 1));
+    lines.push(meridian);
+  }
+  return lines;
 })();
 
 // Great-circle arcs (slerp) with a raised altitude bump, precomputed as unit paths.
@@ -133,15 +161,38 @@ export function DottedGlobe() {
       ctx.arc(cx, cy, radius * 1.02, 0, Math.PI * 2);
       ctx.fill();
 
-      // surface dots (front hemisphere only), shaded by depth
+      // faint graticule for sphere structure over the oceans
+      ctx.lineWidth = 0.6;
+      for (const line of GRATICULE) {
+        ctx.beginPath();
+        let started = false;
+        for (const v of line) {
+          const r = rotate(v, spin);
+          if (r.z <= 0.02) {
+            started = false;
+            continue;
+          }
+          const p = project(r);
+          if (!started) {
+            ctx.moveTo(p.sx, p.sy);
+            started = true;
+          } else {
+            ctx.lineTo(p.sx, p.sy);
+          }
+        }
+        ctx.strokeStyle = rgba(NAVY, 0.13);
+        ctx.stroke();
+      }
+
+      // continent dots (front hemisphere only), shaded by depth
       for (const d of DOTS) {
         const r = rotate(d, spin);
         if (r.z <= 0.02) continue;
         const p = project(r);
         const depth = r.z;
         ctx.beginPath();
-        ctx.fillStyle = rgba(NAVY, 0.16 + depth * 0.5);
-        ctx.arc(p.sx, p.sy, 0.7 + depth * 1.2, 0, Math.PI * 2);
+        ctx.fillStyle = rgba(NAVY, 0.28 + depth * 0.55);
+        ctx.arc(p.sx, p.sy, 0.8 + depth * 1.25, 0, Math.PI * 2);
         ctx.fill();
       }
 
