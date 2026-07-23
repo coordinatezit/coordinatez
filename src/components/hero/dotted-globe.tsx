@@ -3,11 +3,11 @@
 import { useEffect, useRef } from "react";
 import { networkNodes, networkArcs } from "@/data/network";
 
-// Light-theme palette (hex → rgb tuples for canvas alpha compositing).
-const NAVY: [number, number, number] = [20, 65, 127]; // brand royal
-const SKY: [number, number, number] = [46, 143, 202]; // brand sky
-const COPPER: [number, number, number] = [169, 98, 44]; // brand copper
-const HUB: [number, number, number] = [16, 20, 58]; // brand ink
+// Palette tuned for the deep-navy (ink) hero — light dots and glowing arcs.
+const NAVY: [number, number, number] = [150, 180, 224]; // soft periwinkle surface dots
+const SKY: [number, number, number] = [92, 176, 234]; // brand sky (arcs / dev hub)
+const COPPER: [number, number, number] = [224, 160, 106]; // warm copper (trade arcs / markets)
+const HUB: [number, number, number] = [255, 255, 255]; // hub cores / labels on ink
 
 const TILT = -0.42; // radians — northern hemisphere tips toward viewer
 const rgba = (c: [number, number, number], a: number) => `rgba(${c[0]}, ${c[1]}, ${c[2]}, ${a})`;
@@ -126,7 +126,7 @@ export function DottedGlobe() {
 
       // faint sphere disc glow
       const grad = ctx.createRadialGradient(cx, cy - radius * 0.2, radius * 0.2, cx, cy, radius * 1.05);
-      grad.addColorStop(0, rgba(SKY, 0.08));
+      grad.addColorStop(0, rgba(SKY, 0.14));
       grad.addColorStop(1, rgba(SKY, 0));
       ctx.fillStyle = grad;
       ctx.beginPath();
@@ -140,8 +140,8 @@ export function DottedGlobe() {
         const p = project(r);
         const depth = r.z;
         ctx.beginPath();
-        ctx.fillStyle = rgba(NAVY, 0.12 + depth * 0.42);
-        ctx.arc(p.sx, p.sy, 0.7 + depth * 1.15, 0, Math.PI * 2);
+        ctx.fillStyle = rgba(NAVY, 0.16 + depth * 0.5);
+        ctx.arc(p.sx, p.sy, 0.7 + depth * 1.2, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -199,23 +199,23 @@ export function DottedGlobe() {
         const r = rotate(latLonToVec(n.lat, n.lon, 1.01), spin);
         if (r.z <= 0.02) continue;
         const p = project(r);
-        const col = n.kind === "development" ? SKY : NAVY;
-        // halo
+        const col = n.kind === "development" ? SKY : HUB;
+        // glow halo
         ctx.beginPath();
-        ctx.fillStyle = rgba(col, 0.18);
-        ctx.arc(p.sx, p.sy, 7, 0, Math.PI * 2);
+        ctx.fillStyle = rgba(col, 0.25);
+        ctx.arc(p.sx, p.sy, 8, 0, Math.PI * 2);
         ctx.fill();
         // core
         ctx.beginPath();
         ctx.fillStyle = rgba(col, 1);
         ctx.arc(p.sx, p.sy, 3.2, 0, Math.PI * 2);
         ctx.fill();
-        // label with light halo for legibility
+        // label with dark halo for legibility on the ink background
         const label = n.city.toUpperCase();
-        ctx.lineWidth = 3;
-        ctx.strokeStyle = "rgba(250, 248, 243, 0.9)";
+        ctx.lineWidth = 3.5;
+        ctx.strokeStyle = "rgba(7, 10, 44, 0.92)";
         ctx.strokeText(label, p.sx, p.sy - 11);
-        ctx.fillStyle = rgba(HUB, 0.95);
+        ctx.fillStyle = "rgba(233, 235, 245, 0.98)";
         ctx.fillText(label, p.sx, p.sy - 11);
       }
     }
