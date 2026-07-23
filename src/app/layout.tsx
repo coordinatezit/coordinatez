@@ -47,10 +47,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#faf8f3" },
-    { media: "(prefers-color-scheme: dark)", color: "#070920" },
-  ],
+  themeColor: "#faf8f3",
 };
 
 export default function RootLayout({
@@ -67,7 +64,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <JsonLd data={[organizationJsonLd(), websiteJsonLd(), localBusinessJsonLd()]} />
         <AnalyticsScripts />
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" forcedTheme="light" disableTransitionOnChange>
           <TooltipProvider delayDuration={150}>
             <Navbar />
             <main className="flex-1">{children}</main>

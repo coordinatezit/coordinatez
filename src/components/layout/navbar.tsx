@@ -12,7 +12,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { Logo } from "@/components/shared/logo";
 import { mainNav } from "@/data/nav";
 import { siteConfig } from "@/data/site";
@@ -89,7 +88,6 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <ThemeToggle />
             <Button asChild size="sm" className="hidden rounded-full px-4 sm:inline-flex">
               <Link href="/contact">
                 Talk to Coordinatez
