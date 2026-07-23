@@ -19,7 +19,10 @@ export function buildMetadata({
   noIndex = false,
 }: BuildMetadataInput): Metadata {
   const url = `${siteConfig.url}${path}`;
-  const fullTitle = path === "/" ? title : `${title} | ${siteConfig.name}`;
+  // Append the brand suffix only when the title doesn't already carry it — landing
+  // pages supply full brand-inclusive titles, while simpler pages rely on the suffix.
+  const fullTitle =
+    path === "/" || title.includes(siteConfig.name) ? title : `${title} | ${siteConfig.name}`;
 
   return {
     title: fullTitle,
@@ -140,35 +143,60 @@ export function localBusinessJsonLd() {
   };
 }
 
-export function serviceJsonLd(service: { id: string; title: string; description: string }) {
+// Serves both the /technology hub (path "/technology") and each dedicated
+// service landing page (path "/technology/<slug>").
+export function serviceJsonLd(service: {
+  title: string;
+  description: string;
+  path: string;
+  provider?: string;
+}) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
     serviceType: service.title,
     name: service.title,
     description: service.description,
-    url: `${siteConfig.url}/technology#${service.id}`,
+    url: `${siteConfig.url}${service.path}`,
     provider: {
       "@type": "Organization",
-      name: siteConfig.name,
+      name: service.provider ?? siteConfig.name,
       url: siteConfig.url,
+    },
+    areaServed: [
+      { "@type": "Country", name: "United States" },
+      { "@type": "AdministrativeArea", name: "Illinois" },
+      { "@type": "City", name: "Chicago" },
+    ],
+    availableChannel: {
+      "@type": "ServiceChannel",
+      serviceUrl: `${siteConfig.url}/contact`,
     },
   };
 }
 
-export function tradeServiceJsonLd(capability: { id: string; title: string; description: string }) {
+export function tradeServiceJsonLd(capability: {
+  title: string;
+  description: string;
+  path: string;
+}) {
+  return serviceJsonLd({
+    title: capability.title,
+    description: capability.description,
+    path: capability.path,
+    provider: siteConfig.divisions.trade.name,
+  });
+}
+
+export function webPageJsonLd(page: { title: string; description: string; path: string }) {
   return {
     "@context": "https://schema.org",
-    "@type": "Service",
-    serviceType: capability.title,
-    name: capability.title,
-    description: capability.description,
-    url: `${siteConfig.url}/global-trade#${capability.id}`,
-    provider: {
-      "@type": "Organization",
-      name: siteConfig.divisions.trade.name,
-      url: siteConfig.url,
-    },
+    "@type": "WebPage",
+    name: page.title,
+    description: page.description,
+    url: `${siteConfig.url}${page.path}`,
+    isPartOf: { "@type": "WebSite", name: siteConfig.name, url: siteConfig.url },
+    publisher: { "@type": "Organization", name: siteConfig.name },
   };
 }
 

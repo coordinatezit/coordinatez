@@ -1,35 +1,56 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/data/site";
 import { insights } from "@/data/insights";
+import { services } from "@/data/services";
+import { tradePages } from "@/data/trade-pages";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  const staticRoutes: MetadataRoute.Sitemap = [
-    { path: "/", priority: 1, changeFrequency: "weekly" as const },
-    { path: "/technology", priority: 0.9, changeFrequency: "monthly" as const },
-    { path: "/global-trade", priority: 0.9, changeFrequency: "monthly" as const },
-    { path: "/about", priority: 0.8, changeFrequency: "monthly" as const },
-    { path: "/global-presence", priority: 0.7, changeFrequency: "monthly" as const },
-    { path: "/industries", priority: 0.7, changeFrequency: "monthly" as const },
-    { path: "/insights", priority: 0.7, changeFrequency: "weekly" as const },
-    { path: "/careers", priority: 0.6, changeFrequency: "weekly" as const },
-    { path: "/contact", priority: 0.8, changeFrequency: "yearly" as const },
-    { path: "/privacy-policy", priority: 0.2, changeFrequency: "yearly" as const },
-    { path: "/terms-and-conditions", priority: 0.2, changeFrequency: "yearly" as const },
-  ].map(({ path, priority, changeFrequency }) => ({
+  const staticRoutes: { path: string; priority: number; changeFrequency: "weekly" | "monthly" | "yearly" }[] = [
+    { path: "/", priority: 1, changeFrequency: "weekly" },
+    { path: "/technology", priority: 0.9, changeFrequency: "monthly" },
+    { path: "/global-trade", priority: 0.9, changeFrequency: "monthly" },
+    { path: "/about", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/global-presence", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/locations/chicago", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/industries", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/insights", priority: 0.7, changeFrequency: "weekly" },
+    { path: "/careers", priority: 0.6, changeFrequency: "weekly" },
+    { path: "/contact", priority: 0.8, changeFrequency: "yearly" },
+    { path: "/privacy-policy", priority: 0.2, changeFrequency: "yearly" },
+    { path: "/terms-and-conditions", priority: 0.2, changeFrequency: "yearly" },
+  ];
+
+  const staticEntries: MetadataRoute.Sitemap = staticRoutes.map(({ path, priority, changeFrequency }) => ({
     url: `${siteConfig.url}${path === "/" ? "" : path}`,
     lastModified: now,
     changeFrequency,
     priority,
   }));
 
-  const articleRoutes: MetadataRoute.Sitemap = insights.map((post) => ({
+  // Technology service landing pages — high commercial-intent, priority 0.8.
+  const serviceEntries: MetadataRoute.Sitemap = services.map((service) => ({
+    url: `${siteConfig.url}/technology/${service.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  // Global trade landing pages — high commercial-intent, priority 0.8.
+  const tradeEntries: MetadataRoute.Sitemap = tradePages.map((page) => ({
+    url: `${siteConfig.url}/global-trade/${page.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  const articleEntries: MetadataRoute.Sitemap = insights.map((post) => ({
     url: `${siteConfig.url}/insights/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: "yearly",
     priority: 0.5,
   }));
 
-  return [...staticRoutes, ...articleRoutes];
+  return [...staticEntries, ...serviceEntries, ...tradeEntries, ...articleEntries];
 }

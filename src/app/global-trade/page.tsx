@@ -3,47 +3,50 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/shared/container";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { RevealOnScroll, RevealStagger, staggerItem } from "@/components/shared/reveal-on-scroll";
 import * as motion from "framer-motion/client";
 import { JsonLd } from "@/components/shared/json-ld";
 import { TradeNetworkMap } from "@/components/sections/trade-network-map";
 import { buildMetadata, tradeServiceJsonLd, breadcrumbJsonLd } from "@/lib/seo";
-import { tradeCapabilities, tradeCorridors, tradeProcess } from "@/data/trade";
-import { siteConfig } from "@/data/site";
+import { tradePages } from "@/data/trade-pages";
+import { tradeCorridors, tradeProcess } from "@/data/trade";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Global Trade — Import & Export, Sourcing, Commodities & Metal Trading",
+  title: "Metal & Scrap Export & International Trade Company USA | Coordinatez",
   description:
-    "Coordinatez Global Trade connects buyers and suppliers across the United States, India, and international markets — global sourcing, import & export operations, commodity and industrial-material trading, metal & scrap, and logistics coordination.",
+    "Coordinatez Global Trade — scrap metal export, aluminium & copper scrap, ferrous & non-ferrous metal trading, and international import/export from the United States to global markets.",
   path: "/global-trade",
   keywords: [
-    "import export company",
-    "international trade company",
-    "global sourcing",
-    "commodity trading company",
-    "industrial materials supplier",
-    "metal and scrap trading",
-    "US India trade",
-    "logistics coordination",
-    "Coordinatez Global Trade",
+    "scrap metal exporter USA",
+    "metal exporter USA",
+    "metal trading company USA",
+    "aluminium scrap exporter USA",
+    "copper scrap exporter USA",
+    "international scrap metal export",
+    "import export company USA",
   ],
 });
+
+const crumbs = [
+  { name: "Home", path: "/" },
+  { name: "Global Trade", path: "/global-trade" },
+];
+
+const groups = ["Metal & Scrap", "Trade Services"] as const;
 
 export default function GlobalTradePage() {
   return (
     <>
       <JsonLd
         data={[
-          breadcrumbJsonLd([
-            { name: "Home", path: "/" },
-            { name: "Global Trade", path: "/global-trade" },
-          ]),
-          ...tradeCapabilities.map((capability) =>
+          breadcrumbJsonLd(crumbs),
+          ...tradePages.map((page) =>
             tradeServiceJsonLd({
-              id: capability.id,
-              title: capability.title,
-              description: capability.description,
+              title: page.title,
+              description: page.tagline,
+              path: `/global-trade/${page.slug}`,
             })
           ),
         ]}
@@ -60,20 +63,19 @@ export default function GlobalTradePage() {
               "radial-gradient(circle, color-mix(in oklab, var(--brand-copper) 18%, transparent) 0%, transparent 65%)",
           }}
         />
-        <Container className="relative py-20 sm:py-28">
-          <RevealOnScroll>
-            <p className="eyebrow-on-ink">
-              Division 02 <span className="mx-2 text-[var(--ink-panel-border)]">/</span>{" "}
-              {siteConfig.divisions.trade.name}
-            </p>
+        <Container className="relative py-16 sm:py-24">
+          <Breadcrumbs items={crumbs} onInk />
+          <RevealOnScroll className="mt-6">
+            <p className="eyebrow-on-ink">Division 02 / Coordinatez Global Trade</p>
             <h1 className="mt-5 max-w-3xl text-balance font-display text-4xl font-medium leading-[1.08] text-white sm:text-5xl lg:text-6xl">
-              Connecting global markets.{" "}
-              <span className="text-gradient-copper">Moving business forward.</span>
+              Metal &amp; scrap export.{" "}
+              <span className="text-gradient-copper">Connecting global markets.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-[var(--ink-panel-muted)]">
-              International import &amp; export between the United States, India, and world
-              markets — sourcing, commodity and industrial-material trading, metal &amp; scrap,
-              and the logistics coordination that holds it all together.
+              International metal and scrap trading and import/export from the United States to
+              world markets — ferrous and non-ferrous scrap, aluminium and copper, and broader
+              commodity and industrial-material trade, run with disciplined specification,
+              inspection, and documentation.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Button
@@ -120,11 +122,56 @@ export default function GlobalTradePage() {
         </Container>
       </section>
 
+      {/* Services grid — links to dedicated pages */}
+      <section className="section-y">
+        <Container>
+          <SectionHeading
+            index="01"
+            eyebrow="What We Trade"
+            title="Metal, scrap, and international trade services."
+            description="Dedicated capabilities across metal and scrap export and broader import/export — engage us for one material or the entire transaction chain."
+          />
+          {groups.map((group) => {
+            const items = tradePages.filter((p) => p.group === group);
+            if (items.length === 0) return null;
+            return (
+              <div key={group} className="mt-12">
+                <div className="flex items-baseline gap-3">
+                  <h3 className="font-display text-xl font-medium">{group}</h3>
+                  <span
+                    aria-hidden
+                    className="h-px flex-1 bg-border"
+                  />
+                </div>
+                <RevealStagger className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {items.map((page) => (
+                    <motion.div key={page.slug} variants={staggerItem}>
+                      <Link
+                        href={`/global-trade/${page.slug}`}
+                        className="group flex h-full flex-col rounded-xl border bg-card p-6 transition-colors hover:border-brand-copper/50"
+                      >
+                        <h4 className="font-display text-xl font-medium">{page.title}</h4>
+                        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                          {page.tagline}
+                        </p>
+                        <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-copper transition-transform group-hover:translate-x-1">
+                          Explore {page.navLabel} <ArrowRight className="size-4" />
+                        </span>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </RevealStagger>
+              </div>
+            );
+          })}
+        </Container>
+      </section>
+
       {/* Global Trade Network map */}
       <section id="network" className="ink-panel scroll-mt-24 border-t border-[var(--ink-panel-border)]">
         <Container className="section-y">
           <SectionHeading
-            index="01"
+            index="02"
             eyebrow="Global Trade Network"
             title="One desk. Two continents. Global reach."
             description="Our headquarters in Chicago and our team in India work the same transactions from both sides — connecting US and international buyers with vetted suppliers across the markets shown here."
@@ -139,52 +186,9 @@ export default function GlobalTradePage() {
         </Container>
       </section>
 
-      {/* Capabilities */}
-      <section className="section-y">
-        <Container>
-          <SectionHeading
-            index="02"
-            eyebrow="What We Do"
-            title="From first inquiry to delivered cargo."
-            description="Seven capabilities that cover the full life of an international transaction — engage us for one piece or the entire chain."
-          />
-          <div className="mt-4">
-            {tradeCapabilities.map((capability, index) => (
-              <article
-                key={capability.id}
-                id={capability.id}
-                className="scroll-mt-28 border-b py-10 last:border-b-0"
-              >
-                <RevealOnScroll className="grid gap-6 lg:grid-cols-[1fr_1.4fr_1fr] lg:gap-12">
-                  <div className="flex items-start gap-4">
-                    <span className="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-brand-copper">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="-mt-1 font-display text-xl font-medium sm:text-2xl">
-                      {capability.title}
-                    </h3>
-                  </div>
-                  <p className="text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
-                    {capability.description}
-                  </p>
-                  <ul className="space-y-2">
-                    {capability.points.map((point) => (
-                      <li key={point} className="flex gap-2.5 text-sm leading-snug">
-                        <span aria-hidden className="mt-[0.55rem] h-px w-3 shrink-0 bg-brand-copper" />
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </RevealOnScroll>
-              </article>
-            ))}
-          </div>
-        </Container>
-      </section>
-
       {/* Process */}
-      <section className="border-t bg-muted/30">
-        <Container className="section-y">
+      <section className="section-y border-t">
+        <Container>
           <SectionHeading
             index="03"
             eyebrow="How a Transaction Runs"
@@ -208,27 +212,11 @@ export default function GlobalTradePage() {
               </motion.div>
             ))}
           </RevealStagger>
-
-          <RevealOnScroll className="mt-10 rounded-lg border bg-card px-7 py-6">
-            <p className="text-pretty text-sm leading-relaxed text-muted-foreground">
-              <span className="font-semibold text-foreground">A note on fit:</span> we take on
-              transactions where we have reliable counterparties, inspection coverage, and market
-              knowledge — and we&apos;ll tell you plainly when a requirement falls outside that. If
-              you&apos;re exploring a new corridor or material,{" "}
-              <Link
-                href={{ pathname: "/contact", query: { interest: "Global Trade" } }}
-                className="font-medium text-brand-copper underline-offset-4 hover:underline"
-              >
-                start the conversation
-              </Link>{" "}
-              and we&apos;ll give you an honest read.
-            </p>
-          </RevealOnScroll>
         </Container>
       </section>
 
       {/* CTA — copper variant */}
-      <section className="section-y">
+      <section className="section-y border-t">
         <Container>
           <RevealOnScroll>
             <div className="ink-panel relative overflow-hidden rounded-2xl border border-[var(--ink-panel-border)] px-8 py-14 sm:px-14">
