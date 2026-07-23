@@ -102,14 +102,15 @@ export function Footer() {
             {
               label: hq.label,
               company: hq.company,
-              lines: [...hq.addressLines],
+              // Footer shows only the city/region line (no street address).
+              lines: [hq.addressLines[hq.addressLines.length - 1]],
               coords: hq.coordinates.label,
               contact: siteConfig.phone.us,
             },
             {
               label: dev.label,
               company: `${dev.company} — ${dev.role}`,
-              lines: [...dev.addressLines],
+              lines: [dev.addressLines[dev.addressLines.length - 1]],
               coords: dev.coordinates.label,
               contact: siteConfig.phone.india,
             },
