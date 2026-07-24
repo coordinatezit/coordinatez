@@ -1,10 +1,17 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { geoContains } from "d3-geo";
-import { feature } from "topojson-client";
-import land110m from "world-atlas/land-110m.json";
-import { networkNodes, networkArcs } from "@/data/network";
+import {
+  DOTS,
+  GRATICULE,
+  ARCS,
+  HUBS,
+  MARKETS,
+  latLonToVec,
+  rotate,
+  INITIAL_SPIN,
+  type Vec3,
+} from "@/components/hero/globe-geometry";
 
 // Palette tuned for the deep-navy (ink) hero — light dots and glowing arcs.
 const NAVY: [number, number, number] = [150, 180, 224]; // soft periwinkle surface dots
@@ -12,103 +19,7 @@ const SKY: [number, number, number] = [92, 176, 234]; // brand sky (arcs / dev h
 const COPPER: [number, number, number] = [224, 160, 106]; // warm copper (trade arcs / markets)
 const HUB: [number, number, number] = [255, 255, 255]; // hub cores / labels on ink
 
-const TILT = -0.42; // radians — northern hemisphere tips toward viewer
 const rgba = (c: [number, number, number], a: number) => `rgba(${c[0]}, ${c[1]}, ${c[2]}, ${a})`;
-
-type Vec3 = { x: number; y: number; z: number };
-
-function latLonToVec(latDeg: number, lonDeg: number, r = 1): Vec3 {
-  const lat = (latDeg * Math.PI) / 180;
-  const lon = (lonDeg * Math.PI) / 180;
-  return {
-    x: r * Math.cos(lat) * Math.sin(lon),
-    y: r * Math.sin(lat),
-    z: r * Math.cos(lat) * Math.cos(lon),
-  };
-}
-
-/** Rotate around Y (spin) then X (fixed tilt). */
-function rotate(v: Vec3, spin: number): Vec3 {
-  const cosY = Math.cos(spin);
-  const sinY = Math.sin(spin);
-  const x1 = v.x * cosY + v.z * sinY;
-  const z1 = -v.x * sinY + v.z * cosY;
-  const cosX = Math.cos(TILT);
-  const sinX = Math.sin(TILT);
-  const y2 = v.y * cosX - z1 * sinX;
-  const z2 = v.y * sinX + z1 * cosX;
-  return { x: x1, y: y2, z: z2 };
-}
-
-// Real world landmass, decoded once at module load, used to keep only the
-// grid points that fall on land — so the globe reads as an actual world map.
-const LAND = feature(
-  land110m as unknown as Parameters<typeof feature>[0],
-  (land110m as unknown as { objects: { land: unknown } }).objects
-    .land as unknown as Parameters<typeof feature>[1]
-) as unknown as Parameters<typeof geoContains>[0];
-
-// Continent dots — a lat/lon grid filtered to land, giving recognizable
-// continents while density stays even (longitude step scaled by latitude).
-const DOTS: Vec3[] = (() => {
-  const pts: Vec3[] = [];
-  for (let lat = -78; lat <= 84; lat += 2.6) {
-    const cos = Math.cos((lat * Math.PI) / 180);
-    const step = 2.6 / Math.max(0.12, cos);
-    for (let lon = -180; lon < 180; lon += step) {
-      if (geoContains(LAND, [lon, lat])) pts.push(latLonToVec(lat, lon, 1));
-    }
-  }
-  return pts;
-})();
-
-// Faint graticule (lat rings + meridians) so the sphere shape reads even over
-// the oceans, echoing the brand's coordinate-grid motif.
-const GRATICULE: Vec3[][] = (() => {
-  const lines: Vec3[][] = [];
-  for (let lat = -60; lat <= 60; lat += 30) {
-    const ring: Vec3[] = [];
-    for (let lon = -180; lon <= 180; lon += 4) ring.push(latLonToVec(lat, lon, 1));
-    lines.push(ring);
-  }
-  for (let lon = -180; lon < 180; lon += 30) {
-    const meridian: Vec3[] = [];
-    for (let lat = -80; lat <= 80; lat += 4) meridian.push(latLonToVec(lat, lon, 1));
-    lines.push(meridian);
-  }
-  return lines;
-})();
-
-// Great-circle arcs (slerp) with a raised altitude bump, precomputed as unit paths.
-const ARCS = (() => {
-  const byId = Object.fromEntries(networkNodes.map((n) => [n.id, n]));
-  return networkArcs.map(({ from, to }) => {
-    const a = byId[from];
-    const b = byId[to];
-    const va = latLonToVec(a.lat, a.lon, 1);
-    const vb = latLonToVec(b.lat, b.lon, 1);
-    const dot = Math.min(1, Math.max(-1, va.x * vb.x + va.y * vb.y + va.z * vb.z));
-    const omega = Math.acos(dot) || 1e-4;
-    const sin = Math.sin(omega);
-    const pts: Vec3[] = [];
-    const segs = 70;
-    for (let i = 0; i <= segs; i++) {
-      const t = i / segs;
-      const k1 = Math.sin((1 - t) * omega) / sin;
-      const k2 = Math.sin(t * omega) / sin;
-      const alt = 1 + Math.sin(t * Math.PI) * (0.12 + omega * 0.12);
-      pts.push({
-        x: (va.x * k1 + vb.x * k2) * alt,
-        y: (va.y * k1 + vb.y * k2) * alt,
-        z: (va.z * k1 + vb.z * k2) * alt,
-      });
-    }
-    return { pts, isTech: from === "chicago" && to === "mehsana" };
-  });
-})();
-
-const HUBS = networkNodes.filter((n) => n.kind !== "market");
-const MARKETS = networkNodes.filter((n) => n.kind === "market");
 
 export function DottedGlobe() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -124,7 +35,7 @@ export function DottedGlobe() {
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let raf = 0;
-    let spin = -0.5;
+    let spin = INITIAL_SPIN;
     let size = 0;
     let cx = 0;
     let cy = 0;
@@ -271,28 +182,43 @@ export function DottedGlobe() {
       }
     }
 
+    let visible = false;
     function loop() {
+      if (!visible) return;
       spin += 0.0016;
       draw();
       raf = requestAnimationFrame(loop);
     }
 
     resize();
+    draw(); // paint the first frame immediately (matches the static fallback)
+
     const ro = new ResizeObserver(() => {
       resize();
-      if (reduce) draw();
+      draw();
     });
     if (cv.parentElement) ro.observe(cv.parentElement);
 
-    if (reduce) {
-      draw();
-    } else {
-      raf = requestAnimationFrame(loop);
-    }
+    // Only animate while the globe is on-screen — saves CPU/battery on mobile.
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        const onScreen = entry.isIntersecting;
+        if (onScreen && !visible && !reduce) {
+          visible = true;
+          raf = requestAnimationFrame(loop);
+        } else if (!onScreen) {
+          visible = false;
+          cancelAnimationFrame(raf);
+        }
+      },
+      { threshold: 0 }
+    );
+    io.observe(cv);
 
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
+      io.disconnect();
     };
   }, []);
 

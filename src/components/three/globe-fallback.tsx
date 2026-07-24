@@ -1,43 +1,98 @@
 import { cn } from "@/lib/utils";
+import {
+  DOTS,
+  ARCS,
+  HUBS,
+  latLonToVec,
+  rotate,
+  INITIAL_SPIN,
+} from "@/components/hero/globe-geometry";
+
+const SIZE = 560;
+const CX = SIZE / 2;
+const CY = SIZE / 2;
+const R = SIZE * 0.42;
+
+function project(v: { x: number; y: number; z: number }) {
+  const r = rotate(v, INITIAL_SPIN);
+  return { sx: CX + r.x * R, sy: CY - r.y * R, z: r.z };
+}
 
 /**
- * Static, light-theme globe illustration used for the brief pre-hydration paint
- * and for no-JS visitors. The interactive canvas globe replaces it on mount.
+ * Static first-frame of the dotted globe — server-rendered SVG at the same
+ * orientation the canvas starts from, so it appears instantly (great for LCP)
+ * and the interactive canvas takes over seamlessly with no 2D→3D flash.
+ * Continents are subsampled to keep the initial HTML light.
  */
 export function GlobeFallback({ className }: { className?: string }) {
-  const dots: [number, number][] = [];
-  // simple concentric dotted rings to suggest a sphere
-  for (let ring = 1; ring <= 6; ring++) {
-    const r = ring * 38;
-    const count = ring * 8;
-    for (let i = 0; i < count; i++) {
-      const a = (i / count) * Math.PI * 2;
-      dots.push([280 + Math.cos(a) * r, 280 + Math.sin(a) * r * 0.98]);
+  const dots = DOTS.filter((_, i) => i % 2 === 0)
+    .map(project)
+    .filter((p) => p.z > 0.02);
+
+  const arcPaths = ARCS.map((arc) => {
+    let d = "";
+    let started = false;
+    for (const pt of arc.pts) {
+      const p = project(pt);
+      if (p.z <= -0.15) {
+        started = false;
+        continue;
+      }
+      d += `${started ? "L" : "M"}${p.sx.toFixed(1)} ${p.sy.toFixed(1)} `;
+      started = true;
     }
-  }
+    return { d, isTech: arc.isTech };
+  });
 
   return (
     <svg
-      viewBox="0 0 560 560"
+      viewBox={`0 0 ${SIZE} ${SIZE}`}
       role="img"
-      aria-label="Illustration of a global network connecting Chicago, India, and world markets"
+      aria-label="Dotted world globe showing Coordinatez's network across the US, India, and global markets"
       className={cn("h-full w-full", className)}
     >
-      <circle cx="280" cy="280" r="244" fill="rgba(92,176,234,0.06)" />
-      {dots.map(([x, y], i) => (
-        <circle key={i} cx={x} cy={y} r="1.6" fill="rgba(150,180,224,0.45)" />
+      <circle cx={CX} cy={CY} r={R * 1.02} fill="rgba(92,176,234,0.06)" />
+      {dots.map((p, i) => (
+        <circle
+          key={i}
+          cx={p.sx.toFixed(1)}
+          cy={p.sy.toFixed(1)}
+          r={(0.8 + p.z * 1.25).toFixed(1)}
+          fill={`rgba(150,180,224,${(0.28 + p.z * 0.55).toFixed(2)})`}
+        />
       ))}
-      <g fill="none" strokeLinecap="round" strokeDasharray="5 8" className="animate-dash-flow">
-        <path d="M150 210 Q 280 110 398 250" stroke="#5cb0ea" strokeWidth="2" />
-        <path d="M398 250 Q 430 320 430 360" stroke="#e0a06a" strokeWidth="1.4" opacity="0.8" />
-        <path d="M150 210 Q 130 270 145 320" stroke="#e0a06a" strokeWidth="1.4" opacity="0.8" />
-      </g>
-      <g fontFamily="var(--font-plex-mono), monospace" fontSize="10" letterSpacing="0.16em" fontWeight="600">
-        <circle cx="150" cy="210" r="5" fill="#ffffff" />
-        <text x="150" y="192" textAnchor="middle" fill="#e9ebf5">CHICAGO</text>
-        <circle cx="398" cy="250" r="5" fill="#5cb0ea" />
-        <text x="398" y="232" textAnchor="middle" fill="#e9ebf5">MEHSANA</text>
-      </g>
+      {arcPaths.map((a, i) => (
+        <path
+          key={i}
+          d={a.d}
+          fill="none"
+          stroke={a.isTech ? "#5cb0ea" : "#e0a06a"}
+          strokeWidth={a.isTech ? 1.6 : 1.1}
+          strokeOpacity={a.isTech ? 0.85 : 0.55}
+          strokeLinecap="round"
+        />
+      ))}
+      {HUBS.map((n) => {
+        const p = project(latLonToVec(n.lat, n.lon, 1.01));
+        if (p.z <= 0.02) return null;
+        const color = n.kind === "development" ? "#5cb0ea" : "#ffffff";
+        return (
+          <g key={n.id} fontFamily="var(--font-plex-mono), monospace" fontSize="10" fontWeight="600" letterSpacing="0.16em">
+            <circle cx={p.sx.toFixed(1)} cy={p.sy.toFixed(1)} r="3.2" fill={color} />
+            <text
+              x={p.sx.toFixed(1)}
+              y={(p.sy - 11).toFixed(1)}
+              textAnchor="middle"
+              fill="#e9ebf5"
+              stroke="#070a2c"
+              strokeWidth="3.5"
+              paintOrder="stroke"
+            >
+              {n.city.toUpperCase()}
+            </text>
+          </g>
+        );
+      })}
     </svg>
   );
 }
