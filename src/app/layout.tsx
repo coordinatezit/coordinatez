@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { BackToTop } from "@/components/layout/back-to-top";
+import { WhatsAppButton } from "@/components/layout/whatsapp-button";
 import { CookieConsent } from "@/components/layout/cookie-consent";
 import { JsonLd } from "@/components/shared/json-ld";
 import { AnalyticsScripts } from "@/components/shared/analytics-scripts";
@@ -69,6 +70,7 @@ export default function RootLayout({
             <Navbar />
             <main className="flex-1">{children}</main>
             <Footer />
+            <WhatsAppButton />
             <BackToTop />
             <CookieConsent />
             <Toaster position="bottom-right" richColors />
