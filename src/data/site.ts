@@ -26,7 +26,7 @@ export const siteConfig = {
   ],
   email: {
     // Public-facing addresses — update if the mailbox names differ on the coordinatez.com domain.
-    contact: "info@coordinatez.com",
+    contact: "support@coordinatez.com",
     careers: "info@coordinatez.com",
   },
   phone: {
