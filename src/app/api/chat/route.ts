@@ -6,7 +6,9 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 // Google Gemini (free tier). Get a key at https://aistudio.google.com/apikey
-const MODEL = process.env.CHAT_MODEL || "gemini-2.5-flash";
+// "gemini-flash-latest" is an alias Google keeps pointed at the current free
+// Flash model, so it won't go stale the way a pinned version can.
+const MODEL = process.env.CHAT_MODEL || "gemini-flash-latest";
 const MAX_MESSAGES = 20;
 const MAX_CHARS_PER_MESSAGE = 4000;
 const MAX_TOTAL_CHARS = 16000;
