@@ -25,6 +25,13 @@ import { useAntiSpamGuard, turnstileEnabled } from "@/hooks/use-anti-spam-guard"
 import { contactSchema, failsTimeTrap, type ContactFormValues } from "@/lib/validations";
 import { countryOptions, inquiryInterestOptions } from "@/lib/form-options";
 import { trackEvent } from "@/lib/analytics";
+import { siteConfig } from "@/data/site";
+
+// Public Formspree endpoint — safe to expose in the browser. Submissions are
+// delivered to the address configured on the Formspree form (support@coordinatez.com).
+// Overridable via env without a code change.
+const FORMSPREE_ENDPOINT =
+  process.env.NEXT_PUBLIC_FORMSPREE_CONTACT_ENDPOINT || "https://formspree.io/f/meeyvydo";
 
 export function ContactForm() {
   const searchParams = useSearchParams();
@@ -92,35 +99,47 @@ export function ContactForm() {
 
     setStatus("loading");
     try {
-      const res = await fetch("/api/contact", {
+      // Human-readable keys so the email Formspree sends to support@coordinatez.com
+      // clearly identifies each field. `email` is recognized by Formspree as the
+      // reply-to; `_subject` sets the email subject; `_gotcha` is its honeypot.
+      const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          ...data,
-          formRenderedAt: formRenderedAtRef.current,
-          ...(turnstileToken ? { "cf-turnstile-response": turnstileToken } : {}),
+          "Full Name": data.name,
+          email: data.email,
+          Phone: data.phone,
+          Company: data.company || "—",
+          "Inquiry Type": data.interest,
+          Country: data.country,
+          Message: data.message,
+          _subject: `New ${data.interest} inquiry from ${data.name}`,
+          _gotcha: data.website || "",
         }),
       });
 
-      const json = await res.json().catch(() => null);
-      if (!res.ok || !json?.ok) {
-        throw new Error(json?.message || "Something went wrong. Please try again.");
+      if (!res.ok) {
+        const json = await res.json().catch(() => null);
+        const detail = json?.errors?.map((e: { message: string }) => e.message).join(", ");
+        throw new Error(detail || "Submission failed.");
       }
 
       trackEvent("contact_form_submit", { interest: data.interest });
       setStatus("success");
       resetForm();
-    } catch (error) {
+    } catch {
       setStatus("idle");
-      toast.error(error instanceof Error ? error.message : "Something went wrong. Please try again.");
+      toast.error(
+        `Something went wrong while submitting your inquiry. Please try again or contact us directly at ${siteConfig.email.contact}.`
+      );
     }
   }
 
   if (status === "success") {
     return (
       <FormSuccessCard
-        title="Message Sent!"
-        description="Thanks for reaching out — we've emailed you a confirmation and a member of our team will get back to you within one business day."
+        title="Thank You for Contacting Coordinatez"
+        description="Your inquiry has been successfully submitted. Our team will get back to you shortly."
         buttonLabel="Send Another Message"
         onReset={() => setStatus("idle")}
       />
