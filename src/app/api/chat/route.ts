@@ -5,7 +5,8 @@ import { getClientKey, isRateLimited } from "@/lib/rate-limit";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const MODEL = process.env.CHAT_MODEL || "claude-haiku-4-5-20251001";
+// Google Gemini (free tier). Get a key at https://aistudio.google.com/apikey
+const MODEL = process.env.CHAT_MODEL || "gemini-2.5-flash";
 const MAX_MESSAGES = 20;
 const MAX_CHARS_PER_MESSAGE = 4000;
 const MAX_TOTAL_CHARS = 16000;
@@ -24,16 +25,17 @@ function sanitize(input: unknown): ChatMessage[] | null {
     if (text) cleaned.push({ role, content: text });
   }
   if (cleaned.length === 0) return null;
-  // Keep only the most recent turns, and the last message must be from the user.
   const trimmed = cleaned.slice(-MAX_MESSAGES);
   if (trimmed[trimmed.length - 1].role !== "user") return null;
-  const total = trimmed.reduce((n, m) => n + m.content.length, 0);
-  if (total > MAX_TOTAL_CHARS) {
-    // Drop oldest until under budget.
-    while (trimmed.length > 1 && trimmed.reduce((n, m) => n + m.content.length, 0) > MAX_TOTAL_CHARS) {
-      trimmed.shift();
-    }
+  while (
+    trimmed.length > 1 &&
+    trimmed.reduce((n, m) => n + m.content.length, 0) > MAX_TOTAL_CHARS
+  ) {
+    trimmed.shift();
   }
+  // Gemini requires the conversation to start with a user turn — drop the
+  // leading assistant welcome message the widget sends for context.
+  while (trimmed.length > 1 && trimmed[0].role === "assistant") trimmed.shift();
   return trimmed;
 }
 
@@ -41,7 +43,6 @@ const FRIENDLY_ERROR =
   "Sorry, I'm having trouble responding right now. Please try again in a moment or contact our team directly at support@coordinatez.com.";
 
 export async function POST(request: Request) {
-  // Rate limit: generous enough for a real conversation, tight enough to deter abuse.
   if (isRateLimited(`chat:${getClientKey(request)}`, 40, 10 * 60 * 1000)) {
     return NextResponse.json(
       { error: "Too many messages. Please pause for a moment and try again." },
@@ -49,9 +50,9 @@ export async function POST(request: Request) {
     );
   }
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
-    console.error("Chat: ANTHROPIC_API_KEY is not configured.");
+    console.error("Chat: GEMINI_API_KEY is not configured.");
     return NextResponse.json({ error: FRIENDLY_ERROR }, { status: 503 });
   }
 
@@ -61,24 +62,25 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
+  const contents = messages.map((m) => ({
+    role: m.role === "assistant" ? "model" : "user",
+    parts: [{ text: m.content }],
+  }));
+
   let upstream: Response;
   try {
-    upstream = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        max_tokens: 800,
-        temperature: 0.4,
-        system: SYSTEM_PROMPT,
-        messages,
-        stream: true,
-      }),
-    });
+    upstream = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:streamGenerateContent?alt=sse`,
+      {
+        method: "POST",
+        headers: { "content-type": "application/json", "x-goog-api-key": apiKey },
+        body: JSON.stringify({
+          systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+          contents,
+          generationConfig: { maxOutputTokens: 800, temperature: 0.4 },
+        }),
+      }
+    );
   } catch (error) {
     console.error("Chat: upstream request failed:", error);
     return NextResponse.json({ error: FRIENDLY_ERROR }, { status: 502 });
@@ -90,10 +92,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: FRIENDLY_ERROR }, { status: 502 });
   }
 
-  // Transform Anthropic's SSE stream into a plain UTF-8 text stream of the reply.
+  // Transform Gemini's SSE stream into a plain UTF-8 text stream of the reply.
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
   const reader = upstream.body.getReader();
+
+  type GeminiChunk = {
+    candidates?: { content?: { parts?: { text?: string }[] } }[];
+  };
 
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
@@ -109,11 +115,14 @@ export async function POST(request: Request) {
             const trimmed = line.trim();
             if (!trimmed.startsWith("data:")) continue;
             const data = trimmed.slice(5).trim();
-            if (data === "[DONE]") continue;
+            if (!data || data === "[DONE]") continue;
             try {
-              const event = JSON.parse(data);
-              if (event.type === "content_block_delta" && event.delta?.type === "text_delta") {
-                controller.enqueue(encoder.encode(event.delta.text));
+              const event = JSON.parse(data) as GeminiChunk;
+              const parts = event.candidates?.[0]?.content?.parts;
+              if (parts) {
+                for (const p of parts) {
+                  if (p.text) controller.enqueue(encoder.encode(p.text));
+                }
               }
             } catch {
               // ignore keep-alive / non-JSON lines
