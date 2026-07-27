@@ -108,7 +108,11 @@ export default function ContactPage() {
                       <p className="text-sm font-medium">
                         {location.company} — {location.label}
                       </p>
-                      {location.addressLines.map((line) => (
+                      {/* India (Coorbitz) shows only the city/region line. */}
+                      {(location === dev
+                        ? [dev.addressLines[dev.addressLines.length - 1]]
+                        : location.addressLines
+                      ).map((line) => (
                         <p key={line} className="text-sm text-muted-foreground">
                           {line}
                         </p>
