@@ -8,6 +8,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { BackToTop } from "@/components/layout/back-to-top";
 import { WhatsAppButton } from "@/components/layout/whatsapp-button";
+import { ChatWidgetLoader } from "@/components/chat/chat-widget-loader";
 import { CookieConsent } from "@/components/layout/cookie-consent";
 import { JsonLd } from "@/components/shared/json-ld";
 import { AnalyticsScripts } from "@/components/shared/analytics-scripts";
@@ -70,6 +71,7 @@ export default function RootLayout({
             <Navbar />
             <main className="flex-1">{children}</main>
             <Footer />
+            <ChatWidgetLoader />
             <WhatsAppButton />
             <BackToTop />
             <CookieConsent />

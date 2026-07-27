@@ -4,12 +4,16 @@ const hits = new Map<string, number[]>();
 const WINDOW_MS = 10 * 60 * 1000; // 10 minutes
 const MAX_REQUESTS = 5;
 
-export function isRateLimited(key: string): boolean {
+export function isRateLimited(
+  key: string,
+  maxRequests: number = MAX_REQUESTS,
+  windowMs: number = WINDOW_MS
+): boolean {
   const now = Date.now();
-  const timestamps = (hits.get(key) ?? []).filter((t) => now - t < WINDOW_MS);
+  const timestamps = (hits.get(key) ?? []).filter((t) => now - t < windowMs);
   timestamps.push(now);
   hits.set(key, timestamps);
-  return timestamps.length > MAX_REQUESTS;
+  return timestamps.length > maxRequests;
 }
 
 export function getClientKey(request: Request): string {
