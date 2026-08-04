@@ -29,15 +29,21 @@ import { useAntiSpamGuard, turnstileEnabled } from "@/hooks/use-anti-spam-guard"
 import { careerSchema, type CareerFormValues, validateResumeFile } from "@/lib/validations";
 import { openPositions, applicationPositionOptions } from "@/data/jobs";
 import { trackEvent } from "@/lib/analytics";
+import { siteConfig } from "@/data/site";
 
 const positionOptions = [...openPositions.map((job) => job.title), ...applicationPositionOptions];
+
+// Same public Formspree endpoint the contact form uses. Note: résumé file
+// attachments are only delivered on Formspree's paid plans; on the free plan
+// the text fields still arrive. Overridable via env without a code change.
+const FORMSPREE_ENDPOINT =
+  process.env.NEXT_PUBLIC_FORMSPREE_CONTACT_ENDPOINT || "https://formspree.io/f/meeyvydo";
 
 export function CareerForm({ defaultPosition }: { defaultPosition?: string }) {
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [resumeError, setResumeError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
-  const { turnstileToken, handleTurnstileVerify, handleTurnstileExpire, formRenderedAtRef } =
-    useAntiSpamGuard();
+  const { turnstileToken, handleTurnstileVerify, handleTurnstileExpire } = useAntiSpamGuard();
 
   const {
     register,
@@ -68,26 +74,40 @@ export function CareerForm({ defaultPosition }: { defaultPosition?: string }) {
     setStatus("loading");
 
     try {
+      // Multipart submission to Formspree with human-readable field labels.
+      // `email` is Formspree's reply-to; `_subject` sets the email subject;
+      // `_gotcha` is its honeypot. The résumé is attached on paid Formspree plans.
       const formData = new FormData();
-      Object.entries(data).forEach(([key, value]) => formData.append(key, String(value ?? "")));
-      formData.append("formRenderedAt", String(formRenderedAtRef.current));
-      if (turnstileToken) formData.append("cf-turnstile-response", turnstileToken);
+      formData.append("Full Name", data.name);
+      formData.append("email", data.email);
+      formData.append("Phone", data.phone);
+      formData.append("Position", data.position);
+      if (data.message) formData.append("Message", data.message);
       formData.append("resume", resumeFile as File);
+      formData.append("_subject", `New job application: ${data.position} — ${data.name}`);
+      formData.append("_gotcha", data.website || "");
 
-      const res = await fetch("/api/careers", { method: "POST", body: formData });
-      const json = await res.json();
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: formData,
+      });
 
-      if (!res.ok || !json.ok) {
-        throw new Error(json.message || "Something went wrong. Please try again.");
+      if (!res.ok) {
+        const json = await res.json().catch(() => null);
+        const detail = json?.errors?.map((e: { message: string }) => e.message).join(", ");
+        throw new Error(detail || "Submission failed.");
       }
 
       trackEvent("career_application_submit", { position: data.position });
       setStatus("success");
       reset({ position: "", website: "", name: "", email: "", phone: "", message: "" });
       setResumeFile(null);
-    } catch (error) {
+    } catch {
       setStatus("idle");
-      toast.error(error instanceof Error ? error.message : "Something went wrong. Please try again.");
+      toast.error(
+        `Something went wrong while submitting your application. Please try again or email us directly at ${siteConfig.email.contact}.`
+      );
     }
   }
 
@@ -103,9 +123,6 @@ export function CareerForm({ defaultPosition }: { defaultPosition?: string }) {
   }
 
   return (
-    // react-hook-form's handleSubmit() only invokes onSubmit on the browser's submit event, never
-    // during render, so onSubmit reading formRenderedAtRef here is safe despite the static lint check.
-    // eslint-disable-next-line react-hooks/refs
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="rounded-2xl border bg-card p-6 shadow-sm sm:p-8">
       <HoneypotField {...register("website")} />
 
