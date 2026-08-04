@@ -23,6 +23,19 @@ const analyticsConnectSrc = [
   "https://connect.facebook.net",
 ];
 
+// The contact form submits client-side to Formspree, so its origin must be
+// allowed in connect-src or the browser's CSP will block the request in
+// production. Derived from the configured endpoint (falls back to formspree.io).
+const formspreeOrigin = (() => {
+  try {
+    return new URL(
+      process.env.NEXT_PUBLIC_FORMSPREE_CONTACT_ENDPOINT || "https://formspree.io"
+    ).origin;
+  } catch {
+    return "https://formspree.io";
+  }
+})();
+
 // Not using a nonce-based CSP here on purpose: nonces require every page to render
 // dynamically (no static generation/ISR), which would undo this site's static-first
 // performance strategy for a marketing site with no sensitive data and no auth.
@@ -42,7 +55,7 @@ function buildCsp() {
     `style-src 'self' 'unsafe-inline'`,
     `img-src 'self' data: https:`,
     `font-src 'self' data:`,
-    `connect-src 'self' ${analyticsConnectSrc.join(" ")}`,
+    `connect-src 'self' ${formspreeOrigin} ${analyticsConnectSrc.join(" ")}`,
     `frame-src 'self' https://www.google.com https://challenges.cloudflare.com`,
     `object-src 'none'`,
     `base-uri 'self'`,
