@@ -31,6 +31,13 @@ export const careerSchema = z.object({
   email: z.string().trim().email("Please enter a valid email address"),
   phone: z.string().trim().min(7, "Please enter a valid phone number").max(30),
   position: z.string().min(1, "Please select a position"),
+  resumeLink: z
+    .string()
+    .trim()
+    .url("Please enter a valid URL (including https://)")
+    .max(500)
+    .optional()
+    .or(z.literal("")),
   message: z.string().trim().max(3000).optional().or(z.literal("")),
   website: honeypot,
 });

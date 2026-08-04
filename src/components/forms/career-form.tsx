@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
-import { Loader2, Upload, FileText } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,22 +26,18 @@ import { TurnstileWidget } from "@/components/shared/turnstile-widget";
 import { HoneypotField } from "@/components/forms/honeypot-field";
 import { FormSuccessCard } from "@/components/forms/form-success-card";
 import { useAntiSpamGuard, turnstileEnabled } from "@/hooks/use-anti-spam-guard";
-import { careerSchema, type CareerFormValues, validateResumeFile } from "@/lib/validations";
+import { careerSchema, type CareerFormValues } from "@/lib/validations";
 import { openPositions, applicationPositionOptions } from "@/data/jobs";
 import { trackEvent } from "@/lib/analytics";
 import { siteConfig } from "@/data/site";
 
 const positionOptions = [...openPositions.map((job) => job.title), ...applicationPositionOptions];
 
-// Same public Formspree endpoint the contact form uses. Note: résumé file
-// attachments are only delivered on Formspree's paid plans; on the free plan
-// the text fields still arrive. Overridable via env without a code change.
+// Same public Formspree endpoint the contact form uses. Overridable via env.
 const FORMSPREE_ENDPOINT =
   process.env.NEXT_PUBLIC_FORMSPREE_CONTACT_ENDPOINT || "https://formspree.io/f/meeyvydo";
 
 export function CareerForm({ defaultPosition }: { defaultPosition?: string }) {
-  const [resumeFile, setResumeFile] = useState<File | null>(null);
-  const [resumeError, setResumeError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
   const { turnstileToken, handleTurnstileVerify, handleTurnstileExpire } = useAntiSpamGuard();
 
@@ -60,37 +56,30 @@ export function CareerForm({ defaultPosition }: { defaultPosition?: string }) {
   });
 
   async function onSubmit(data: CareerFormValues) {
-    const fileError = validateResumeFile(resumeFile);
-    if (fileError) {
-      setResumeError(fileError);
-      return;
-    }
     if (turnstileEnabled && !turnstileToken) {
       toast.error("Please complete the verification challenge before submitting.");
       return;
     }
 
-    setResumeError(null);
     setStatus("loading");
 
     try {
-      // Multipart submission to Formspree with human-readable field labels.
+      // JSON submission to Formspree with human-readable field labels.
       // `email` is Formspree's reply-to; `_subject` sets the email subject;
-      // `_gotcha` is its honeypot. The résumé is attached on paid Formspree plans.
-      const formData = new FormData();
-      formData.append("Full Name", data.name);
-      formData.append("email", data.email);
-      formData.append("Phone", data.phone);
-      formData.append("Position", data.position);
-      if (data.message) formData.append("Message", data.message);
-      formData.append("resume", resumeFile as File);
-      formData.append("_subject", `New job application: ${data.position} — ${data.name}`);
-      formData.append("_gotcha", data.website || "");
-
+      // `_gotcha` is its honeypot. Applicants email their résumé file separately.
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
-        headers: { Accept: "application/json" },
-        body: formData,
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          "Full Name": data.name,
+          email: data.email,
+          Phone: data.phone,
+          Position: data.position,
+          "Résumé / Portfolio Link": data.resumeLink || "Not provided",
+          Message: data.message || "",
+          _subject: `New job application: ${data.position} — ${data.name}`,
+          _gotcha: data.website || "",
+        }),
       });
 
       if (!res.ok) {
@@ -101,8 +90,7 @@ export function CareerForm({ defaultPosition }: { defaultPosition?: string }) {
 
       trackEvent("career_application_submit", { position: data.position });
       setStatus("success");
-      reset({ position: "", website: "", name: "", email: "", phone: "", message: "" });
-      setResumeFile(null);
+      reset({ position: "", website: "", name: "", email: "", phone: "", resumeLink: "", message: "" });
     } catch {
       setStatus("idle");
       toast.error(
@@ -115,7 +103,7 @@ export function CareerForm({ defaultPosition }: { defaultPosition?: string }) {
     return (
       <FormSuccessCard
         title="Application Submitted!"
-        description="Thanks for applying — our talent team will review your application and reach out if it's a fit."
+        description={`Thanks for applying — our talent team will review your application and reach out if it's a fit. If you haven't shared it yet, please email your résumé to ${siteConfig.email.contact}.`}
         buttonLabel="Submit Another Application"
         onReset={() => setStatus("idle")}
       />
@@ -170,26 +158,26 @@ export function CareerForm({ defaultPosition }: { defaultPosition?: string }) {
           </Field>
         </div>
 
-        <Field data-invalid={!!resumeError}>
-          <FieldLabel htmlFor="career-resume">Resume (PDF or Word, max 5MB)</FieldLabel>
-          <label
-            htmlFor="career-resume"
-            className="flex cursor-pointer items-center gap-3 rounded-lg border border-dashed px-4 py-3 text-sm text-muted-foreground hover:border-primary hover:text-primary"
-          >
-            {resumeFile ? <FileText className="size-4" /> : <Upload className="size-4" />}
-            {resumeFile ? resumeFile.name : "Click to upload your resume"}
-          </label>
-          <input
-            id="career-resume"
-            type="file"
-            accept=".pdf,.doc,.docx"
-            className="sr-only"
-            onChange={(e) => {
-              setResumeFile(e.target.files?.[0] ?? null);
-              setResumeError(null);
-            }}
+        <Field data-invalid={!!errors.resumeLink}>
+          <FieldLabel htmlFor="career-resume-link">Résumé / Portfolio link (optional)</FieldLabel>
+          <Input
+            id="career-resume-link"
+            type="url"
+            inputMode="url"
+            placeholder="https://linkedin.com/in/… or a link to your résumé"
+            {...register("resumeLink")}
           />
-          <FieldError errors={[resumeError ? { message: resumeError } : undefined]} />
+          <FieldError errors={[errors.resumeLink]} />
+          <p className="mt-1.5 text-xs text-muted-foreground">
+            Prefer to send a file? Email your résumé to{" "}
+            <a
+              href={`mailto:${siteConfig.email.contact}?subject=Résumé%20—%20Job%20Application`}
+              className="font-medium text-brand-royal underline underline-offset-2 dark:text-brand-sky"
+            >
+              {siteConfig.email.contact}
+            </a>
+            .
+          </p>
         </Field>
 
         <Field>
