@@ -28,6 +28,7 @@ const columns: { title: string; items: { label: string; href: string }[] }[] = [
 export function Footer() {
   const hq = siteConfig.locations.headquarters;
   const dev = siteConfig.locations.development;
+  const aus = siteConfig.locations.australia;
   const hasSocial = Object.values(siteConfig.social).some(Boolean);
 
   return (
@@ -97,7 +98,7 @@ export function Footer() {
 
       {/* Locations strip */}
       <div className="border-t border-[var(--ink-panel-border)]">
-        <Container className="grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-3">
+        <Container className="grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-4">
           {[
             {
               label: hq.label,
@@ -113,6 +114,13 @@ export function Footer() {
               lines: [dev.addressLines[dev.addressLines.length - 1]],
               coords: dev.coordinates.label,
               contact: siteConfig.phone.india,
+            },
+            {
+              label: aus.label,
+              company: `${aus.company} — ${aus.role}`,
+              lines: [aus.addressLines[aus.addressLines.length - 1]],
+              coords: aus.coordinates.label,
+              contact: siteConfig.email.contact,
             },
             {
               label: "Global Trade Desk",

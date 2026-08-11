@@ -79,6 +79,17 @@ export const siteConfig = {
       coordinates: { lat: 23.588, lon: 72.3693, label: "23.5880° N / 72.3693° E" },
       mapEmbedSrc: "https://www.google.com/maps?q=Mehsana,+Gujarat,+India&output=embed",
     },
+    australia: {
+      label: "Australia Office",
+      company: "Coordinatez",
+      role: "Asia-Pacific",
+      city: "Harris Park, NSW",
+      country: "Australia",
+      addressLines: ["60 Weston St", "Harris Park NSW 2150, Australia"],
+      coordinates: { lat: -33.8213, lon: 151.0043, label: "33.8213° S / 151.0043° E" },
+      mapEmbedSrc:
+        "https://www.google.com/maps?q=60+Weston+St,+Harris+Park+NSW+2150,+Australia&output=embed",
+    },
   },
   businessHours: [
     { days: "Monday – Friday", hours: "9:00 AM – 5:00 PM (CT) · 10:00 AM – 6:00 PM (IST)" },

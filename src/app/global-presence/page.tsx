@@ -37,6 +37,10 @@ const locationEntries = [
     location: siteConfig.locations.development,
     phone: siteConfig.phone.india,
   },
+  {
+    location: siteConfig.locations.australia,
+    phone: siteConfig.email.contact,
+  },
 ];
 
 export default function GlobalPresencePage() {
@@ -70,10 +74,11 @@ export default function GlobalPresencePage() {
               <span className="text-gradient-sky">Trading worldwide.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-[var(--ink-panel-muted)]">
-              Two locations run everything we do: our global headquarters in{" "}
-              {siteConfig.locations.headquarters.city} and our technology &amp; development center
-              in {siteConfig.locations.development.city}, India. From those two anchors we work
-              markets and trade hubs across four continents.
+              Three offices run everything we do: our global headquarters in{" "}
+              {siteConfig.locations.headquarters.city}, our technology &amp; development center in{" "}
+              {siteConfig.locations.development.city}, India, and our Asia-Pacific office in{" "}
+              {siteConfig.locations.australia.city}, Australia. From there we work markets and trade
+              hubs across four continents.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Button asChild size="lg" className="rounded-full bg-white px-6 text-[#10143a] hover:bg-white/90">
@@ -104,8 +109,8 @@ export default function GlobalPresencePage() {
           <SectionHeading
             index="01"
             eyebrow="The Network"
-            title="Two anchors, a world of working relationships."
-            description="Chicago and Mehsana are where Coordinatez lives. The other cities on this map are the ports, markets, and trade hubs where our transactions and partnerships play out."
+            title="Our anchors, a world of working relationships."
+            description="Chicago, Mehsana, and Sydney are where Coordinatez lives. The other cities on this map are the ports, markets, and trade hubs where our transactions and partnerships play out."
             onInk
           />
           <RevealOnScroll className="mt-12 overflow-hidden rounded-xl border border-[var(--ink-panel-border)] bg-[var(--ink-panel-soft)]/40 p-4 text-[var(--ink-panel-foreground)] sm:p-8">
@@ -124,9 +129,9 @@ export default function GlobalPresencePage() {
             index="02"
             eyebrow="Our Locations"
             title="Where Coordinatez actually is."
-            description="Two addresses, two teams, one company. Corporate and trade run from Chicago; technology and AI delivery run from Mehsana under the Coorbitz brand."
+            description="Three addresses, one company. Corporate and trade run from Chicago; technology and AI delivery run from Mehsana under the Coorbitz brand; and our Asia-Pacific office is in Sydney, Australia."
           />
-          <RevealStagger className="mt-12 grid gap-6 lg:grid-cols-2">
+          <RevealStagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {locationEntries.map(({ location, phone }) => (
               <motion.div
                 key={location.city}
@@ -146,7 +151,9 @@ export default function GlobalPresencePage() {
                 </p>
                 <p className="mt-2 text-sm">
                   <a
-                    href={`tel:${phone.replace(/[^+\d]/g, "")}`}
+                    href={
+                      phone.includes("@") ? `mailto:${phone}` : `tel:${phone.replace(/[^+\d]/g, "")}`
+                    }
                     className="font-medium text-brand-royal transition-colors hover:text-brand-sky dark:text-brand-sky"
                   >
                     {phone}

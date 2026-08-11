@@ -1,12 +1,13 @@
 import { networkNodes, networkArcs } from "@/data/network";
 
-// Equirectangular projection cropped to the band our network occupies.
+// Equirectangular projection cropped to the band our network occupies
+// (Chicago in the west through Sydney in the south-east).
 const LON_MIN = -130;
-const LON_MAX = 140;
+const LON_MAX = 158;
 const LAT_MAX = 70;
-const LAT_MIN = -15;
+const LAT_MIN = -40;
 const W = 1000;
-const H = 440;
+const H = 470;
 
 function project(lat: number, lon: number): [number, number] {
   const x = ((lon - LON_MIN) / (LON_MAX - LON_MIN)) * W;
@@ -30,6 +31,7 @@ const labelOffset: Record<string, { dx: number; dy: number; anchor: "start" | "m
   rotterdam: { dx: 0, dy: -14, anchor: "middle" },
   singapore: { dx: 14, dy: 4, anchor: "start" },
   shanghai: { dx: 14, dy: -4, anchor: "start" },
+  sydney: { dx: 0, dy: 22, anchor: "middle" },
 };
 
 /**
@@ -82,7 +84,13 @@ export function TradeNetworkMap({ className }: { className?: string }) {
       {positioned.map((node) => {
         const isHub = node.kind !== "market";
         const color =
-          node.kind === "headquarters" ? "#7dc0ea" : node.kind === "development" ? "#4aa3dc" : "#d3915a";
+          node.kind === "headquarters"
+            ? "#7dc0ea"
+            : node.kind === "development"
+              ? "#4aa3dc"
+              : node.kind === "office"
+                ? "#5cb0ea"
+                : "#d3915a";
         const offset = labelOffset[node.id] ?? { dx: 0, dy: -12, anchor: "middle" as const };
         return (
           <g key={node.id}>

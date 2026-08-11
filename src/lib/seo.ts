@@ -64,6 +64,43 @@ export function organizationJsonLd() {
       postalCode: "60606",
       addressCountry: "US",
     },
+    location: [
+      {
+        "@type": "Place",
+        name: siteConfig.locations.headquarters.label,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: siteConfig.locations.headquarters.addressLines[0],
+          addressLocality: "Chicago",
+          addressRegion: "IL",
+          postalCode: "60606",
+          addressCountry: "US",
+        },
+      },
+      {
+        "@type": "Place",
+        name: siteConfig.locations.development.label,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Mehsana",
+          addressRegion: "Gujarat",
+          postalCode: "384002",
+          addressCountry: "IN",
+        },
+      },
+      {
+        "@type": "Place",
+        name: siteConfig.locations.australia.label,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: siteConfig.locations.australia.addressLines[0],
+          addressLocality: "Harris Park",
+          addressRegion: "NSW",
+          postalCode: "2150",
+          addressCountry: "AU",
+        },
+      },
+    ],
     department: [
       {
         "@type": "Organization",

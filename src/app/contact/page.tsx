@@ -33,6 +33,7 @@ export const metadata: Metadata = buildMetadata({
 export default function ContactPage() {
   const hq = siteConfig.locations.headquarters;
   const dev = siteConfig.locations.development;
+  const aus = siteConfig.locations.australia;
 
   return (
     <>
@@ -101,7 +102,7 @@ export default function ContactPage() {
             <div>
               <h2 className="eyebrow">Locations</h2>
               <ul className="mt-4 space-y-5">
-                {[hq, dev].map((location) => (
+                {[hq, dev, aus].map((location) => (
                   <li key={location.city} className="flex gap-3">
                     <MapPin className="mt-0.5 size-4 shrink-0 text-brand-sky" />
                     <div>
