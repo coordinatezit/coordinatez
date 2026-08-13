@@ -18,14 +18,14 @@ export function latLonToVec(latDeg: number, lonDeg: number, r = 1): Vec3 {
   };
 }
 
-/** Rotate a point around Y (spin) then X (fixed tilt). */
-export function rotate(v: Vec3, spin: number): Vec3 {
+/** Rotate a point around Y (spin) then X (tilt — defaults to the fixed TILT). */
+export function rotate(v: Vec3, spin: number, tilt: number = TILT): Vec3 {
   const cosY = Math.cos(spin);
   const sinY = Math.sin(spin);
   const x1 = v.x * cosY + v.z * sinY;
   const z1 = -v.x * sinY + v.z * cosY;
-  const cosX = Math.cos(TILT);
-  const sinX = Math.sin(TILT);
+  const cosX = Math.cos(tilt);
+  const sinX = Math.sin(tilt);
   const y2 = v.y * cosX - z1 * sinX;
   const z2 = v.y * sinX + z1 * cosX;
   return { x: x1, y: y2, z: z2 };

@@ -10,6 +10,7 @@ import {
   latLonToVec,
   rotate,
   INITIAL_SPIN,
+  TILT,
   type Vec3,
 } from "@/components/hero/globe-geometry";
 
@@ -40,6 +41,11 @@ export function DottedGlobe() {
     let cx = 0;
     let cy = 0;
     let radius = 0;
+    // Pointer-driven rotation offsets (hover parallax), eased toward their targets.
+    let targetYaw = 0;
+    let targetPitch = 0;
+    let curYaw = 0;
+    let curPitch = 0;
 
     function resize() {
       const parent = cv.parentElement;
@@ -63,6 +69,10 @@ export function DottedGlobe() {
     function draw() {
       ctx.clearRect(0, 0, size, size);
 
+      // Effective view rotation = auto-spin + hover offset, and tilt + hover offset.
+      const effSpin = spin + curYaw;
+      const effTilt = TILT + curPitch;
+
       // faint sphere disc glow
       const grad = ctx.createRadialGradient(cx, cy - radius * 0.2, radius * 0.2, cx, cy, radius * 1.05);
       grad.addColorStop(0, rgba(SKY, 0.14));
@@ -78,7 +88,7 @@ export function DottedGlobe() {
         ctx.beginPath();
         let started = false;
         for (const v of line) {
-          const r = rotate(v, spin);
+          const r = rotate(v, effSpin, effTilt);
           if (r.z <= 0.02) {
             started = false;
             continue;
@@ -97,7 +107,7 @@ export function DottedGlobe() {
 
       // continent dots (front hemisphere only), shaded by depth
       for (const d of DOTS) {
-        const r = rotate(d, spin);
+        const r = rotate(d, effSpin, effTilt);
         if (r.z <= 0.02) continue;
         const p = project(r);
         const depth = r.z;
@@ -115,7 +125,7 @@ export function DottedGlobe() {
         ctx.beginPath();
         let started = false;
         for (const pt of arc.pts) {
-          const r = rotate(pt, spin);
+          const r = rotate(pt, effSpin, effTilt);
           const p = project(r);
           if (r.z <= -0.15) {
             started = false;
@@ -133,7 +143,7 @@ export function DottedGlobe() {
         // travelling pulse
         const prog = (spin * 0.6 + (arc.isTech ? 0 : 0.4)) % 1;
         const idx = Math.floor(Math.abs(prog) * (arc.pts.length - 1));
-        const rp = rotate(arc.pts[idx], spin);
+        const rp = rotate(arc.pts[idx], effSpin, effTilt);
         if (rp.z > 0) {
           const pp = project(rp);
           ctx.beginPath();
@@ -145,7 +155,7 @@ export function DottedGlobe() {
 
       // market nodes
       for (const n of MARKETS) {
-        const r = rotate(latLonToVec(n.lat, n.lon, 1.01), spin);
+        const r = rotate(latLonToVec(n.lat, n.lon, 1.01), effSpin, effTilt);
         if (r.z <= 0.02) continue;
         const p = project(r);
         ctx.beginPath();
@@ -158,7 +168,7 @@ export function DottedGlobe() {
       ctx.font = "600 10px 'IBM Plex Mono', ui-monospace, monospace";
       ctx.textAlign = "center";
       for (const n of HUBS) {
-        const r = rotate(latLonToVec(n.lat, n.lon, 1.01), spin);
+        const r = rotate(latLonToVec(n.lat, n.lon, 1.01), effSpin, effTilt);
         if (r.z <= 0.02) continue;
         const p = project(r);
         const col = n.kind === "development" ? SKY : HUB;
@@ -185,6 +195,9 @@ export function DottedGlobe() {
     let visible = false;
     function loop() {
       if (!visible) return;
+      // ease the hover offsets toward their targets for smooth follow / return
+      curYaw += (targetYaw - curYaw) * 0.08;
+      curPitch += (targetPitch - curPitch) * 0.08;
       spin += 0.0016;
       draw();
       raf = requestAnimationFrame(loop);
@@ -215,16 +228,36 @@ export function DottedGlobe() {
     );
     io.observe(cv);
 
+    // Hover parallax — the globe leans toward the cursor while hovered. Mouse-only,
+    // so it never interferes with touch scrolling; disabled for reduced motion.
+    function onMouseMove(e: MouseEvent) {
+      const rect = cv.getBoundingClientRect();
+      const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      const ny = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+      targetYaw = Math.max(-1, Math.min(1, nx)) * 0.5;
+      targetPitch = Math.max(-1, Math.min(1, ny)) * 0.35;
+    }
+    function onMouseLeave() {
+      targetYaw = 0;
+      targetPitch = 0;
+    }
+    if (!reduce) {
+      cv.addEventListener("mousemove", onMouseMove);
+      cv.addEventListener("mouseleave", onMouseLeave);
+    }
+
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
       io.disconnect();
+      cv.removeEventListener("mousemove", onMouseMove);
+      cv.removeEventListener("mouseleave", onMouseLeave);
     };
   }, []);
 
   return (
     <div className="relative aspect-square w-full">
-      <canvas ref={canvasRef} aria-hidden className="absolute inset-0" />
+      <canvas ref={canvasRef} aria-hidden className="absolute inset-0 cursor-grab" />
     </div>
   );
 }

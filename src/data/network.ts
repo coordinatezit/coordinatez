@@ -11,7 +11,7 @@ export type NetworkNode = {
 };
 
 export const networkNodes: NetworkNode[] = [
-  { id: "chicago", city: "Chicago", region: "United States — Global HQ", lat: 41.8781, lon: -87.6298, kind: "headquarters" },
+  { id: "chicago", city: "Chicago", region: "United States — Global HQ", lat: 41.9848, lon: -87.8459, kind: "headquarters" },
   { id: "mehsana", city: "Mehsana", region: "India — Technology & Development", lat: 23.588, lon: 72.3693, kind: "development" },
   { id: "sydney", city: "Sydney", region: "Australia — Asia-Pacific Office", lat: -33.82, lon: 151.0, kind: "office" },
   { id: "houston", city: "Houston", region: "US Gulf — Trade Corridor", lat: 29.7604, lon: -95.3698, kind: "market" },
