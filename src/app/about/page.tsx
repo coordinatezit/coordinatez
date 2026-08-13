@@ -14,14 +14,14 @@ import { siteConfig } from "@/data/site";
 export const metadata: Metadata = buildMetadata({
   title: "About Us — A Technology & Global Trade Company",
   description:
-    "Coordinatez is a global company headquartered in Chicago with a technology and development center in Mehsana, India. Learn who we are, what our two divisions do, the values we work by, and how the Coordinatez and Coorbitz organizations fit together.",
+    "Coordinatez is a global company headquartered in Chicago with a technology and development center in Mehsana, India. Learn who we are, what our two divisions do, the values we work by, and how our global offices fit together.",
   path: "/about",
   keywords: [
     "about Coordinatez",
     "Coordinatez company",
     "technology and trade company",
     "Chicago headquarters",
-    "Coorbitz",
+    "Coordinatez India office",
     "US India company",
     "IT services and import export",
   ],
@@ -104,9 +104,8 @@ export default function AboutPage() {
                 <p>
                   {siteConfig.name} is headquartered in {hq.city}, where our corporate, global
                   trade, and client partnership functions sit. Our technology and development
-                  center in {dev.city}, India — operating under the{" "}
-                  {siteConfig.technologyBrand.name} brand — is where our engineering teams design,
-                  build, and run software and AI systems for clients worldwide.
+                  center in {dev.city}, India, is where our engineering teams design, build, and
+                  run software and AI systems for clients worldwide.
                 </p>
                 <p>
                   The two divisions look different from the outside — one ships code, the other
@@ -242,8 +241,8 @@ export default function AboutPage() {
           <SectionHeading
             index="04"
             eyebrow="How We're Organized"
-            title="Coordinatez and Coorbitz — one group, two names."
-            description={siteConfig.technologyBrand.relationshipStatement}
+            title="One company. Offices across three continents."
+            description="Corporate and trade run from Chicago; technology and AI are engineered from our development center in Mehsana, India — one company, one accountable team."
             onInk
           />
           <RevealOnScroll className="mt-12">
@@ -265,12 +264,12 @@ export default function AboutPage() {
               <div className="bg-[var(--ink-panel)] p-7 sm:p-9">
                 <p className="eyebrow-on-ink">{dev.label} — {dev.city}</p>
                 <h3 className="mt-4 font-display text-2xl font-medium text-white">
-                  {siteConfig.technologyBrand.name}
+                  {siteConfig.divisions.technology.name}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--ink-panel-muted)]">
-                  The dedicated IT Services &amp; AI Solutions brand of {siteConfig.name}. Our
-                  engineering teams in {dev.city}, India design, build, and operate the technology
-                  division&apos;s work for clients worldwide — backed by the standards of the group.
+                  The Technology &amp; AI division of {siteConfig.name}. Our engineering teams in{" "}
+                  {dev.city}, India design, build, and operate this work for clients worldwide —
+                  backed by the standards of the group.
                 </p>
                 <p className="mt-4 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-[var(--ink-panel-muted)]">
                   {dev.coordinates.label}
@@ -279,7 +278,7 @@ export default function AboutPage() {
             </div>
             <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
               <p className="max-w-2xl text-pretty text-sm leading-relaxed text-[var(--ink-panel-muted)]">
-                One client relationship, one accountable owner — whichever name is on the door.
+                One client relationship, one accountable owner — across every office.
               </p>
               <Link
                 href="/global-presence"

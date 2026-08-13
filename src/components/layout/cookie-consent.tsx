@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-const STORAGE_KEY = "coorbitz-cookie-consent";
+const STORAGE_KEY = "coordinatez-cookie-consent";
 
 export function CookieConsent() {
   const [visible, setVisible] = useState(false);

@@ -109,7 +109,7 @@ export default function ContactPage() {
                       <p className="text-sm font-medium">
                         {location.company} — {location.label}
                       </p>
-                      {/* India (Coorbitz) shows only the city/region line. */}
+                      {/* India office shows only the city/region line. */}
                       {(location === dev
                         ? [dev.addressLines[dev.addressLines.length - 1]]
                         : location.addressLines

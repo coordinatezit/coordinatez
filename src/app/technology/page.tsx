@@ -75,8 +75,8 @@ export default function TechnologyPage() {
             </h1>
             <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
               Web, mobile, custom software, AI, data, and cloud — designed, built, and operated by
-              our engineering teams under the {siteConfig.technologyBrand.name} technology brand,
-              for startups, SMEs, and enterprises across the United States and beyond.
+              our in-house engineering team, for startups, SMEs, and enterprises across the United
+              States and beyond.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Button asChild size="lg" className="rounded-full px-6">
@@ -149,18 +149,17 @@ export default function TechnologyPage() {
         </Container>
       </section>
 
-      {/* Coorbitz note */}
+      {/* India development center note */}
       <section className="border-t bg-muted/30">
         <Container className="section-y">
           <RevealOnScroll className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-2xl text-pretty text-sm leading-relaxed text-muted-foreground">
               <span className="font-semibold text-foreground">
-                Delivered by {siteConfig.technologyBrand.name}.
+                Engineered in-house.
               </span>{" "}
-              {siteConfig.technologyBrand.name} is the dedicated IT Services &amp; AI Solutions
-              brand of {siteConfig.name}, operating from our development center in{" "}
-              {siteConfig.locations.development.city}, India — backed by the standards and global
-              presence of the {siteConfig.name} group.
+              {siteConfig.name}&apos;s technology and AI work is built by our own engineering team at
+              our development center in {siteConfig.locations.development.city}, India — backed by the
+              standards and global presence of the {siteConfig.name} group.
             </p>
             <Link
               href="/global-presence"

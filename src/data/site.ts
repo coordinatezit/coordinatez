@@ -52,12 +52,6 @@ export const siteConfig = {
         "International import & export — global sourcing, supplier networks, commodity and industrial-material trading, and logistics coordination between the United States, India, and global markets.",
     },
   },
-  // Coorbitz is the dedicated IT Services & AI Solutions brand operating under Coordinatez.
-  technologyBrand: {
-    name: "Coorbitz",
-    url: "https://coorbitz.com",
-    relationshipStatement: "Coorbitz is the technology brand of Coordinatez.",
-  },
   locations: {
     headquarters: {
       label: "Global Headquarters",
@@ -72,7 +66,7 @@ export const siteConfig = {
     },
     development: {
       label: "Technology & Development",
-      company: "Coorbitz",
+      company: "Coordinatez",
       role: "Technology & AI Solutions Division",
       city: "Mehsana, Gujarat",
       country: "India",

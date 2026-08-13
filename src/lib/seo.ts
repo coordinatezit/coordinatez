@@ -127,18 +127,6 @@ export function organizationJsonLd() {
         url: `${siteConfig.url}${siteConfig.divisions.trade.href}`,
       },
     ],
-    subOrganization: {
-      "@type": "Organization",
-      name: siteConfig.technologyBrand.name,
-      url: siteConfig.technologyBrand.url,
-      description: siteConfig.technologyBrand.relationshipStatement,
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Mehsana",
-        addressRegion: "Gujarat",
-        addressCountry: "IN",
-      },
-    },
     sameAs: Object.values(siteConfig.social).filter(Boolean),
     contactPoint: [
       {

@@ -129,7 +129,7 @@ export default function GlobalPresencePage() {
             index="02"
             eyebrow="Our Locations"
             title="Where Coordinatez actually is."
-            description="Three addresses, one company. Corporate and trade run from Chicago; technology and AI delivery run from Mehsana under the Coorbitz brand; and our Asia-Pacific office is in Sydney, Australia."
+            description="Three addresses, one company. Corporate and trade run from Chicago; technology and AI delivery run from our development center in Mehsana, India; and our Asia-Pacific office is in Sydney, Australia."
           />
           <RevealStagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {locationEntries.map(({ location, phone }) => (

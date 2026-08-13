@@ -178,11 +178,11 @@ export default async function ServicePage({
                 ))}
               </ul>
               <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
-                Engineering is delivered by our team under the{" "}
+                Engineering is delivered by{" "}
                 <Link href="/about" className="font-medium text-brand-royal hover:underline dark:text-brand-sky">
-                  {siteConfig.technologyBrand.name}
-                </Link>{" "}
-                technology brand, serving clients across the United States and internationally.
+                  {siteConfig.name}
+                </Link>
+                &apos;s in-house team, serving clients across the United States and internationally.
               </p>
             </RevealOnScroll>
           </div>

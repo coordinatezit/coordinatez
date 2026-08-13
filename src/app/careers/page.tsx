@@ -15,11 +15,10 @@ import { siteConfig } from "@/data/site";
 export const metadata: Metadata = buildMetadata({
   title: "Careers — Build at the Intersection of Technology, AI & Global Trade",
   description:
-    "Careers at Coordinatez: engineering, AI, and international trade roles across our Chicago headquarters and our Coorbitz development center in Mehsana, Gujarat, India. See open positions or introduce yourself.",
+    "Careers at Coordinatez: engineering, AI, and international trade roles across our Chicago headquarters and our development center in Mehsana, Gujarat, India. See open positions or introduce yourself.",
   path: "/careers",
   keywords: [
     "Coordinatez careers",
-    "Coorbitz careers",
     "software engineering jobs Mehsana",
     "AI engineering jobs India",
     "international trade careers",

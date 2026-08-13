@@ -43,7 +43,7 @@ function buildKnowledge(): string {
 - Tagline: "${siteConfig.tagline}".
 - ${siteConfig.description}
 - Global HQ: ${hq.city}, ${hq.country} (corporate, global trade & client partnerships).
-- Technology & development center: ${dev.city}, ${dev.country}, operating under the ${siteConfig.technologyBrand.name} brand (${siteConfig.technologyBrand.relationshipStatement}).
+- Technology & development center: ${dev.city}, ${dev.country} — ${siteConfig.name}'s in-house engineering team that delivers the Technology & AI division's work for clients worldwide.
 - The company has TWO distinct divisions. Always keep them clearly separated:
   1. ${tech.name} — ${tech.summary}
   2. ${trade.name} — ${trade.summary}

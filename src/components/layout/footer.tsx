@@ -155,7 +155,7 @@ export function Footer() {
           <p className="text-xs text-[var(--ink-panel-muted)]">
             © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
             <span className="mx-2 hidden sm:inline">·</span>
-            <span className="block sm:inline">{siteConfig.technologyBrand.relationshipStatement}</span>
+            <span className="block sm:inline">{siteConfig.tagline}</span>
           </p>
           <nav aria-label="Legal" className="flex gap-6">
             {footerNav.legal.map((item) => (

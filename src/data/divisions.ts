@@ -22,7 +22,7 @@ export const divisions: Division[] = [
     href: "/technology",
     tagline: "Technology That Moves Business Forward.",
     summary:
-      "We design, build, and run digital products and AI systems — from marketing sites and mobile apps to custom software, AI agents, automation, and data platforms. Engineering is led from our development center in Mehsana, India, operating under the Coorbitz technology brand.",
+      "We design, build, and run digital products and AI systems — from marketing sites and mobile apps to custom software, AI agents, automation, and data platforms. Engineering is led from our development center in Mehsana, India.",
     accent: "sky",
     focus: [
       "Web & Mobile Development",

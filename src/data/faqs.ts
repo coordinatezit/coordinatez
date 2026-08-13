@@ -12,12 +12,7 @@ export const faqs: Faq[] = [
   {
     question: "Where is Coordinatez located?",
     answer:
-      "Our global headquarters is in Chicago, Illinois, USA. Technology and development work is led from our center in Mehsana, Gujarat, India, operating under our Coorbitz technology brand. Our trading activity connects the United States, India, and international markets.",
-  },
-  {
-    question: "What is the relationship between Coordinatez and Coorbitz?",
-    answer:
-      "Coorbitz is the dedicated IT Services & AI Solutions brand of Coordinatez. It runs our technology and development operations from Mehsana, India, and serves clients worldwide under the Coordinatez umbrella.",
+      "Our global headquarters is in Chicago, Illinois, USA. Technology and development work is led from our own center in Mehsana, Gujarat, India. Our trading activity connects the United States, India, and international markets.",
   },
   {
     question: "Do you work with small businesses or only enterprises?",

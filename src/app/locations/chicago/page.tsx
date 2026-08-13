@@ -111,9 +111,8 @@ export default function ChicagoPage() {
             <h2 className="mt-4 font-display text-2xl font-medium">Technology &amp; AI in Chicago</h2>
             <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
               We help Chicago-area startups, SMEs, and enterprises build software, integrate AI, and
-              automate operations. Engineering is delivered by our team under the{" "}
-              {siteConfig.technologyBrand.name} technology brand, coordinated from our Chicago
-              headquarters and available to clients nationwide.
+              automate operations. Engineering is delivered by our in-house team, coordinated from
+              our Chicago headquarters and available to clients nationwide.
             </p>
             <ul className="mt-6 grid gap-2 sm:grid-cols-2">
               {techLinks.map((link) => (
