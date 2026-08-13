@@ -99,6 +99,16 @@ const nextConfig: NextConfig = {
   // image (see Dockerfile). Vercel ignores this and uses its own builder either way, so it's
   // safe to leave on for both deployment paths.
   output: "standalone",
+  // Permanent redirects for legacy paths from the previous site so old inbound
+  // links and search-engine memory land on the current equivalent (single hop).
+  async redirects() {
+    return [
+      { source: "/services", destination: "/technology", permanent: true },
+      { source: "/services/:path*", destination: "/technology", permanent: true },
+      { source: "/import-export", destination: "/global-trade", permanent: true },
+      { source: "/import-export/:path*", destination: "/global-trade", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

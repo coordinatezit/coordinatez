@@ -24,6 +24,16 @@ export function buildMetadata({
   const fullTitle =
     path === "/" || title.includes(siteConfig.name) ? title : `${title} | ${siteConfig.name}`;
 
+  // Reference the generated OG image explicitly so EVERY page carries og:image /
+  // twitter:image (the opengraph-image file convention only attaches to the root
+  // route, leaving sub-pages with blank link previews otherwise).
+  const ogImage = {
+    url: `${siteConfig.url}/opengraph-image`,
+    width: 1200,
+    height: 630,
+    alt: `${siteConfig.name} — ${siteConfig.tagline}`,
+  };
+
   return {
     title: fullTitle,
     description,
@@ -37,11 +47,13 @@ export function buildMetadata({
       siteName: siteConfig.name,
       type: "website",
       locale: "en_US",
+      images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description,
+      images: [ogImage.url],
     },
   };
 }

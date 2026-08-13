@@ -1,3 +1,6 @@
+import { services } from "@/data/services";
+import { tradePages } from "@/data/trade-pages";
+
 export type NavItem = {
   label: string;
   href: string;
@@ -12,25 +15,12 @@ export const mainNav: NavItem[] = [
   { label: "Careers", href: "/careers" },
 ];
 
+// Footer service lists are DERIVED from the single source of truth (services.ts /
+// trade-pages.ts) — the same data the /technology, /global-trade, and sitemap use —
+// so a service added in one place appears everywhere automatically.
 export const footerNav = {
-  technology: [
-    { label: "AI Integration", href: "/technology/ai-integration" },
-    { label: "AI Agents", href: "/technology/ai-agents" },
-    { label: "AI Chatbots", href: "/technology/ai-chatbots" },
-    { label: "Custom Software", href: "/technology/custom-software" },
-    { label: "Web Development", href: "/technology/web-development" },
-    { label: "Mobile App Development", href: "/technology/mobile-applications" },
-    { label: "Business Automation", href: "/technology/business-automation" },
-    { label: "Data Analytics", href: "/technology/data-analytics" },
-  ],
-  globalTrade: [
-    { label: "Scrap Metal Export", href: "/global-trade/scrap-metal-export" },
-    { label: "Aluminium Scrap Export", href: "/global-trade/aluminium-scrap" },
-    { label: "Copper Scrap Export", href: "/global-trade/copper-scrap" },
-    { label: "Ferrous & Non-Ferrous Scrap", href: "/global-trade/ferrous-non-ferrous" },
-    { label: "Metal Trading", href: "/global-trade/metal-trading" },
-    { label: "Import & Export", href: "/global-trade/import-export" },
-  ],
+  technology: services.map((s) => ({ label: s.navLabel, href: `/technology/${s.slug}` })),
+  globalTrade: tradePages.map((p) => ({ label: p.navLabel, href: `/global-trade/${p.slug}` })),
   company: [
     { label: "About Us", href: "/about" },
     { label: "Industries", href: "/industries" },

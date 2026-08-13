@@ -113,6 +113,7 @@ export function ContactForm() {
           "Inquiry Type": data.interest,
           Country: data.country,
           Message: data.message,
+          "Source Page": document.referrer || "Direct / bookmarked",
           _subject: `New ${data.interest} inquiry from ${data.name}`,
           _gotcha: data.website || "",
         }),
