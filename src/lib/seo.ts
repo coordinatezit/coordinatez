@@ -61,7 +61,7 @@ export function organizationJsonLd() {
       streetAddress: siteConfig.locations.headquarters.addressLines[0],
       addressLocality: "Chicago",
       addressRegion: "Illinois",
-      postalCode: "60606",
+      postalCode: "60631",
       addressCountry: "US",
     },
     location: [
@@ -73,7 +73,7 @@ export function organizationJsonLd() {
           streetAddress: siteConfig.locations.headquarters.addressLines[0],
           addressLocality: "Chicago",
           addressRegion: "IL",
-          postalCode: "60606",
+          postalCode: "60631",
           addressCountry: "US",
         },
       },
@@ -169,7 +169,7 @@ export function localBusinessJsonLd() {
       streetAddress: hq.addressLines[0],
       addressLocality: "Chicago",
       addressRegion: "IL",
-      postalCode: "60606",
+      postalCode: "60631",
       addressCountry: "US",
     },
     geo: {

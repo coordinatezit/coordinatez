@@ -65,9 +65,10 @@ export const siteConfig = {
       role: "Corporate, Global Trade & Client Partnerships",
       city: "Chicago, Illinois",
       country: "United States",
-      addressLines: ["71 S Wacker Dr, Suite 2400", "Chicago, IL 60606, USA"],
-      coordinates: { lat: 41.8781, lon: -87.6298, label: "41.8781° N / 87.6298° W" },
-      mapEmbedSrc: "https://www.google.com/maps?q=71+S+Wacker+Dr,+Chicago,+IL+60606&output=embed",
+      addressLines: ["8745 W. Higgins Road, Suite 110", "Chicago, IL 60631, USA"],
+      coordinates: { lat: 41.9848, lon: -87.8459, label: "41.9848° N / 87.8459° W" },
+      mapEmbedSrc:
+        "https://www.google.com/maps?q=8745+W+Higgins+Road+Suite+110,+Chicago,+IL+60631&output=embed",
     },
     development: {
       label: "Technology & Development",

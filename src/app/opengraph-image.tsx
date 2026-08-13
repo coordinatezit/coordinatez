@@ -43,7 +43,7 @@ export default function OpengraphImage() {
             fontFamily: "'Courier New', monospace",
           }}
         >
-          41.8781° N / 87.6298° W — Chicago · 23.5880° N / 72.3693° E — India
+          41.9848° N / 87.8459° W — Chicago · 23.5880° N / 72.3693° E — India
         </div>
         <div
           style={{
