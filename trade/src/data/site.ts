@@ -23,8 +23,8 @@ export const siteConfig = {
     "metal trading",
   ],
   email: {
-    // Public-facing addresses — update if the mailbox names differ on the coordinatez.com domain.
-    contact: "support@coordinatez.com",
+    // trade@ is a Hostinger alias delivering into the support@coordinatez.com mailbox.
+    contact: "trade@coordinatez.com",
     careers: "info@coordinatez.com",
   },
   phone: {
