@@ -56,8 +56,8 @@
 /*
  * Coordinatez design language
  * — Ink navy + warm paper, editorial serif display type, mono "coordinate"
- *   labels, hairline rules and graticule grids. Two division accents share
- *   the same ink base: sky blue (Technology & AI) and copper (Global Trade).
+ *   labels, hairline rules and graticule grids. Two accents share the same
+ *   ink base: sky blue (primary) and copper (warm secondary).
  * Brand ink/royal/sky/teal values are sampled from the Coordinatez logo artwork.
  */
 :root {

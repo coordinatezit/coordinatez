@@ -101,12 +101,30 @@ const nextConfig: NextConfig = {
   output: "standalone",
   // Permanent redirects for legacy paths from the previous site so old inbound
   // links and search-engine memory land on the current equivalent (single hop).
+  // The Global Trade division now lives on its own site — everything trade-related
+  // 301s to https://trade.coordinatez.com.
   async redirects() {
+    const tradeSite = "https://trade.coordinatez.com";
+    // Insight articles that moved to the trade site along with the division.
+    const movedInsightSlugs = [
+      "us-india-trade-corridor-basics",
+      "reading-a-metal-scrap-specification",
+      "scrap-metal-export-guide-usa",
+      "aluminium-scrap-export-explained",
+      "copper-scrap-export-explained",
+    ];
     return [
       { source: "/services", destination: "/technology", permanent: true },
       { source: "/services/:path*", destination: "/technology", permanent: true },
-      { source: "/import-export", destination: "/global-trade", permanent: true },
-      { source: "/import-export/:path*", destination: "/global-trade", permanent: true },
+      { source: "/global-trade", destination: tradeSite, permanent: true },
+      { source: "/global-trade/:slug", destination: `${tradeSite}/:slug`, permanent: true },
+      { source: "/import-export", destination: tradeSite, permanent: true },
+      { source: "/import-export/:path*", destination: tradeSite, permanent: true },
+      ...movedInsightSlugs.map((slug) => ({
+        source: `/insights/${slug}`,
+        destination: `${tradeSite}/insights/${slug}`,
+        permanent: true,
+      })),
     ];
   },
   async headers() {

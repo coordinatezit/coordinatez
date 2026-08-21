@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, MapPin, Cpu, Container as ContainerIcon } from "lucide-react";
+import { ArrowRight, ArrowUpRight, MapPin, Cpu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/shared/container";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
@@ -17,17 +17,16 @@ import { siteConfig } from "@/data/site";
 const path = "/locations/chicago";
 
 export const metadata: Metadata = buildMetadata({
-  title: "IT Services & Metal Export in Chicago | Coordinatez",
+  title: "IT Services & AI Solutions in Chicago | Coordinatez",
   description:
-    "Coordinatez is headquartered in Chicago, Illinois — IT services, AI solutions, and software development for the Chicago area and the US, plus metal & scrap export from the United States.",
+    "Coordinatez is headquartered in Chicago, Illinois — IT services, AI solutions, and software development for the Chicago area and businesses across the United States.",
   path,
   keywords: [
     "IT services Chicago",
     "AI company Chicago",
     "software development Chicago",
     "IT consulting Chicago",
-    "Chicago scrap metal exporter",
-    "Chicago metal supplier",
+    "AI integration Chicago",
     "technology company Chicago",
   ],
 });
@@ -39,13 +38,6 @@ const techLinks = [
   { label: "Mobile App Development", href: "/technology/mobile-applications" },
   { label: "Business Automation", href: "/technology/business-automation" },
   { label: "Data Analytics", href: "/technology/data-analytics" },
-];
-
-const tradeLinks = [
-  { label: "Scrap Metal Export", href: "/global-trade/scrap-metal-export" },
-  { label: "Aluminium Scrap Export", href: "/global-trade/aluminium-scrap" },
-  { label: "Copper Scrap Export", href: "/global-trade/copper-scrap" },
-  { label: "Metal Trading", href: "/global-trade/metal-trading" },
 ];
 
 export default function ChicagoPage() {
@@ -61,9 +53,9 @@ export default function ChicagoPage() {
         data={[
           breadcrumbJsonLd(crumbs),
           webPageJsonLd({
-            title: "IT Services & Metal Export in Chicago",
+            title: "IT Services & AI Solutions in Chicago",
             description:
-              "Coordinatez in Chicago, Illinois — technology and AI services and metal & scrap export.",
+              "Coordinatez in Chicago, Illinois — technology and AI services for the Chicago area and the United States.",
             path,
           }),
           localBusinessJsonLd(),
@@ -87,9 +79,10 @@ export default function ChicagoPage() {
               Coordinatez in Chicago
             </h1>
             <p className="mt-5 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
-              Our global headquarters is in Chicago, Illinois. From here we run both sides of the
-              business — technology and AI services for companies across Chicago and the United
-              States, and international metal &amp; scrap export from the US to global markets.
+              Our global headquarters is in Chicago, Illinois. From here we coordinate technology
+              and AI services for companies across Chicago and the United States — web, mobile,
+              custom software, AI integration, automation, and data — delivered by our in-house
+              engineering team.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Button asChild size="lg" className="rounded-full px-6">
@@ -103,9 +96,9 @@ export default function ChicagoPage() {
         </Container>
       </section>
 
-      {/* Two divisions in Chicago */}
+      {/* Technology & AI in Chicago */}
       <section className="section-y">
-        <Container className="grid gap-6 lg:grid-cols-2">
+        <Container className="grid gap-6">
           <RevealOnScroll className="flex flex-col rounded-xl border bg-card p-8">
             <Cpu className="size-6 text-brand-sky" />
             <h2 className="mt-4 font-display text-2xl font-medium">Technology &amp; AI in Chicago</h2>
@@ -137,36 +130,6 @@ export default function ChicagoPage() {
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll delay={0.08} className="flex flex-col rounded-xl border bg-card p-8">
-            <ContainerIcon className="size-6 text-brand-copper" />
-            <h2 className="mt-4 font-display text-2xl font-medium">Metal &amp; Scrap Export from the US</h2>
-            <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
-              Our trading desk connects US suppliers and international buyers of metal and recyclable
-              scrap — ferrous and non-ferrous grades, aluminium, and copper — with disciplined
-              specification, inspection, and documentation from origin through delivery.
-            </p>
-            <ul className="mt-6 grid gap-2 sm:grid-cols-2">
-              {tradeLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="inline-flex items-center gap-1.5 text-sm text-brand-copper transition-colors hover:opacity-80"
-                  >
-                    <ArrowRight className="size-3.5" />
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-auto pt-6">
-              <Link
-                href="/global-trade"
-                className="text-sm font-semibold text-brand-copper hover:underline"
-              >
-                All global trade services →
-              </Link>
-            </div>
-          </RevealOnScroll>
         </Container>
       </section>
 
@@ -192,8 +155,15 @@ export default function ChicagoPage() {
             </ul>
             <p className="mt-5 max-w-md text-sm leading-relaxed text-muted-foreground">
               Chicago is our corporate headquarters and the coordination hub for client
-              partnerships and trade. Software engineering is delivered from our development center
-              in {siteConfig.locations.development.city}, India — see our{" "}
+              partnerships. It is also home to the company&apos;s separate{" "}
+              <a
+                href={siteConfig.tradeSite.url}
+                className="font-medium text-brand-royal hover:underline dark:text-brand-sky"
+              >
+                Global Trade division
+              </a>
+              . Software engineering is delivered from our development center in{" "}
+              {siteConfig.locations.development.city}, India — see our{" "}
               <Link href="/global-presence" className="font-medium text-brand-royal hover:underline dark:text-brand-sky">
                 global presence
               </Link>{" "}

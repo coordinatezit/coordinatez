@@ -8,6 +8,7 @@ import { siteConfig } from "@/data/site";
 export function PresenceStrip() {
   const hq = siteConfig.locations.headquarters;
   const dev = siteConfig.locations.development;
+  const aus = siteConfig.locations.australia;
 
   const points = [
     {
@@ -25,11 +26,11 @@ export function PresenceStrip() {
       accent: "text-brand-sky",
     },
     {
-      coords: "Trade corridors",
-      title: "Global Markets",
-      note: "Import & Export",
-      detail: "US–India corridor, Middle East, Europe & Asia counterparties",
-      accent: "text-brand-copper",
+      coords: aus.coordinates.label,
+      title: `${aus.city}, Australia`,
+      note: aus.label,
+      detail: `${aus.company} — ${aus.role}`,
+      accent: "text-brand-sky",
     },
   ];
 
@@ -41,7 +42,7 @@ export function PresenceStrip() {
           <SectionHeading
             index="03"
             eyebrow="Global Presence"
-            title="Anchored in Chicago. Engineered in India. Trading worldwide."
+            title="Anchored in Chicago. Engineered in India. Working worldwide."
             onInk
           />
           <Link

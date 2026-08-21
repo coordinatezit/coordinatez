@@ -1,5 +1,5 @@
 import { Hero } from "@/components/sections/hero";
-import { DivisionsSection } from "@/components/sections/divisions-section";
+import { ServicesOverview } from "@/components/sections/services-overview";
 import { ApproachSection } from "@/components/sections/approach-section";
 import { PresenceStrip } from "@/components/sections/presence-strip";
 import { InsightsPreview } from "@/components/sections/insights-preview";
@@ -9,7 +9,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <DivisionsSection />
+      <ServicesOverview />
       <ApproachSection />
       <PresenceStrip />
       <InsightsPreview />

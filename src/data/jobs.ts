@@ -26,16 +26,16 @@ export const careerTracks = [
       "Applied AI engineering: LLM integrations, AI agents and chatbots, automation pipelines, data engineering, and machine-learning solutions delivered into real business workflows.",
   },
   {
-    id: "trade",
-    title: "Business & Trade Careers",
+    id: "business",
+    title: "Business & Operations Careers",
     description:
-      "Sourcing, trading operations, supplier relations, logistics coordination, and business development across our import & export activities in the United States, India, and global markets.",
+      "Client partnerships, project coordination, business development, and operations — the people who keep scopes honest, timelines real, and clients informed across our US and India teams.",
   },
   {
     id: "internships",
     title: "Internships",
     description:
-      "Hands-on internships for students and early-career professionals in software engineering, AI, and international business — with real projects and mentorship, not busywork.",
+      "Hands-on internships for students and early-career professionals in software engineering, AI, and business operations — with real projects and mentorship, not busywork.",
   },
 ];
 
@@ -43,7 +43,7 @@ export const applicationPositionOptions = [
   "Technology — Engineering",
   "Technology — Design / UX",
   "AI & Data",
-  "Business & Trade",
+  "Business & Operations",
   "Internship",
   "Other / General Application",
 ];

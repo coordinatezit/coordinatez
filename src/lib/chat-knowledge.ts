@@ -4,14 +4,12 @@
 // pages into every request (token-efficient).
 import { siteConfig } from "@/data/site";
 import { services } from "@/data/services";
-import { tradePages } from "@/data/trade-pages";
 import { industries } from "@/data/industries";
 import { careerTracks, openPositions } from "@/data/jobs";
 import { faqs } from "@/data/faqs";
 
 function buildKnowledge(): string {
   const tech = siteConfig.divisions.technology;
-  const trade = siteConfig.divisions.trade;
   const hq = siteConfig.locations.headquarters;
   const dev = siteConfig.locations.development;
 
@@ -19,13 +17,7 @@ function buildKnowledge(): string {
     .map((s) => `- ${s.title} (/technology/${s.slug}): ${s.description}`)
     .join("\n");
 
-  const tradeServices = tradePages
-    .map((p) => `- ${p.title} (/global-trade/${p.slug}): ${p.tagline}`)
-    .join("\n");
-
-  const industryList = industries
-    .map((i) => `- ${i.name} — ${i.divisions.join(" & ")}`)
-    .join("\n");
+  const industryList = industries.map((i) => `- ${i.name}: ${i.description}`).join("\n");
 
   const careers =
     openPositions.length > 0
@@ -42,11 +34,10 @@ function buildKnowledge(): string {
 - Name: ${siteConfig.legalName} (brand: ${siteConfig.name}).
 - Tagline: "${siteConfig.tagline}".
 - ${siteConfig.description}
-- Global HQ: ${hq.city}, ${hq.country} (corporate, global trade & client partnerships).
-- Technology & development center: ${dev.city}, ${dev.country} — ${siteConfig.name}'s in-house engineering team that delivers the Technology & AI division's work for clients worldwide.
-- The company has TWO distinct divisions. Always keep them clearly separated:
-  1. ${tech.name} — ${tech.summary}
-  2. ${trade.name} — ${trade.summary}
+- Global HQ: ${hq.city}, ${hq.country} (corporate & client partnerships).
+- Technology & development center: ${dev.city}, ${dev.country} — ${siteConfig.name}'s in-house engineering team that delivers the company's work for clients worldwide.
+- This website (coordinatez.com) is the technology practice: ${tech.name} — ${tech.summary}
+- The company ALSO operates a separate division, ${siteConfig.tradeSite.name} (international import & export), which has its own website at ${siteConfig.tradeSite.url}. This website does not cover trade services — direct all trade, import/export, metal, or scrap inquiries to ${siteConfig.tradeSite.url}.
 
 ## Contact
 - Email: ${siteConfig.email.contact}
@@ -54,11 +45,8 @@ function buildKnowledge(): string {
 - Contact page: /contact (has an inquiry form). Careers page: /careers. Global presence: /global-presence.
 - Business hours: ${siteConfig.businessHours.map((b) => `${b.days}: ${b.hours}`).join("; ")}.
 
-## Division 1 — Technology & AI services
+## Technology & AI services
 ${techServices}
-
-## Division 2 — Global Trade (Import/Export & Metal/Scrap)
-${tradeServices}
 
 ## Industries served
 ${industryList}
@@ -82,7 +70,7 @@ export const SYSTEM_PROMPT = `You are the "Coordinatez AI Assistant", the offici
 - You are an AI assistant, not a human employee. If asked, say so plainly. Never pretend to be a person.
 - Be professional, friendly, concise, and business-focused. Natural and conversational — not robotic.
 - Keep answers short and scannable (usually 2-5 sentences or a short list). Don't dump everything at once. Use at most one emoji, rarely.
-- Coordinatez has two separate divisions — Technology & AI, and Global Trade (import/export & metal/scrap). Keep them distinct; never blur them.
+- This website is about Coordinatez's IT services & AI solutions. The company's separate Global Trade division (import/export) has its own website at https://trade.coordinatez.com — never present trade services as offered on this site.
 
 # Grounding & accuracy (critical)
 - Use ONLY the knowledge base below as the source of truth for anything about Coordinatez. Never invent services, products, prices, clients, partnerships, certifications, awards, addresses, statistics, quantities, availability, or job openings.
@@ -100,7 +88,7 @@ export const SYSTEM_PROMPT = `You are the "Coordinatez AI Assistant", the offici
 - When a visitor describes a business problem, recommend the most relevant Coordinatez service(s) — helpfully, not pushily.
 - When they show buying intent or want to work with Coordinatez, gather relevant details conversationally (not all at once): what they need, their business/context, name, email, company, country, and rough scope. Budget is fine to ask about here only if relevant — but never direct them to add budget to the website contact form.
 - Close with a clear next step: invite them to submit the inquiry via the Contact page (/contact) or email ${siteConfig.email.contact}.
-- For import/export interest, ask: material of interest, buyer or supplier, country, quantity, and specification/grade — then route serious inquiries to ${siteConfig.email.contact} or /contact. Do not quote prices or guarantee availability.
+- For import/export or trade interest, explain that trade inquiries are handled by the Coordinatez Global Trade division at https://trade.coordinatez.com and direct the visitor there. Do not gather trade requirements, quote prices, or guarantee availability.
 - For careers questions, use only the Careers info below; if there are no open roles, say so and invite them to introduce themselves via /careers.
 
 # Formatting

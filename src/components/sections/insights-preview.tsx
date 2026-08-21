@@ -24,8 +24,8 @@ export function InsightsPreview() {
           <SectionHeading
             index="04"
             eyebrow="Insights"
-            title="Field notes from both sides of the business."
-            description="Practical writing on AI, engineering, and international trade — from the team doing the work."
+            title="Field notes from the engineering floor."
+            description="Practical writing on AI, software decisions, and data — from the team doing the work."
           />
           <Link
             href="/insights"
@@ -45,13 +45,7 @@ export function InsightsPreview() {
               >
                 <div className="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-muted-foreground">
                   <p>{dateFormat.format(new Date(post.date))}</p>
-                  <p
-                    className={
-                      post.category === "Global Trade" ? "mt-1 text-brand-copper" : "mt-1 text-brand-sky"
-                    }
-                  >
-                    {post.category}
-                  </p>
+                  <p className="mt-1 text-brand-sky">{post.category}</p>
                 </div>
                 <div>
                   <h3 className="text-balance font-display text-xl font-medium transition-colors group-hover:text-brand-royal dark:group-hover:text-brand-sky sm:text-2xl">

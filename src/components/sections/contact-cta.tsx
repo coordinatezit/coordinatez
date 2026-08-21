@@ -24,11 +24,11 @@ export function ContactCta() {
               <div>
                 <p className="eyebrow-on-ink">Start a conversation</p>
                 <h2 className="mt-4 text-balance font-display text-3xl font-medium text-white sm:text-4xl lg:text-[2.6rem] lg:leading-[1.12]">
-                  A build to scope, or a shipment to move — tell us what you&apos;re working on.
+                  A build to scope, or a process to automate — tell us what you&apos;re working on.
                 </h2>
                 <p className="mt-5 max-w-xl text-pretty text-[var(--ink-panel-muted)]">
-                  Technology inquiries reach our engineering leads; trade inquiries reach our
-                  trading desk. Either way, you&apos;ll hear back within one business day.
+                  Every inquiry reaches our engineering leads directly — and you&apos;ll hear back
+                  within one business day.
                 </p>
               </div>
               <div className="flex flex-col items-start gap-4 lg:items-end">

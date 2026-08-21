@@ -9,17 +9,16 @@ import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { insights } from "@/data/insights";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Insights — Writing on AI, Engineering & International Trade",
+  title: "Insights — Writing on AI, Software & Engineering",
   description:
-    "Practical writing on AI, engineering, and international trade from the Coordinatez team — field notes on AI agents, custom software decisions, US–India trade, and running technology and trade under one roof.",
+    "Practical writing on AI, software, and engineering from the Coordinatez team — field notes on AI agents, custom software decisions, data readiness, and how a US–India engineering team actually works.",
   path: "/insights",
   keywords: [
     "Coordinatez insights",
     "AI articles for business",
     "custom software insights",
-    "US India trade articles",
-    "import export knowledge",
     "AI agents in business",
+    "data readiness for AI",
     "engineering blog",
   ],
 });
@@ -53,11 +52,10 @@ export default function InsightsPage() {
               <span aria-hidden className="h-px max-w-24 flex-1 bg-border" />
             </div>
             <h1 className="mt-5 max-w-3xl text-balance font-display text-4xl font-medium leading-[1.08] sm:text-5xl lg:text-6xl">
-              Field notes from both sides of the business.
+              Field notes from the engineering floor.
             </h1>
             <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
-              Practical writing on AI, engineering, and international trade from the Coordinatez
-              team.
+              Practical writing on AI, software, and engineering from the Coordinatez team.
             </p>
           </RevealOnScroll>
         </Container>
@@ -75,15 +73,7 @@ export default function InsightsPage() {
                 >
                   <div className="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-muted-foreground">
                     <p>{dateFormat.format(new Date(post.date))}</p>
-                    <p
-                      className={
-                        post.category === "Global Trade"
-                          ? "mt-1 text-brand-copper"
-                          : "mt-1 text-brand-sky"
-                      }
-                    >
-                      {post.category}
-                    </p>
+                    <p className="mt-1 text-brand-sky">{post.category}</p>
                   </div>
                   <div>
                     <h2 className="text-balance font-display text-xl font-medium transition-colors group-hover:text-brand-royal dark:group-hover:text-brand-sky sm:text-2xl">

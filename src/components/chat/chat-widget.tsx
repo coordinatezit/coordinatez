@@ -20,14 +20,14 @@ const WELCOME: ChatMessage = {
   id: "welcome",
   role: "assistant",
   content:
-    "Hi! I'm the Coordinatez AI Assistant. I can help you learn about our IT services, AI solutions, business automation, software development, digital marketing, and import/export business. How can I help you today?",
+    "Hi! I'm the Coordinatez AI Assistant. I can help you learn about our IT services, AI solutions, business automation, software development, and digital marketing. How can I help you today?",
 };
 
 const QUICK_QUESTIONS = [
   "What services do you offer?",
   "I need an AI solution",
   "I want to build a website",
-  "Tell me about your import/export business",
+  "How do AI agents help a business?",
   "I want to contact your team",
 ];
 

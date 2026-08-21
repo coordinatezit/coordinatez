@@ -95,7 +95,7 @@ export default function PrivacyPolicyPage() {
             <PolicySection title="2. How we use your information">
               <PolicyList
                 items={[
-                  "To respond to your inquiries and provide information about our technology and trade services.",
+                  "To respond to your inquiries and provide information about our technology services.",
                   "To evaluate career applications and contact you about current or future opportunities.",
                   "To operate, secure, and improve the Site.",
                   "To comply with legal obligations where applicable.",

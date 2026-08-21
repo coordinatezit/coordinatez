@@ -79,7 +79,7 @@ export default function OpengraphImage() {
             }}
           >
             <div style={{ display: "flex", width: 14, height: 14, borderRadius: 7, background: "#4aa3dc" }} />
-            Technology &amp; AI Solutions
+            IT Services &amp; AI Solutions
           </div>
           <div
             style={{
@@ -92,7 +92,7 @@ export default function OpengraphImage() {
             }}
           >
             <div style={{ display: "flex", width: 14, height: 14, borderRadius: 7, background: "#d3915a" }} />
-            Global Import &amp; Export
+            Chicago HQ · India Development Center
           </div>
         </div>
       </div>

@@ -66,9 +66,7 @@ export default function TechnologyPage() {
         <Container className="relative py-16 sm:py-24">
           <Breadcrumbs items={crumbs} />
           <RevealOnScroll className="mt-6">
-            <p className="eyebrow">
-              Division 01 <span className="mx-2 text-border">/</span> {siteConfig.divisions.technology.name}
-            </p>
+            <p className="eyebrow">{siteConfig.divisions.technology.name}</p>
             <h1 className="mt-5 max-w-3xl text-balance font-display text-4xl font-medium leading-[1.08] sm:text-5xl lg:text-6xl">
               IT services &amp; AI solutions that move{" "}
               <span className="text-gradient-sky">business forward</span>.

@@ -35,16 +35,16 @@ const labelOffset: Record<string, { dx: number; dy: number; anchor: "start" | "m
 };
 
 /**
- * Animated 2D "Global Trade Network" map — server-rendered SVG, CSS-driven
- * motion, zero JavaScript. Nodes are real coordinates; arcs mirror the 3D
- * globe's connections.
+ * Animated 2D global network map — server-rendered SVG, CSS-driven motion,
+ * zero JavaScript. Nodes are real coordinates; arcs mirror the 3D globe's
+ * connections.
  */
 export function TradeNetworkMap({ className }: { className?: string }) {
   return (
     <svg
       viewBox={`0 0 ${W} ${H}`}
       role="img"
-      aria-label="Map of the Coordinatez trade network connecting the United States, India, and global markets"
+      aria-label="Map of the Coordinatez global network connecting Chicago, Mehsana, and Sydney with partner markets and hubs"
       className={className}
     >
       {/* graticule */}

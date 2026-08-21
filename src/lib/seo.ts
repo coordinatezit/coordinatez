@@ -121,10 +121,11 @@ export function organizationJsonLd() {
         url: `${siteConfig.url}${siteConfig.divisions.technology.href}`,
       },
       {
+        // The Global Trade division is still a real part of the company — it
+        // simply lives on its own site now.
         "@type": "Organization",
-        name: siteConfig.divisions.trade.name,
-        description: siteConfig.divisions.trade.summary,
-        url: `${siteConfig.url}${siteConfig.divisions.trade.href}`,
+        name: siteConfig.tradeSite.name,
+        url: siteConfig.tradeSite.url,
       },
     ],
     sameAs: Object.values(siteConfig.social).filter(Boolean),
@@ -210,19 +211,6 @@ export function serviceJsonLd(service: {
       serviceUrl: `${siteConfig.url}/contact`,
     },
   };
-}
-
-export function tradeServiceJsonLd(capability: {
-  title: string;
-  description: string;
-  path: string;
-}) {
-  return serviceJsonLd({
-    title: capability.title,
-    description: capability.description,
-    path: capability.path,
-    provider: siteConfig.divisions.trade.name,
-  });
 }
 
 export function webPageJsonLd(page: { title: string; description: string; path: string }) {

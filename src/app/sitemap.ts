@@ -2,7 +2,6 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/data/site";
 import { insights } from "@/data/insights";
 import { services } from "@/data/services";
-import { tradePages } from "@/data/trade-pages";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -10,7 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: { path: string; priority: number; changeFrequency: "weekly" | "monthly" | "yearly" }[] = [
     { path: "/", priority: 1, changeFrequency: "weekly" },
     { path: "/technology", priority: 0.9, changeFrequency: "monthly" },
-    { path: "/global-trade", priority: 0.9, changeFrequency: "monthly" },
     { path: "/about", priority: 0.8, changeFrequency: "monthly" },
     { path: "/global-presence", priority: 0.7, changeFrequency: "monthly" },
     { path: "/locations/chicago", priority: 0.7, changeFrequency: "monthly" },
@@ -37,14 +35,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // Global trade landing pages — high commercial-intent, priority 0.8.
-  const tradeEntries: MetadataRoute.Sitemap = tradePages.map((page) => ({
-    url: `${siteConfig.url}/global-trade/${page.slug}`,
-    lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.8,
-  }));
-
   const articleEntries: MetadataRoute.Sitemap = insights.map((post) => ({
     url: `${siteConfig.url}/insights/${post.slug}`,
     lastModified: new Date(post.date),
@@ -52,5 +42,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...staticEntries, ...serviceEntries, ...tradeEntries, ...articleEntries];
+  return [...staticEntries, ...serviceEntries, ...articleEntries];
 }

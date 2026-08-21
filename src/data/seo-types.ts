@@ -1,2 +1,2 @@
-// Shared shapes for SEO landing pages (service + trade spokes).
+// Shared shapes for SEO landing pages (service spokes).
 export type LandingFaq = { question: string; answer: string };

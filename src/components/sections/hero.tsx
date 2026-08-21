@@ -28,24 +28,23 @@ export function Hero() {
               <span aria-hidden className="text-[var(--ink-panel-border)]">/</span>
               <span>Development — India</span>
               <span aria-hidden className="text-[var(--ink-panel-border)]">/</span>
-              <span>Markets — Worldwide</span>
+              <span>Clients — Worldwide</span>
             </p>
           </RevealOnScroll>
 
           <RevealOnScroll delay={0.08}>
             <h1 className="mt-6 text-balance font-display text-[2.6rem] font-medium leading-[1.06] text-white sm:text-6xl lg:text-[4.2rem]">
-              Connecting Technology,{" "}
-              <span className="text-gradient-sky">Intelligence</span>{" "}
-              &amp; Global{" "}
-              <span className="text-gradient-copper">Commerce</span>.
+              Software &amp; <span className="text-gradient-sky">AI systems</span> that move
+              business <span className="text-gradient-copper">forward</span>.
             </h1>
           </RevealOnScroll>
 
           <RevealOnScroll delay={0.16}>
             <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-[var(--ink-panel-muted)] sm:text-lg">
-              {siteConfig.name} brings together technology innovation, artificial intelligence,
-              and international trade to help businesses operate, grow, and connect in a rapidly
-              evolving global economy.
+              {siteConfig.name} is an IT services &amp; AI solutions company — Chicago-based,
+              with our own development center in Mehsana, India. We design, build, and run web
+              platforms, custom software, AI integrations, and data systems for startups, SMEs,
+              and enterprises.
             </p>
           </RevealOnScroll>
 
@@ -56,8 +55,8 @@ export function Hero() {
                 size="lg"
                 className="rounded-full bg-white px-6 text-[#10143a] hover:bg-white/90"
               >
-                <Link href="#businesses">
-                  Explore Our Businesses
+                <Link href="/technology">
+                  Explore Our Services
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>
@@ -78,15 +77,15 @@ export function Hero() {
           <RevealOnScroll delay={0.32}>
             <dl className="mt-12 grid max-w-xl grid-cols-2 gap-x-8 gap-y-2 border-t border-[var(--ink-panel-border)] pt-6">
               <div>
-                <dt className="eyebrow-on-ink">Division 01</dt>
+                <dt className="eyebrow-on-ink">Engineering</dt>
                 <dd className="mt-1.5 text-sm font-medium text-white">
-                  Technology &amp; AI Solutions
+                  Web, Mobile &amp; Custom Software
                 </dd>
               </div>
               <div>
-                <dt className="eyebrow-on-ink">Division 02</dt>
+                <dt className="eyebrow-on-ink">Intelligence</dt>
                 <dd className="mt-1.5 text-sm font-medium text-white">
-                  Metal, Scrap &amp; Global Trade
+                  AI Agents, Automation &amp; Data
                 </dd>
               </div>
             </dl>

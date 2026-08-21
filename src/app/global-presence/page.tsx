@@ -15,14 +15,13 @@ import { siteConfig } from "@/data/site";
 export const metadata: Metadata = buildMetadata({
   title: "Global Presence — Chicago Headquarters & India Development Center",
   description:
-    "Coordinatez operates from two locations: our global headquarters in Chicago and our technology & development center in Mehsana, Gujarat, India — working across US Central and India Standard Time to cover most of the global business day.",
+    "Coordinatez operates from three locations: our global headquarters in Chicago, our technology & development center in Mehsana, Gujarat, India, and our Asia-Pacific office in Harris Park, Australia — covering most of the global business day.",
   path: "/global-presence",
   keywords: [
     "Coordinatez locations",
     "Chicago headquarters",
     "Mehsana development center",
     "US India company",
-    "global trade network",
     "international business locations",
     "Coordinatez global presence",
   ],
@@ -71,14 +70,14 @@ export default function GlobalPresencePage() {
             <p className="eyebrow-on-ink">Global Presence</p>
             <h1 className="mt-5 max-w-3xl text-balance font-display text-4xl font-medium leading-[1.08] text-white sm:text-5xl lg:text-6xl">
               Anchored in Chicago. Engineered in India.{" "}
-              <span className="text-gradient-sky">Trading worldwide.</span>
+              <span className="text-gradient-sky">Working worldwide.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-[var(--ink-panel-muted)]">
               Three offices run everything we do: our global headquarters in{" "}
               {siteConfig.locations.headquarters.city}, our technology &amp; development center in{" "}
               {siteConfig.locations.development.city}, India, and our Asia-Pacific office in{" "}
-              {siteConfig.locations.australia.city}, Australia. From there we work markets and trade
-              hubs across four continents.
+              {siteConfig.locations.australia.city}, Australia. From there we serve clients across
+              time zones and continents.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Button asChild size="lg" className="rounded-full bg-white px-6 text-[#10143a] hover:bg-white/90">
@@ -110,13 +109,13 @@ export default function GlobalPresencePage() {
             index="01"
             eyebrow="The Network"
             title="Our anchors, a world of working relationships."
-            description="Chicago, Mehsana, and Sydney are where Coordinatez lives. The other cities on this map are the ports, markets, and trade hubs where our transactions and partnerships play out."
+            description="Chicago, Mehsana, and Sydney are where Coordinatez lives. The other cities on this map are markets and hubs where the wider Coordinatez group — including our Global Trade division (trade.coordinatez.com) — does business through partners and counterparties."
             onInk
           />
           <RevealOnScroll className="mt-12 overflow-hidden rounded-xl border border-[var(--ink-panel-border)] bg-[var(--ink-panel-soft)]/40 p-4 text-[var(--ink-panel-foreground)] sm:p-8">
             <TradeNetworkMap className="h-auto w-full" />
             <p className="mt-4 text-center font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[var(--ink-panel-muted)]">
-              Coordinatez locations in blue · markets &amp; trade hubs we work with in copper
+              Coordinatez locations in blue · partner markets &amp; hubs in copper
             </p>
           </RevealOnScroll>
         </Container>
@@ -129,7 +128,7 @@ export default function GlobalPresencePage() {
             index="02"
             eyebrow="Our Locations"
             title="Where Coordinatez actually is."
-            description="Three addresses, one company. Corporate and trade run from Chicago; technology and AI delivery run from our development center in Mehsana, India; and our Asia-Pacific office is in Sydney, Australia."
+            description="Three addresses, one company. Corporate and client partnerships run from Chicago; technology and AI delivery run from our development center in Mehsana, India; and our Asia-Pacific office is in Sydney, Australia."
           />
           <RevealStagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {locationEntries.map(({ location, phone }) => (
@@ -198,10 +197,10 @@ export default function GlobalPresencePage() {
               </dl>
               <p className="mt-6 text-pretty text-sm leading-relaxed text-muted-foreground">
                 <span className="font-semibold text-foreground">A note on the map:</span> beyond
-                Chicago and Mehsana, the cities shown above — Houston, Rotterdam, Dubai, Mundra,
-                Singapore, Shanghai — are markets and trade hubs where we transact through
-                partners and counterparties. They are not Coordinatez offices, and we won&apos;t
-                pretend otherwise.
+                Chicago, Mehsana, and Sydney, the cities shown above — Houston, Rotterdam, Dubai,
+                Mundra, Singapore, Shanghai — are markets and hubs where the wider Coordinatez
+                group works through partners and counterparties. They are not Coordinatez offices,
+                and we won&apos;t pretend otherwise.
               </p>
             </RevealOnScroll>
           </div>

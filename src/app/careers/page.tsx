@@ -13,15 +13,14 @@ import { openPositions, careerTracks } from "@/data/jobs";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Careers — Build at the Intersection of Technology, AI & Global Trade",
+  title: "Careers — Build Software & AI That Ships",
   description:
-    "Careers at Coordinatez: engineering, AI, and international trade roles across our Chicago headquarters and our development center in Mehsana, Gujarat, India. See open positions or introduce yourself.",
+    "Careers at Coordinatez: engineering, AI, and business operations roles across our Chicago headquarters and our development center in Mehsana, Gujarat, India. See open positions or introduce yourself.",
   path: "/careers",
   keywords: [
     "Coordinatez careers",
     "software engineering jobs Mehsana",
     "AI engineering jobs India",
-    "international trade careers",
     "IT jobs Gujarat",
     "technology internships India",
   ],
@@ -29,9 +28,9 @@ export const metadata: Metadata = buildMetadata({
 
 const whyReasons = [
   {
-    title: "Real problems, two industries",
+    title: "Real problems, real clients",
     description:
-      "One week you're shipping an AI integration for a client; the next you're building the tooling that tracks physical cargo across an ocean. Software here meets the operational seriousness of international trade — the work has consequences you can see.",
+      "One week you're shipping an AI integration for a client; the next you're untangling the workflow their whole operation runs on. The work here goes live for real businesses — it has consequences you can see.",
   },
   {
     title: "Ownership and visibility",
@@ -53,7 +52,7 @@ const whyReasons = [
 const lifePoints = [
   "Small teams where decisions happen in the room, not three levels above it.",
   "Direct access to leadership — the people setting direction are the people you work with.",
-  "Work that ships: client products, trading tools, and internal platforms in real use.",
+  "Work that ships: client products, AI systems, and internal platforms in real use.",
   "Timezone-flexible collaboration between the US and India, with overlap hours planned rather than improvised.",
 ];
 
@@ -97,14 +96,14 @@ export default function CareersPage() {
           <RevealOnScroll>
             <p className="eyebrow">Careers at Coordinatez</p>
             <h1 className="mt-5 max-w-3xl text-balance font-display text-4xl font-medium leading-[1.08] sm:text-5xl lg:text-6xl">
-              Build a career where technology, AI, and{" "}
-              <span className="text-gradient-sky">global trade</span> meet.
+              Build a career in software and{" "}
+              <span className="text-gradient-sky">AI that ships</span>.
             </h1>
             <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
-              Coordinatez runs two businesses on one operating discipline — software and AI built
-              from {siteConfig.locations.development.city}, and international trade coordinated
-              from {siteConfig.locations.headquarters.city}. Join a team small enough that your
-              work is visible, working on problems large enough to matter.
+              Coordinatez builds software and AI from {siteConfig.locations.development.city},
+              with client partnerships coordinated from{" "}
+              {siteConfig.locations.headquarters.city}. Join a team small enough that your work is
+              visible, working on problems large enough to matter.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-6">
               <Button asChild size="lg" className="rounded-full px-6">
@@ -159,7 +158,7 @@ export default function CareersPage() {
               index="02"
               eyebrow="Life at Coordinatez"
               title="Small teams. Direct lines. Work that ships."
-              description="Day to day, this is a company of practitioners — engineers, traders, and operators who would rather solve the problem than schedule a meeting about it."
+              description="Day to day, this is a company of practitioners — engineers and operators who would rather solve the problem than schedule a meeting about it."
             />
             <RevealOnScroll delay={0.08} className="lg:pt-2">
               <ul className="space-y-4">

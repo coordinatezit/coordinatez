@@ -48,7 +48,7 @@ export default function NotFound() {
             variant="outline"
             className="rounded-full border-white/25 bg-transparent px-6 text-white hover:bg-white/10 hover:text-white"
           >
-            <Link href="/global-trade">Global Trade</Link>
+            <Link href="/insights">Insights</Link>
           </Button>
           <Button
             asChild

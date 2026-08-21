@@ -79,13 +79,11 @@ export default function TermsAndConditionsPage() {
                 your circumstances from qualified professionals before making business decisions.
               </p>
               <p>
-                Descriptions of our services — whether in our Technology &amp; AI division or our
-                Global Trade division — are informational and do not constitute an offer capable
-                of acceptance. Technology engagements and trade transactions are governed
-                exclusively by separate written agreements or contracts negotiated and executed
-                between {siteConfig.name} and the relevant counterparty. In the event of any
-                conflict between Site content and a signed agreement, the signed agreement
-                controls.
+                Descriptions of our services are informational and do not constitute an offer
+                capable of acceptance. Engagements are governed exclusively by separate written
+                agreements or contracts negotiated and executed between {siteConfig.name} and the
+                relevant counterparty. In the event of any conflict between Site content and a
+                signed agreement, the signed agreement controls.
               </p>
             </TermsSection>
 

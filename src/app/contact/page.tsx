@@ -17,16 +17,16 @@ import { siteConfig } from "@/data/site";
 import { faqs } from "@/data/faqs";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Contact Us — Technology, AI & Global Trade Inquiries",
+  title: "Contact Us — Technology & AI Inquiries",
   description:
-    "Talk to Coordinatez about technology and AI projects, global trade requirements, partnerships, or careers. Offices in Chicago, USA and Mehsana, India — we respond within one business day.",
+    "Talk to Coordinatez about technology and AI projects, partnerships, or careers. Offices in Chicago, USA and Mehsana, India — we respond within one business day.",
   path: "/contact",
   keywords: [
     "contact Coordinatez",
     "IT services inquiry",
     "AI solutions consultation",
-    "import export inquiry",
-    "global trade contact",
+    "software development consultation",
+    "technology partner Chicago",
   ],
 });
 
@@ -61,8 +61,8 @@ export default function ContactPage() {
               Tell us what you&apos;re working on.
             </h1>
             <p className="mt-5 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
-              Technology inquiries route to our engineering leads; trade inquiries route to our
-              trading desk. Either way, a real person replies within one business day.
+              Every inquiry routes to our engineering leads — and a real person replies within
+              one business day.
             </p>
           </RevealOnScroll>
         </Container>
@@ -144,9 +144,9 @@ export default function ContactPage() {
 
             <div className="rounded-lg border bg-muted/40 p-5">
               <p className="text-sm leading-relaxed text-muted-foreground">
-                <span className="font-semibold text-foreground">Trade requirement?</span> Include
-                the material, specification or grade, quantity, and destination — it lets our desk
-                come back with a useful answer on the first reply.
+                <span className="font-semibold text-foreground">Starting a project?</span> Include
+                the business problem, any systems involved, and a rough timeline — it lets our
+                team come back with a useful answer on the first reply.
               </p>
             </div>
           </RevealOnScroll>

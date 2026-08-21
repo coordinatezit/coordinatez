@@ -55,7 +55,7 @@ export function ContactForm() {
     },
   });
 
-  // Prefill from CTA deep-links: /contact?interest=Global Trade&topic=Metal & Scrap Trading
+  // Prefill from CTA deep-links: /contact?interest=Technology & AI&topic=AI Integration
   useEffect(() => {
     const interest = searchParams.get("interest");
     const topic = searchParams.get("topic");

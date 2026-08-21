@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 export function Logo({
   className,
   onInk = false,
-  subtitle = "Technology · Global Trade",
+  subtitle = "IT Services · AI Solutions",
 }: {
   className?: string;
   /** Set when rendered on a dark/ink surface. */

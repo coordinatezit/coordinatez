@@ -76,7 +76,7 @@ export default async function InsightArticlePage({
   const post = insights.find((entry) => entry.slug === slug);
   if (!post) notFound();
 
-  const accent = post.category === "Global Trade" ? "text-brand-copper" : "text-brand-sky";
+  const accent = "text-brand-sky";
   const firstParagraphIndex = post.body.findIndex((block) => block.type === "p");
 
   return (
@@ -137,8 +137,8 @@ export default async function InsightArticlePage({
                 Working through a problem like this one?
               </h2>
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
-                Whether it&apos;s a build to scope or a trade requirement to fill, our team will
-                give you an honest read within one business day.
+                Whether it&apos;s a build to scope or a process to automate, our team will give
+                you an honest read within one business day.
               </p>
               <Button asChild className="mt-6 rounded-full px-6">
                 <Link href="/contact">

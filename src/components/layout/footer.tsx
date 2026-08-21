@@ -21,8 +21,8 @@ import { siteConfig } from "@/data/site";
 
 const columns: { title: string; items: { label: string; href: string }[] }[] = [
   { title: "Technology & AI", items: footerNav.technology },
-  { title: "Global Trade", items: footerNav.globalTrade },
   { title: "Company", items: footerNav.company },
+  { title: "Legal", items: footerNav.legal },
 ];
 
 export function Footer() {
@@ -41,7 +41,7 @@ export function Footer() {
             <div className="flex flex-col leading-none">
               <span className="font-display text-2xl font-semibold text-white">Coordinatez</span>
               <span className="mt-1.5 font-mono text-[0.6rem] uppercase tracking-[0.28em] text-[var(--ink-panel-muted)]">
-                Technology · Global Trade
+                IT Services · AI Solutions
               </span>
             </div>
           </div>
@@ -98,7 +98,7 @@ export function Footer() {
 
       {/* Locations strip */}
       <div className="border-t border-[var(--ink-panel-border)]">
-        <Container className="grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-4">
+        <Container className="grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-3">
           {[
             {
               label: hq.label,
@@ -120,13 +120,6 @@ export function Footer() {
               company: `${aus.company} — ${aus.role}`,
               lines: [aus.addressLines[aus.addressLines.length - 1]],
               coords: aus.coordinates.label,
-              contact: siteConfig.email.contact,
-            },
-            {
-              label: "Global Trade Desk",
-              company: "United States · India · International Markets",
-              lines: ["Sourcing, import & export, and logistics", "coordination across trade corridors"],
-              coords: "US–India primary corridor",
               contact: siteConfig.email.contact,
             },
           ].map((loc) => (
@@ -157,17 +150,13 @@ export function Footer() {
             <span className="mx-2 hidden sm:inline">·</span>
             <span className="block sm:inline">{siteConfig.tagline}</span>
           </p>
-          <nav aria-label="Legal" className="flex gap-6">
-            {footerNav.legal.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-xs text-[var(--ink-panel-muted)] transition-colors hover:text-white"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+          {/* Quiet pointer to the separate Global Trade division site. */}
+          <a
+            href={siteConfig.tradeSite.url}
+            className="text-xs text-[var(--ink-panel-muted)] transition-colors hover:text-white"
+          >
+            Global Trade division ↗
+          </a>
         </Container>
       </div>
     </footer>

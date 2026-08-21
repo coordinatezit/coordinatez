@@ -11,11 +11,11 @@ export const countryOptions = [
   "Other",
 ];
 
-// Business-interest routing for the contact form — mirrors the two divisions
-// plus general/partnership/career inquiries.
+// Business-interest routing for the contact form — technology inquiries plus
+// general/partnership/career inquiries. (Trade inquiries are handled by the
+// separate Global Trade division at trade.coordinatez.com.)
 export const inquiryInterestOptions = [
   "Technology & AI",
-  "Global Trade",
   "General Inquiry",
   "Partnership",
   "Career",

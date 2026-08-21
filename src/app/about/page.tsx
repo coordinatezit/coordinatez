@@ -8,22 +8,22 @@ import * as motion from "framer-motion/client";
 import { JsonLd } from "@/components/shared/json-ld";
 import { ContactCta } from "@/components/sections/contact-cta";
 import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo";
-import { divisions } from "@/data/divisions";
+import { services, serviceCategories } from "@/data/services";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "About Us — A Technology & Global Trade Company",
+  title: "About Us — An IT Services & AI Solutions Company",
   description:
-    "Coordinatez is a global company headquartered in Chicago with a technology and development center in Mehsana, India. Learn who we are, what our two divisions do, the values we work by, and how our global offices fit together.",
+    "Coordinatez is an IT services and AI solutions company headquartered in Chicago with its own development center in Mehsana, India. Learn who we are, how we work, the values we work by, and how our global offices fit together.",
   path: "/about",
   keywords: [
     "about Coordinatez",
     "Coordinatez company",
-    "technology and trade company",
+    "IT services company",
+    "AI solutions company",
     "Chicago headquarters",
     "Coordinatez India office",
     "US India company",
-    "IT services and import export",
   ],
 });
 
@@ -32,25 +32,25 @@ const values = [
     index: "01",
     title: "Specification discipline",
     description:
-      "Every engagement starts by pinning the requirement down in writing — what will be delivered, to what standard, by when. Ambiguity is where projects and shipments go wrong, so we remove it first.",
+      "Every engagement starts by pinning the requirement down in writing — what will be delivered, to what standard, by when. Ambiguity is where projects go wrong, so we remove it first.",
   },
   {
     index: "02",
     title: "Accountability",
     description:
-      "Every project and every transaction has a named Coordinatez owner who carries it end to end. When you call with a question, the person who answers is the person responsible.",
+      "Every project has a named Coordinatez owner who carries it end to end. When you call with a question, the person who answers is the person responsible.",
   },
   {
     index: "03",
     title: "Verification at source",
     description:
-      "We check work where it originates — material inspected before it ships, software tested before it releases. Catching a problem at the source costs a fraction of catching it at the destination.",
+      "We check work where it originates — code reviewed before it merges, software tested before it releases. Catching a problem at the source costs a fraction of catching it in production.",
   },
   {
     index: "04",
     title: "Honesty about fit",
     description:
-      "Not every requirement is ours to take. When a market, material, or build sits outside what we can serve well, we say so at the first conversation — and point you somewhere better when we can.",
+      "Not every requirement is ours to take. When a stack, scope, or build sits outside what we can serve well, we say so at the first conversation — and point you somewhere better when we can.",
   },
 ];
 
@@ -79,12 +79,12 @@ export default function AboutPage() {
           <RevealOnScroll>
             <p className="eyebrow">About Coordinatez</p>
             <h1 className="mt-5 max-w-3xl text-balance font-display text-4xl font-medium leading-[1.08] sm:text-5xl lg:text-6xl">
-              Connecting technology, intelligence &amp; global commerce.
+              Technology that moves business forward.
             </h1>
             <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
-              Coordinatez is a global company operating two business divisions — Technology &amp;
-              AI Solutions and Global Import &amp; Export — from the United States and India. One
-              company, one standard of work, on both sides of the world.
+              Coordinatez is an IT services &amp; AI solutions company — headquartered in the
+              United States, engineered from India. One company, one standard of work, on both
+              sides of the world.
             </p>
           </RevealOnScroll>
         </Container>
@@ -102,23 +102,27 @@ export default function AboutPage() {
               />
               <RevealOnScroll delay={0.08} className="mt-8 space-y-5 text-pretty leading-relaxed text-muted-foreground">
                 <p>
-                  {siteConfig.name} is headquartered in {hq.city}, where our corporate, global
-                  trade, and client partnership functions sit. Our technology and development
-                  center in {dev.city}, India, is where our engineering teams design, build, and
-                  run software and AI systems for clients worldwide.
+                  {siteConfig.name} is headquartered in {hq.city}, where our corporate and client
+                  partnership functions sit. Our technology and development center in {dev.city},
+                  India, is where our engineering teams design, build, and run software and AI
+                  systems for clients worldwide.
                 </p>
                 <p>
-                  The two divisions look different from the outside — one ships code, the other
-                  ships cargo — but they run on the same underlying work: moving accurate
-                  information across borders, time zones, and organizations without letting it
-                  degrade. Our trading desk runs on tools our engineers build; our engineers work
-                  with the operational discipline that physical trade demands.
+                  Client conversations happen in US time; engineering happens in India — inside
+                  one company, not across a vendor boundary. The team that scopes your project is
+                  the team that builds and runs it, which keeps accountability in one place and
+                  handoffs inside the company rather than between contractors.
                 </p>
                 <p>
-                  We are deliberately specific about what we claim. Beyond Chicago and Mehsana, the
-                  cities you&apos;ll see on our network map are markets and trade hubs we transact
-                  with through partners and counterparties — not Coordinatez offices. What we tell
-                  you about our company is what is actually true of it.
+                  The company also operates a separate business division,{" "}
+                  <a
+                    href={siteConfig.tradeSite.url}
+                    className="font-medium text-brand-royal hover:underline dark:text-brand-sky"
+                  >
+                    {siteConfig.tradeSite.name}
+                  </a>
+                  , which handles international trade from its own site. This site — and this
+                  team — is the technology practice.
                 </p>
               </RevealOnScroll>
             </div>
@@ -141,10 +145,10 @@ export default function AboutPage() {
                   </dd>
                 </div>
                 <div className="p-5">
-                  <dt className="eyebrow">Divisions</dt>
-                  <dd className="mt-2 font-mono text-sm font-medium">02</dd>
+                  <dt className="eyebrow">Focus</dt>
+                  <dd className="mt-2 text-sm font-medium">IT Services &amp; AI Solutions</dd>
                   <dd className="mt-1 text-xs text-muted-foreground">
-                    Technology &amp; AI · Global Trade
+                    Web · Mobile · Software · AI · Data · Cloud
                   </dd>
                 </div>
               </dl>
@@ -159,45 +163,34 @@ export default function AboutPage() {
           <SectionHeading
             index="02"
             eyebrow="What We Do"
-            title="Two divisions, one operating standard."
-            description="Software and AI engineered from India. Goods sourced and traded between the US, India, and global markets. Engage one division, or both."
+            title="IT services & AI, delivered end to end."
+            description="Web, mobile, custom software, AI, data, and cloud — designed, built, and operated by our in-house engineering team for startups, SMEs, and enterprises."
           />
-          <RevealStagger className="mt-12 grid gap-6 lg:grid-cols-2">
-            {divisions.map((division) => {
-              const isSky = division.accent === "sky";
+          <RevealStagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {serviceCategories.map((category, i) => {
+              const items = services.filter((s) => s.category === category.id);
               return (
-                <motion.div key={division.id} variants={staggerItem} className="h-full">
+                <motion.div key={category.id} variants={staggerItem} className="h-full">
                   <Link
-                    href={division.href}
-                    className="group flex h-full flex-col rounded-lg border bg-card p-6 transition-colors hover:border-foreground/25 sm:p-8"
+                    href="/technology"
+                    className="group flex h-full flex-col rounded-lg border bg-card p-6 transition-colors hover:border-foreground/25"
                   >
-                    <p
-                      className={`font-mono text-[0.68rem] uppercase tracking-[0.22em] ${
-                        isSky ? "text-brand-sky" : "text-brand-copper"
-                      }`}
-                    >
-                      Division {division.number} — {division.label}
+                    <p className="font-mono text-[0.68rem] uppercase tracking-[0.22em] text-brand-sky">
+                      {String(i + 1).padStart(2, "0")} — {category.label}
                     </p>
-                    <h3 className="mt-4 font-display text-2xl font-medium">{division.name}</h3>
-                    <p className="mt-4 flex-1 text-pretty text-sm leading-relaxed text-muted-foreground">
-                      {division.summary}
-                    </p>
-                    <ul className="mt-6 flex flex-wrap gap-1.5">
-                      {division.focus.slice(0, 4).map((item) => (
+                    <h3 className="mt-4 font-display text-xl font-medium">{category.note}</h3>
+                    <ul className="mt-5 flex flex-1 flex-wrap content-start gap-1.5">
+                      {items.map((service) => (
                         <li
-                          key={item}
+                          key={service.slug}
                           className="rounded border bg-muted/60 px-2.5 py-1 font-mono text-[0.65rem] tracking-wide text-muted-foreground"
                         >
-                          {item}
+                          {service.navLabel}
                         </li>
                       ))}
                     </ul>
-                    <span
-                      className={`mt-7 inline-flex items-center gap-2 text-sm font-semibold ${
-                        isSky ? "text-brand-sky" : "text-brand-copper"
-                      }`}
-                    >
-                      {division.cta}
+                    <span className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-brand-sky">
+                      Explore Technology &amp; AI
                       <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </span>
                   </Link>
@@ -215,8 +208,8 @@ export default function AboutPage() {
             <SectionHeading
               index="03"
               eyebrow="Our Values"
-              title="The standards behind both businesses."
-              description="Code and cargo fail the same way — through vagueness, unowned problems, and unchecked assumptions. These four values are how we prevent that."
+              title="The standards behind the work."
+              description="Software fails through vagueness, unowned problems, and unchecked assumptions. These four values are how we prevent that."
             />
             <RevealStagger className="grid gap-x-10 gap-y-10 sm:grid-cols-2">
               {values.map((value) => (
@@ -242,7 +235,7 @@ export default function AboutPage() {
             index="04"
             eyebrow="How We're Organized"
             title="One company. Offices across three continents."
-            description="Corporate and trade run from Chicago; technology and AI are engineered from our development center in Mehsana, India — one company, one accountable team."
+            description="Corporate and client partnerships run from Chicago; technology and AI are engineered from our development center in Mehsana, India — one company, one accountable team."
             onInk
           />
           <RevealOnScroll className="mt-12">
@@ -253,9 +246,9 @@ export default function AboutPage() {
                   {siteConfig.name}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--ink-panel-muted)]">
-                  The parent company. Corporate functions, the global trade division, and client
-                  partnerships run from our headquarters at {hq.addressLines[0]},{" "}
-                  {hq.city} — the commercial front door for both divisions.
+                  The parent company. Corporate functions and client partnerships run from our
+                  headquarters at {hq.addressLines[0]}, {hq.city} — the commercial front door of
+                  the company.
                 </p>
                 <p className="mt-4 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-[var(--ink-panel-muted)]">
                   {hq.coordinates.label}

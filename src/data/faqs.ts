@@ -7,27 +7,17 @@ export const faqs: Faq[] = [
   {
     question: "What exactly does Coordinatez do?",
     answer:
-      "Coordinatez operates two business divisions. Coordinatez Technology delivers IT services and AI solutions — web and mobile development, custom software, AI integration, automation, data, and cloud. Coordinatez Global Trade handles international import & export — global sourcing, commodity and industrial-material trading, metal & scrap trading, and logistics coordination.",
+      "Coordinatez is an IT services and AI solutions company. We design, build, and run web and mobile applications, custom software, AI integrations and agents, business automation, data platforms, and cloud systems for startups, SMEs, and enterprises. The company also operates a separate Global Trade division, which handles international import & export from its own site at trade.coordinatez.com.",
   },
   {
     question: "Where is Coordinatez located?",
     answer:
-      "Our global headquarters is in Chicago, Illinois, USA. Technology and development work is led from our own center in Mehsana, Gujarat, India. Our trading activity connects the United States, India, and international markets.",
+      "Our global headquarters is in Chicago, Illinois, USA. Technology and development work is led from our own center in Mehsana, Gujarat, India, and our Asia-Pacific office is in Harris Park, NSW, Australia.",
   },
   {
     question: "Do you work with small businesses or only enterprises?",
     answer:
-      "Both. On the technology side we work with startups, SMEs, and larger organizations — scope is matched to budget and stage. On the trade side we work with suppliers and buyers of varying sizes, from single-container transactions to recurring supply programs.",
-  },
-  {
-    question: "Which countries do you trade with?",
-    answer:
-      "Our primary corridor is between the United States and India, and we work with counterparties across the Middle East, Europe, and Asia depending on the material and market. If you have a specific requirement, contact us and we'll tell you honestly whether it's a fit.",
-  },
-  {
-    question: "What materials do you trade?",
-    answer:
-      "Our focus is commodities, industrial materials, and metal & scrap — including ferrous and non-ferrous grades. We take on other categories selectively where we have reliable counterparties and quality-inspection coverage.",
+      "Both. We work with startups, SMEs, and larger organizations — scope is matched to budget and stage, from a focused discovery sprint to a multi-quarter platform build.",
   },
   {
     question: "How do technology engagements usually start?",

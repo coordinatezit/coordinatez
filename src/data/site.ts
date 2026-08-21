@@ -4,9 +4,9 @@ export const siteConfig = {
   name: "Coordinatez",
   // Update with the registered legal entity name once provided.
   legalName: "Coordinatez",
-  tagline: "Connecting Technology, Intelligence & Global Commerce",
+  tagline: "Technology That Moves Business Forward.",
   description:
-    "Coordinatez is a global company headquartered in Chicago that operates two business divisions: Technology & AI Solutions and Global Import & Export. We help businesses build software, integrate AI, and trade across international markets.",
+    "Coordinatez is an IT services and AI solutions company headquartered in Chicago, with its own development center in Mehsana, India. We design, build, and run web platforms, mobile apps, custom software, AI integrations, automation, and data systems for startups, SMEs, and enterprises.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://coordinatez.com",
   keywords: [
     "Coordinatez",
@@ -17,12 +17,12 @@ export const siteConfig = {
     "business automation",
     "AI agents",
     "data analytics",
-    "import export company",
-    "international trade",
-    "global sourcing",
-    "commodity trading",
-    "industrial materials",
-    "metal trading",
+    "web development company",
+    "mobile app development",
+    "machine learning solutions",
+    "cloud engineering",
+    "IT services company USA",
+    "AI company Chicago",
   ],
   email: {
     // Public-facing addresses — update if the mailbox names differ on the coordinatez.com domain.
@@ -43,20 +43,18 @@ export const siteConfig = {
       summary:
         "IT services and AI solutions — web, mobile, custom software, AI integration, automation, data, and cloud — delivered from our development center in India for clients worldwide.",
     },
-    trade: {
-      name: "Coordinatez Global Trade",
-      shortName: "Global Trade",
-      href: "/global-trade",
-      tagline: "Connecting Global Markets. Moving Business Forward.",
-      summary:
-        "International import & export — global sourcing, supplier networks, commodity and industrial-material trading, and logistics coordination between the United States, India, and global markets.",
-    },
+  },
+  // The Global Trade division runs on its own site. This site (www) is the
+  // technology practice; the constant below powers the footer link and schema.
+  tradeSite: {
+    name: "Coordinatez Global Trade",
+    url: "https://trade.coordinatez.com",
   },
   locations: {
     headquarters: {
       label: "Global Headquarters",
       company: "Coordinatez",
-      role: "Corporate, Global Trade & Client Partnerships",
+      role: "Corporate & Client Partnerships",
       city: "Chicago, Illinois",
       country: "United States",
       addressLines: ["8745 W. Higgins Road, Suite 110", "Chicago, IL 60631, USA"],

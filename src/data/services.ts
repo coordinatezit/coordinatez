@@ -244,7 +244,7 @@ export const services: Service[] = [
     useCases: [
       "Inventory and order management",
       "Custom CRMs and quoting tools",
-      "Trade & logistics operations systems",
+      "Logistics & supply-chain operations systems",
       "Compliance and reporting platforms",
     ],
     faqs: [
@@ -475,7 +475,7 @@ export const services: Service[] = [
     ],
     useCases: [
       "Sales and margin dashboards",
-      "Trade and logistics KPI tracking",
+      "Logistics and supply-chain KPI tracking",
       "Inventory and demand reporting",
       "Finance close automation",
     ],
